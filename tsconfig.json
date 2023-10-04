@@ -4,6 +4,7 @@
     "strict": true,
     "baseUrl": "./",
     "checkJs": true,
+    "jsx": "react-jsx",
     "paths": {
       "@/*": ["*/index", "*"]
     }
