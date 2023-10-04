@@ -17,17 +17,31 @@ export const Box = forwardRef((props: boxProps, ref: any): JSX.Element => {
       {props.children}
     </ScrollView>
   ) : (
-    <View {...props} ref={props.ref} style={[props.style && props.style, props.center && Style.center]}>
+    <View
+      {...props}
+      ref={props.ref}
+      style={[props.style && props.style, props.center && Style.center, props.centerFullScreen && Style.centerFullScreen]}
+    >
       {props.children}
     </View>
   );
 
   return props.withoutFeedback ? (
-    <Pressable {...props} ref={props.ref} style={[props.style && props.style, props.center && Style.center]} onPress={props.onPress}>
+    <Pressable
+      {...props}
+      ref={props.ref}
+      style={[props.style && props.style, props.center && Style.center, props.centerFullScreen && Style.centerFullScreen]}
+      onPress={props.onPress}
+    >
       {props.children}
     </Pressable>
   ) : props.onPress ? (
-    <Pressable {...props} ref={props.ref} style={[props.style && props.style, props.center && Style.center]} onPress={props.onPress}>
+    <Pressable
+      {...props}
+      ref={props.ref}
+      style={[props.style && props.style, props.center && Style.center, props.centerFullScreen && Style.centerFullScreen]}
+      onPress={props.onPress}
+    >
       {props.children}
     </Pressable>
   ) : (

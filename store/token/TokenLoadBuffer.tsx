@@ -24,20 +24,20 @@ import {
 export default function TokenLoadBuffer({children}: {children: React.ReactNode}) {
   const {isTokenLoaded} = useToken();
   let [fontsLoaded, fontError] = useFonts({
-    RedHatDisplay_300Light,
-    RedHatDisplay_400Regular,
+    // RedHatDisplay_300Light,
+    // RedHatDisplay_400Regular,
     RedHatDisplay_500Medium,
-    RedHatDisplay_600SemiBold,
-    RedHatDisplay_700Bold,
-    RedHatDisplay_800ExtraBold,
-    RedHatDisplay_900Black,
-    RedHatDisplay_300Light_Italic,
-    RedHatDisplay_400Regular_Italic,
-    RedHatDisplay_500Medium_Italic,
-    RedHatDisplay_600SemiBold_Italic,
-    RedHatDisplay_700Bold_Italic,
-    RedHatDisplay_800ExtraBold_Italic,
-    RedHatDisplay_900Black_Italic,
+    // RedHatDisplay_600SemiBold,
+    // RedHatDisplay_700Bold,
+    // RedHatDisplay_800ExtraBold,
+    // RedHatDisplay_900Black,
+    // RedHatDisplay_300Light_Italic,
+    // RedHatDisplay_400Regular_Italic,
+    // RedHatDisplay_500Medium_Italic,
+    // RedHatDisplay_600SemiBold_Italic,
+    // RedHatDisplay_700Bold_Italic,
+    // RedHatDisplay_800ExtraBold_Italic,
+    // RedHatDisplay_900Black_Italic,
   });
 
   if (fontError) {
@@ -49,12 +49,12 @@ export default function TokenLoadBuffer({children}: {children: React.ReactNode})
   }
 
   const onLayoutRootView = useCallback(() => {
-    if (isTokenLoaded) {
+    if (isTokenLoaded && fontsLoaded) {
       return SplashScreen.hideAsync();
     }
-  }, [isTokenLoaded]);
+  }, [isTokenLoaded, fontsLoaded]);
 
-  if (!isTokenLoaded && !fontsLoaded) {
+  if (!isTokenLoaded || !fontsLoaded) {
     SplashScreen.preventAutoHideAsync();
     return null;
   } else {

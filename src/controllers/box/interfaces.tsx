@@ -9,4 +9,5 @@ export type boxProps = ViewProps &
     withoutFeedback?: boolean;
     contentContainerStyle?: ViewStyle;
     center?: boolean;
+    centerFullScreen?: boolean;
   };

@@ -7,6 +7,11 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  centerFullScreen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
 });
 
