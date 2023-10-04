@@ -15,7 +15,7 @@ export const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
         <Box
           style={[
             {
-              paddingHorizontal: 16,
+              paddingHorizontal: 0,
               width: '100%',
               height: '100%',
             },
@@ -27,7 +27,7 @@ export const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
       ) : (
         <ScrollView
           style={{height: '100%'}}
-          contentContainerStyle={[{paddingHorizontal: 16}, props.style]}
+          contentContainerStyle={[{paddingHorizontal: 0}, props.style]}
           showsVerticalScrollIndicator={true}
           showsHorizontalScrollIndicator={true}
           scrollEnabled={true}
