@@ -11,6 +11,7 @@
     "lint": "eslint app src --fix --ext .js,.ts,.tsx && npm run format"
   },
   "dependencies": {
+
     "@expo-google-fonts/red-hat-display": "^0.2.3",
     "@expo/webpack-config": "^19.0.0",
     "@react-navigation/drawer": "^6.6.4",
@@ -36,6 +37,8 @@
     "react-native-web": "~0.19.6"
   },
   "devDependencies": {
+    "eslint-config-prettier": "8.5.0",
+    "prettier": "2.8.8",
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.14",
     "babel-plugin-module-resolver": "^5.0.0",
