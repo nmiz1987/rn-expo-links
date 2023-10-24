@@ -1,4 +1,3 @@
+import {LogBox} from 'react-native';
 
-import { LogBox } from "react-native"
-
-LogBox.ignoreLogs(["Require cycle:"])
+LogBox.ignoreLogs(['Require cycle:']);

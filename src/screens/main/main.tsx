@@ -1,6 +1,6 @@
 import {Ionicons} from '@expo/vector-icons';
 import Style from './main.style';
-import {Box} from '@/src/controllers/box/box';
+import Box from '@/src/controllers/box/box';
 import {Screen} from '@/src/controllers/screen/screen';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 

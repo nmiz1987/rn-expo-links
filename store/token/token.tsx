@@ -35,7 +35,7 @@ export function useToken() {
     if (!isTokenLoaded) {
       getStringAsync(ACCESS_TOKEN_KEY).then(newToken => {
         if (newToken) {
-          setTokenInternal(newToken);
+          Internal(newToken);
         }
         setIsTokenLoaded(true);
       });

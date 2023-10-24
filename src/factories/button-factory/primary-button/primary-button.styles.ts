@@ -1,15 +1,13 @@
-import {I18nManager, PixelRatio, Platform, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {GlobalColors} from '@/styles/global-colors';
-import {EnglishStyle, HebrewStyle} from '@/styles/styles';
-
-const LanguageStyle = I18nManager.isRTL ? HebrewStyle : EnglishStyle;
+import {FontStyle} from '@/styles/styles';
 
 export default StyleSheet.create({
   primary: {
     backgroundColor: 'transparent',
   },
   label: {
-    ...LanguageStyle.BodyText2,
+    ...FontStyle.H2,
     color: 'white',
   },
   centered: {
@@ -44,6 +42,6 @@ export default StyleSheet.create({
     borderRadius: 16,
   },
   disabledText: {
-    color: GlobalColors.IconsColors.secondary,
+    color: GlobalColors.TextColors.disable,
   },
 });

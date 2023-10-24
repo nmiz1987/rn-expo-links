@@ -4,7 +4,7 @@ import Style from './box.styles';
 
 import {boxProps} from './interfaces';
 
-export default const Box = forwardRef((props: boxProps, ref: any): JSX.Element => {
+const Box = forwardRef((props: boxProps, ref: any): JSX.Element => {
   const BoxView = props.scroll ? (
     <ScrollView
       {...props}
@@ -48,3 +48,5 @@ export default const Box = forwardRef((props: boxProps, ref: any): JSX.Element =
     BoxView
   );
 });
+
+export default Box;
