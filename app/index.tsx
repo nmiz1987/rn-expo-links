@@ -6,6 +6,7 @@ import MainPage from '@/src/screens/main/main';
 import TokenLoadBuffer from '@/store/token/TokenLoadBuffer';
 import {TokenProvider} from '@/store/token/token';
 
+
 const queryClient = new QueryClient();
 
 export default function Page() {
