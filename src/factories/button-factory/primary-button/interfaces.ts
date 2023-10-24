@@ -5,4 +5,3 @@ export default interface PrimaryButtonProps extends TouchableOpacityProps {
   background?: ViewStyle;
   lightEffect?: boolean;
 }
-

@@ -1,11 +1,10 @@
-import { StyleSheet } from 'react-native';
-import { GlobalColors } from '@/styles/global-colors';
-
+import {StyleSheet} from 'react-native';
+import {GlobalColors} from '@/styles/global-colors';
 
 export default StyleSheet.create({
   screen: {
     backgroundColor: GlobalColors.black,
-    flex: 1
+    flex: 1,
   },
   header: {
     flexDirection: 'row',
@@ -14,7 +13,6 @@ export default StyleSheet.create({
     paddingVertical: 24,
     paddingHorizontal: 16,
     backgroundColor: GlobalColors.gray,
-
   },
   logo: {
     color: GlobalColors.white,

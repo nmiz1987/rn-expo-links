@@ -1,10 +1,9 @@
-import { StyleSheet } from "react-native"
-
+import {StyleSheet} from 'react-native';
 
 export default (noPadding?: boolean) =>
   StyleSheet.create({
     screen: {
-      alignItems: "center",
+      alignItems: 'center',
       padding: noPadding ? 0 : 16,
-    }
+    },
   });

@@ -1,4 +1,3 @@
-
 export default interface TextInputProps {
   label?: string;
   caption?: string;

@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { HebrewStyle } from '@/styles/styles';
-import { GlobalColors } from '@/styles/global-colors';
+import {StyleSheet} from 'react-native';
+import {HebrewStyle} from '@/styles/styles';
+import {GlobalColors} from '@/styles/global-colors';
 
 export default StyleSheet.create({
   container: {
@@ -39,4 +39,3 @@ export default StyleSheet.create({
     ...HebrewStyle.BodyText1,
   },
 });
-

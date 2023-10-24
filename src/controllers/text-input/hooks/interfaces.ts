@@ -4,8 +4,8 @@ export interface ITextInputStatus {
 }
 
 export enum EnumITextInputStatus {
-  Idle = "idle",
-  Focus = "focus",
-  Error = "error",
-  Disable = "disable",
+  Idle = 'idle',
+  Focus = 'focus',
+  Error = 'error',
+  Disable = 'disable',
 }

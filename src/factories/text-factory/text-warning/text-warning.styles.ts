@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
-    warning: {
-        color: 'orange',
-        fontWeight: 'bold',
-    },
+  warning: {
+    color: 'orange',
+    fontWeight: 'bold',
+  },
 });

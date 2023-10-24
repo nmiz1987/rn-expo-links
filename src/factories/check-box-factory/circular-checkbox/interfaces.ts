@@ -5,4 +5,3 @@ export interface CircularCheckboxProps extends TouchableOpacityProps {
   status?: boolean;
   style?: ViewStyle;
 }
-

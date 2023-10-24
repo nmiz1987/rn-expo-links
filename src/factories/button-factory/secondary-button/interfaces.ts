@@ -3,4 +3,3 @@ export default interface SecondaryButtonProps extends TouchableOpacityProps {
   label: string;
   containerStyle?: ViewStyle;
 }
-
