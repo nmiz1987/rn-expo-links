@@ -3,7 +3,7 @@ import {GlobalColors} from '@/styles/global-colors';
 
 export default StyleSheet.create({
   screen: {
-    backgroundColor: GlobalColors.black,
+    // backgroundColor: GlobalColors.black,
     flex: 1,
   },
   header: {
@@ -12,10 +12,10 @@ export default StyleSheet.create({
     alignContent: 'space-between',
     paddingVertical: 24,
     paddingHorizontal: 16,
-    backgroundColor: GlobalColors.gray,
+    // backgroundColor: GlobalColors.gray,
   },
   logo: {
-    color: GlobalColors.white,
+    // color: GlobalColors.white,
     fontSize: 28,
     fontWeight: 'bold',
   },
