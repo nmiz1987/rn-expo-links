@@ -1,6 +1,6 @@
 import React from 'react';
-import CheckBoxFactoryProps from './interfaces';
 import CircularCheckBox from './circular-checkbox/circular-checkbox';
+import CheckBoxFactoryProps from './interfaces';
 import CheckBox from '@/components/controllers/check-box/check-box';
 
 const CheckBoxFactory = ({type, ...props}: CheckBoxFactoryProps) => {

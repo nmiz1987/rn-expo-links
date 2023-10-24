@@ -1,8 +1,7 @@
-import {forwardRef} from 'react';
+import React, {forwardRef} from 'react';
 
-import TextInput from '@/components/controllers/text-input/text-input';
-import React from 'react';
 import InputFactoryProps from './interfaces';
+import TextInput from '@/components/controllers/text-input/text-input';
 
 const InputFactory = forwardRef(({type, label, isError, shownDisable, disabled, ...props}: InputFactoryProps, ref: any) => {
   switch (type) {

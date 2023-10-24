@@ -1,9 +1,9 @@
-import {TouchableOpacity} from 'react-native';
-import Text from '@/components/controllers/text/text';
 import React from 'react';
+import {TouchableOpacity} from 'react-native';
 import SecondaryButtonProps from './interfaces';
 import Styles from './secondary-button.styles';
 import {Box} from '@/components/controllers/box/box';
+import Text from '@/components/controllers/text/text';
 
 const SecondaryButton = ({label, ...props}: SecondaryButtonProps) => {
   return (

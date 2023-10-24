@@ -1,4 +1,4 @@
-import {ScrollViewProps, ViewProps, ViewStyle, PressableProps} from 'react-native';
+import {PressableProps, ScrollViewProps, ViewProps, ViewStyle} from 'react-native';
 
 export type boxProps = ViewProps &
   PressableProps &

@@ -1,9 +1,9 @@
 module.exports = {
   root: true,
-  extends: '@react-native-community',
-  plugins: ['import', 'cypress'],
+  extends: [ 'universe/native'],
+  plugins: ['import'],
   env: {
-    'cypress/globals': true,
+    
   },
   rules: {
     'import/order': ['warn', {alphabetize: {order: 'asc'}}], // group and then alphabetize lines - https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/order.md

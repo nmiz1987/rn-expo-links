@@ -1,12 +1,12 @@
-import {Dimensions, TouchableOpacity} from 'react-native';
-import Text from '@/components/controllers/text/text';
-import React from 'react';
-import PrimaryButtonProps from './interfaces';
 import {LinearGradient} from 'expo-linear-gradient';
+import React from 'react';
+import {Dimensions, TouchableOpacity} from 'react-native';
+import Animated, {Easing, useAnimatedStyle, useSharedValue, withTiming} from 'react-native-reanimated';
+import PrimaryButtonProps from './interfaces';
 import Styles from './primary-button.styles';
 import {Box} from '@/components/controllers/box/box';
+import Text from '@/components/controllers/text/text';
 import {GlobalColors} from '@/styles/global-colors';
-import Animated, {useSharedValue, withTiming, useAnimatedStyle, Easing} from 'react-native-reanimated';
 
 const AnimatedLinearGradient = Animated.createAnimatedComponent(LinearGradient);
 

@@ -1,5 +1,5 @@
 import React, {forwardRef} from 'react';
-import {ScrollView, View, Pressable} from 'react-native';
+import {Pressable, ScrollView, View} from 'react-native';
 import Style from './box.styles';
 
 import {boxProps} from './interfaces';

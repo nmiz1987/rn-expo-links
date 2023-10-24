@@ -28,11 +28,11 @@ export const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
         <ScrollView
           style={{height: '100%'}}
           contentContainerStyle={[{paddingHorizontal: 0}, props.style]}
-          showsVerticalScrollIndicator={true}
-          showsHorizontalScrollIndicator={true}
-          scrollEnabled={true}
+          showsVerticalScrollIndicator
+          showsHorizontalScrollIndicator
+          scrollEnabled
           ref={ref}
-          nestedScrollEnabled={true}
+          nestedScrollEnabled
         >
           {props.children}
         </ScrollView>

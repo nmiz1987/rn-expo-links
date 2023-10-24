@@ -1,8 +1,8 @@
-import {StyleSheet, Platform, PixelRatio, I18nManager} from 'react-native';
-import {HebrewStyle, EnglishStyle} from '@/styles/styles';
+import {I18nManager, PixelRatio, Platform, StyleSheet} from 'react-native';
 import {GlobalColors} from '@/styles/global-colors';
+import {EnglishStyle, HebrewStyle} from '@/styles/styles';
 
-let LanguageStyle = I18nManager.isRTL ? HebrewStyle : EnglishStyle;
+const LanguageStyle = I18nManager.isRTL ? HebrewStyle : EnglishStyle;
 
 export default StyleSheet.create({
   primary: {

@@ -1,11 +1,11 @@
-import React, {useEffect, forwardRef} from 'react';
+import React, {forwardRef, useEffect} from 'react';
+import {TextInput as RNTextInput} from 'react-native';
+import useInputText from './hooks/useInputText';
 import TextInputProps from './interfaces';
 import Styles from './text-input.styles';
-import Text from '@/src/controllers/text/text';
 import {Box} from '@/src/controllers/box/box';
 import Spacer from '@/src/controllers/spacer/spacer';
-import useInputText from './hooks/useInputText';
-import {TextInput as RNTextInput} from 'react-native';
+import Text from '@/src/controllers/text/text';
 import {GlobalColors} from '@/styles/global-colors';
 
 const TextInput = forwardRef(({label, caption, isError = false, shownDisable = false, disabled, ...props}: TextInputProps, ref: any) => {
@@ -23,7 +23,7 @@ const TextInput = forwardRef(({label, caption, isError = false, shownDisable = f
         ref={ref}
         editable={!disabled}
         allowFontScaling={false}
-        textAlign={'left'}
+        textAlign="left"
         placeholderTextColor={shownDisable ? GlobalColors.IconsColors.secondary : '#000'}
         style={[Styles.textInput, inputStatus.activeStyle, shownDisable && Styles.inputDisabled]}
         // props.onFocus is important to show disable the focus color if the component wont active as input but as "displayed text"
