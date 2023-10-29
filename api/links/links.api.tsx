@@ -1,0 +1,19 @@
+import networkService from '@/services/network-service/network-service';
+
+async function getAllLinks() {
+  try {
+
+    const { response, status, success } = await networkService.fetch('useful-links/');
+
+    if (!success) throw 'Loading failed';
+
+    return response;
+  } catch (error) {
+    console.warn('Loading failed');
+    throw error;
+  }
+}
+
+export {
+  getAllLinks,
+};

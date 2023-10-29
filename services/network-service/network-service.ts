@@ -1,4 +1,4 @@
-import { CustomRequestInit } from './interfaces';
+
 
 class NetworkService {
   private _headers: { [key: string]: string } = {
@@ -7,27 +7,30 @@ class NetworkService {
     Accept: 'application/json',
   };
 
+  private _baseUrl = 'https://netanel-server.vercel.app';
+
   public setToken(value: string) {
-    this._headers.Authorization = "bearer " + value;
+    this._headers.Authorization = 'bearer ' + value;
   }
 
-  public async fetch(input: RequestInfo, init?: CustomRequestInit): Promise<{ response: any; status: number; success: boolean }> {
-    let body = undefined;
-    if (init?.body) body = JSON.stringify(init.body);
+  public async fetch(url: RequestInfo, bodyInit?: BodyInit): Promise<{ response: any; status: number; success: boolean }> {
+    let body = '';
+    if (bodyInit) body = JSON.stringify(bodyInit);
 
-    const responseObj = await fetch(input, {
-      ...init,
-      body,
-      headers: { ...this._headers, ...init?.headers },
-    }).catch(error => {
+    const resObj = await fetch(`${this._baseUrl}/${url}`,
+      {
+        body,
+        headers: { ...this._headers },
+      }
+    ).catch(error => {
       console.warn(error);
       throw error;
     });
 
-    const status = responseObj?.status || 500;
-    const response = await responseObj.json();
+    const status = resObj?.status || 500;
+    const response = await resObj.json();
 
-    if (!responseObj || String(status).charAt(0) !== '2') {
+    if (!resObj || String(status).charAt(0) !== '2') {
       return {
         response,
         status,
@@ -43,4 +46,3 @@ class NetworkService {
   }
 }
 export default new NetworkService();
-

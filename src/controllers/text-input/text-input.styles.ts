@@ -1,5 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { GlobalColors } from '@/styles/global-colors';
+import { FontStyle } from '@/styles/styles';
 
 export default StyleSheet.create({
   textInput: {
@@ -8,12 +9,14 @@ export default StyleSheet.create({
     borderRadius: 10,
     backgroundColor: GlobalColors.BgColors.Bg1,
     borderColor: GlobalColors.Border,
-  },
-  inputSize: {
+    ...FontStyle.H3,
     paddingVertical: 2,
     paddingBottom: 2,
+    ...FontStyle.H3,
   },
+
   title: {
+    ...FontStyle.H5,
     textAlign: 'left',
   },
   focusColor: {
@@ -27,9 +30,9 @@ export default StyleSheet.create({
   },
   errorText: {
     paddingTop: 8,
+    ...FontStyle.H5,
     color: 'red',
     textAlign: 'left',
-    fontSize: 8,
   },
   titleDisabled: {
     color: GlobalColors.TextColors.secondary,
@@ -46,5 +49,8 @@ export default StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  InputAccessory: {
+    backgroundColor: 'white',
   },
 });

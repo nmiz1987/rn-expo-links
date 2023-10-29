@@ -5,10 +5,14 @@ export const GlobalColors = {
     white: '#FFFFFF',
     disable: '#BFC1C7'
   },
+  IconsColors: {
+    primary: '#2C2D2E',
+    secondary: '#BFC1C7',
+  },
   Brand: {
     primary: '#9B0BF9',
     secondary: '#F72585',
-    Gradient: ['#9B0BF9', '#F74094'],
+    Gradient: ['#0011ff', '#508aff'],
   },
   BgColors: {
     Bg1: '#FFFFFF',

@@ -1,5 +1,5 @@
 import { ForwardedRef, forwardRef } from 'react';
-import { Platform, SafeAreaView, ScrollView, ViewProps } from 'react-native';
+import { Platform, ScrollView, ViewProps } from 'react-native';
 import Box from '@/src/controllers/box/box';
 
 type Props = ViewProps & {
@@ -9,16 +9,18 @@ type Props = ViewProps & {
   contentContainerStyle?: ScrollView['props']['contentContainerStyle'];
 };
 
-export const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
+const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
   return (
     <>
       {props.noScroll ? (
         <Box
           style={[
             {
-              paddingHorizontal: 0,
+              paddingHorizontal: 16,
               width: '100%',
               height: '100%',
+              paddingTop: Platform.select({ ios: 50, android: 20 }),
+              backgroundColor: 'black',
             },
             props.style,
           ]}
@@ -34,6 +36,7 @@ export const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
               paddingTop: Platform.select({ ios: 50, android: 20 }),
               width: '100%',
               flex: 1,
+              backgroundColor: 'black',
             },
             props.contentContainerStyle,
           ]}
@@ -49,3 +52,5 @@ export const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
     </>
   );
 });
+
+export default Screen;

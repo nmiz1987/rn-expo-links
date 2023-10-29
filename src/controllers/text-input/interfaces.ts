@@ -5,5 +5,6 @@ export default interface TextInputProps {
   shownDisable?: boolean;
   disabled?: boolean;
   style?: any;
+  multiline?: boolean;
   onFocus?: () => void;
 }

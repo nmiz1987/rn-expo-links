@@ -10,28 +10,23 @@ export default StyleSheet.create({
     ...FontStyle.H2,
     color: 'white',
   },
-  centered: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonBox: {
-    alignItems: 'center',
+  pressed: {
+    opacity: 0.7,
   },
   background: {
     width: '100%',
-    paddingVertical: 18,
+    paddingVertical: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 16,
+    borderRadius: 8,
   },
   shadow: {
     backgroundColor: 'white',
-    shadowColor: '#ff007b',
-    shadowOffset: { width: 0, height: 4 },
+    shadowColor: '#3326f6',
+    shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 5,
-    elevation: 5,
+    elevation: 20,
     borderRadius: 16,
   },
   disabledButton: {

@@ -1,17 +1,22 @@
-import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { Pressable } from 'react-native';
 import SecondaryButtonProps from './interfaces';
 import Styles from './secondary-button.styles';
-import { Box } from '@/components/controllers/box/box';
-import Text from '@/components/controllers/text/text';
+import Box from '@/src/controllers/box/box';
+import TextFactory from '@/src/factories/text-factory/text-factory';
 
-const SecondaryButton = ({ label, ...props }: SecondaryButtonProps) => {
+const SecondaryButton = ({ label, onPress, ...props }: SecondaryButtonProps) => {
   return (
-    <TouchableOpacity {...props} style={[Styles.secondary, Styles.shadow]}>
+    <Pressable
+      onPress={() => {
+        !props.disabled && onPress();
+      }}
+      style={({ pressed }) => [Styles.secondary, pressed && Styles.pressed]}
+      {...props}
+    >
       <Box style={[Styles.container, { ...props.containerStyle }]}>
-        <Text style={Styles.label}>{label}</Text>
+        <TextFactory style={Styles.label}>{label}</TextFactory>
       </Box>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 

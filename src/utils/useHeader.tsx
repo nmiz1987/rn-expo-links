@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useLayoutEffect } from 'react';
-import { Header, HeaderProps } from '@/src/components/navigation/Header';
+import { Header, HeaderProps } from '@/src/components/navigation/header/header';
 
 export function useHeader(headerProps: HeaderProps, deps: Parameters<typeof useLayoutEffect>[1] = []) {
   const navigation = useNavigation();

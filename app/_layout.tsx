@@ -1,6 +1,7 @@
+import { Ionicons } from '@expo/vector-icons';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Slot } from 'expo-router';
+import { Tabs } from 'expo-router/tabs';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
@@ -32,7 +33,57 @@ export default function RootLayout() {
           <LoadBuffer>
             <QueryClientProvider client={queryClient}>
               <StatusBar />
-              <Slot />
+              <Tabs
+                screenOptions={{
+                  headerStyle: {
+                    backgroundColor: '#f4511e',
+                  },
+                  headerTintColor: '#fff',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }}
+              >
+                <Tabs.Screen
+                  name="index"
+                  options={{
+                    href: '/',
+                    title: 'All My Links',
+                    tabBarIcon: ({ color, size }) => <Ionicons name="home" color={color} size={size} />,
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                      backgroundColor: GlobalColors.gray,
+                    },
+
+                    headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                      fontWeight: 'bold',
+                      fontSize: 28,
+                    },
+                  }}
+                />
+                <Tabs.Screen
+                  name="fav"
+                  options={{
+                    href: '/fav',
+                    title: 'fav',
+                    tabBarIcon: ({ color, size }) => <Ionicons name="heart" color={color} size={size} />,
+                    headerTitleAlign: 'center',
+                    headerStyle: {
+                      backgroundColor: GlobalColors.gray,
+                    },
+
+                    headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
+                    // headerRight: () => <Ionicons name="log-in-outline" color={'white'} size={35} />,
+                    headerTintColor: '#fff',
+                    headerTitleStyle: {
+                      fontWeight: 'bold',
+                      fontSize: 28,
+                    },
+                  }}
+                />
+              </Tabs>
             </QueryClientProvider>
           </LoadBuffer>
         </TokenProvider>

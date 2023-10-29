@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from './circular-checkbox.styles';
 import { CircularCheckboxProps } from './interfaces';
-import { Box } from '@/components/controllers/box/box';
+import Box from '@/components/controllers/box/box';
 import TextFactory from '@/components/factories/text-factory/text-factory';
 
 const CircularCheckBox = ({ label, status, style, ...props }: CircularCheckboxProps) => {

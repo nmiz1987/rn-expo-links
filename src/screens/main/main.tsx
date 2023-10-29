@@ -1,24 +1,24 @@
-import { Ionicons } from '@expo/vector-icons';
-import { useTheme } from '@react-navigation/native';
-
-import Style from './main.style';
-import Box from '@/src/controllers/box/box';
-import { Screen } from '@/src/controllers/screen/screen';
-import TextFactory from '@/src/factories/text-factory/text-factory';
+import { useEffect, useState } from 'react';
+import { FlatList } from 'react-native';
+import { getAllLinks } from '@/api/links/links.api';
+import { linkProps } from '@/src/components/link/interfaces';
+import Link from '@/src/components/link/link';
+import Screen from '@/src/controllers/screen/screen';
 
 export default function Page() {
-  const theme = useTheme();
+  const [links, setLinks] = useState<linkProps[]>([]);
+
+  useEffect(() => {
+    async function getLinks() {
+      const res = await getAllLinks();
+      setLinks(res);
+    }
+    getLinks();
+  }, []);
 
   return (
-    <Screen>
-      <Box center style={Style.header}>
-        <TextFactory style={Style.logo} type="h1">
-          All My Links
-        </TextFactory>
-        <Box onPress={() => console.log('log in')}>
-          <Ionicons name="log-in-outline" color={theme.dark ? 'white' : 'black'} size={35} />
-        </Box>
-      </Box>
+    <Screen noScroll>
+      <FlatList data={links} renderItem={({ item }) => <Link link={item} />} keyExtractor={item => item._id} />
     </Screen>
   );
 }
