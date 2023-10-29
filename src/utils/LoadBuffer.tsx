@@ -1,15 +1,28 @@
 import { RedHatDisplay_500Medium, useFonts } from '@expo-google-fonts/red-hat-display';
 import * as SplashScreen from 'expo-splash-screen';
-import { useCallback } from 'react';
+import { observer } from 'mobx-react';
+import { useCallback, useEffect } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { useToken } from '../../store/token/token';
+import { getAllLinks } from '@/api/links/links.api';
 import Box from '@/src/controllers/box/box';
+import linksStore from '@/store/links/links-store';
 
-export default function LoadBuffer({ children }: { children: React.ReactNode }) {
+function LoadBuffer({ children }: { children: React.ReactNode }) {
   const { isTokenLoaded } = useToken();
   const [fontsLoaded, fontError] = useFonts({
     RedHatDisplay_500Medium,
   });
+
+  useEffect(() => {
+    async function getLinks() {
+      const res = await getAllLinks();
+      linksStore.setLinks(res);
+    }
+    if (linksStore.links.length === 0) {
+      getLinks();
+    }
+  }, []);
 
   const onLayoutRootView = useCallback(() => {
     if (isTokenLoaded && fontsLoaded) {
@@ -27,7 +40,7 @@ export default function LoadBuffer({ children }: { children: React.ReactNode }) 
     );
   }
 
-  if (!isTokenLoaded || !fontsLoaded) {
+  if (!isTokenLoaded || !fontsLoaded || linksStore.links.length === 0) {
     SplashScreen.preventAutoHideAsync();
     return null;
   } else {
@@ -44,3 +57,5 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default observer(LoadBuffer);

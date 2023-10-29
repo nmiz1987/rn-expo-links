@@ -32,7 +32,7 @@ export default function RootLayout() {
         <TokenProvider>
           <LoadBuffer>
             <QueryClientProvider client={queryClient}>
-              <StatusBar />
+              <StatusBar style="light" />
               <Tabs
                 screenOptions={{
                   headerStyle: {
@@ -42,6 +42,13 @@ export default function RootLayout() {
                   headerTitleStyle: {
                     fontWeight: 'bold',
                   },
+                  tabBarInactiveTintColor: 'gray',
+                  tabBarActiveBackgroundColor: 'black',
+                  tabBarInactiveBackgroundColor: 'black',
+                  tabBarLabelStyle: {
+                    fontSize: 12,
+                    marginVertical: 4,
+                  },
                 }}
               >
                 <Tabs.Screen
@@ -49,12 +56,12 @@ export default function RootLayout() {
                   options={{
                     href: '/',
                     title: 'All My Links',
-                    tabBarIcon: ({ color, size }) => <Ionicons name="home" color={color} size={size} />,
+                    tabBarIcon: ({ color, size }) => <Ionicons name="home" color={color} size={24} />,
                     headerTitleAlign: 'center',
                     headerStyle: {
                       backgroundColor: GlobalColors.gray,
                     },
-
+                    tabBarActiveTintColor: GlobalColors.IconsColors.blue,
                     headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
                     headerTintColor: '#fff',
                     headerTitleStyle: {
@@ -64,16 +71,16 @@ export default function RootLayout() {
                   }}
                 />
                 <Tabs.Screen
-                  name="fav"
+                  name="author-favorites"
                   options={{
-                    href: '/fav',
-                    title: 'fav',
-                    tabBarIcon: ({ color, size }) => <Ionicons name="heart" color={color} size={size} />,
+                    href: '/author-favorites',
+                    title: 'Author favorites',
+                    tabBarIcon: ({ color, size }) => <Ionicons name="heart" color={color} size={24} />,
                     headerTitleAlign: 'center',
                     headerStyle: {
                       backgroundColor: GlobalColors.gray,
                     },
-
+                    tabBarActiveTintColor: GlobalColors.IconsColors.heart,
                     headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
                     // headerRight: () => <Ionicons name="log-in-outline" color={'white'} size={35} />,
                     headerTintColor: '#fff',

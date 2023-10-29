@@ -8,6 +8,9 @@ export const GlobalColors = {
   IconsColors: {
     primary: '#2C2D2E',
     secondary: '#BFC1C7',
+    blue: "#6f78ff",
+    heart: "#e43e3e",
+    gold: "#FFD700"
   },
   Brand: {
     primary: '#9B0BF9',
@@ -42,7 +45,7 @@ export const GlobalColors = {
   },
   Bar: 'rgba(168, 167, 178, 0.20)',
   white: '#FFFFFF',
-  lightWhite: '#d4d4d4',
+  lightGray: '#757373',
   gray: 'rgb(44, 44, 44)',
   blue: "rgb(28, 127, 255)",
   black: 'black',

@@ -1,4 +1,5 @@
 import networkService from '@/services/network-service/network-service';
+import linksStore from "@/store/links/links-store"
 
 async function getAllLinks() {
   try {

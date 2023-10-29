@@ -14,10 +14,31 @@ export default StyleSheet.create({
   image: {
     width: 50,
     height: 50,
-    backgroundColor: '#0553',
   },
-  row: {
+  titleContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  heart: {
+    padding: 4,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginStart: 'auto',
+    width: 40,
+  },
+  recommended: {
+    paddingVertical: 4,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 4,
+  },
+  recommendedTxt: {
+    color: 'white',
+  },
+  recommendedRow: {
+    flexDirection: 'row',
+    gap: 4,
+    alignItems: 'center',
   },
 });
