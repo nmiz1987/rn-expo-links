@@ -19,6 +19,10 @@ class LinkStore {
     return this._categories;
   }
 
+  get favoriteLinks() {
+    return this._favoriteLinks;
+  }
+
   isFavoriteByUser(link: string) {
     return this._favoriteLinks.includes(link);
   }

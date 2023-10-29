@@ -23,7 +23,8 @@ const preferredLanguage: Localization.Locale | { languageTag: string; textDirect
 i18n.locale = preferredLanguage.languageTag;
 
 // handle RTL languages
-export const isRTL = preferredLanguage.textDirection === 'rtl';
+// export const isRTL = preferredLanguage.textDirection === 'rtl';
+export const isRTL = false;
 I18nManager.allowRTL(isRTL);
 I18nManager.forceRTL(isRTL);
 
