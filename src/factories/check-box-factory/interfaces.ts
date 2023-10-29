@@ -1,4 +1,4 @@
-import {TouchableOpacityProps, ViewStyle} from 'react-native';
+import { TouchableOpacityProps, ViewStyle } from 'react-native';
 
 type CheckBoxFactoryProps =
   | (Base & {

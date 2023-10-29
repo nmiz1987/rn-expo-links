@@ -1,4 +1,4 @@
-import {InputProps as KitInputProps} from '@ui-kitten/components';
+import { InputProps as KitInputProps } from '@ui-kitten/components';
 
 type InputFactoryProps = {
   type: 'text';

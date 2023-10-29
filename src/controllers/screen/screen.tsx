@@ -1,16 +1,17 @@
-import {ForwardedRef, forwardRef} from 'react';
-import {SafeAreaView, ScrollView, ViewProps} from 'react-native';
-import {Box} from '@/src/controllers/box/box';
+import { ForwardedRef, forwardRef } from 'react';
+import { Platform, SafeAreaView, ScrollView, ViewProps } from 'react-native';
+import Box from '@/src/controllers/box/box';
 
 type Props = ViewProps & {
   noScroll?: boolean;
   noPadding?: boolean;
   blur?: boolean;
+  contentContainerStyle?: ScrollView['props']['contentContainerStyle'];
 };
 
 export const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
   return (
-    <SafeAreaView style={props.style}>
+    <>
       {props.noScroll ? (
         <Box
           style={[
@@ -26,8 +27,16 @@ export const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
         </Box>
       ) : (
         <ScrollView
-          style={{height: '100%'}}
-          contentContainerStyle={[{paddingHorizontal: 0}, props.style]}
+          style={{ height: '100%' }}
+          contentContainerStyle={[
+            {
+              paddingHorizontal: 16,
+              paddingTop: Platform.select({ ios: 50, android: 20 }),
+              width: '100%',
+              flex: 1,
+            },
+            props.contentContainerStyle,
+          ]}
           showsVerticalScrollIndicator
           showsHorizontalScrollIndicator
           scrollEnabled
@@ -37,6 +46,6 @@ export const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {
           {props.children}
         </ScrollView>
       )}
-    </SafeAreaView>
+    </>
   );
 });

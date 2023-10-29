@@ -9,7 +9,7 @@ import TextMainTitle from './text-main-title/text-main-title';
 import TextWarning from './text-warning/text-warning';
 import Text from '@/src/controllers/text/text';
 
-const TextFactory = ({type, ...props}: TextFactoryProps) => {
+const TextFactory = ({ type, ...props }: TextFactoryProps) => {
   switch (type) {
     case 'warning':
       return <TextWarning {...props} />;

@@ -1,8 +1,8 @@
-import React, {ReactElement} from 'react';
-import {StyleProp, TextProps, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewStyle} from 'react-native';
-import {Icon, IconTypes} from './Icon';
+import React, { ReactElement } from 'react';
+import { StyleProp, TextProps, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from 'react-native';
+import { Icon, IconTypes } from './Icon';
 import TextFactory from '@/src/factories/text-factory/text-factory';
-import {isRTL, translate} from '@/src/i18n';
+import { isRTL, translate } from '@/src/i18n';
 
 export interface HeaderProps {
   /**
@@ -162,7 +162,7 @@ export function Header(props: HeaderProps) {
   const titleContent = titleTx ? translate(titleTx, titleTxOptions) : title;
 
   return (
-    <View style={[$container, $containerInsets, {backgroundColor}, $containerStyleOverride]}>
+    <View style={[$container, $containerInsets, { backgroundColor }, $containerStyleOverride]}>
       <View style={[$wrapper, $styleOverride]}>
         <HeaderAction
           tx={leftTx}
@@ -200,7 +200,7 @@ export function Header(props: HeaderProps) {
 }
 
 function HeaderAction(props: HeaderActionProps) {
-  const {backgroundColor, icon, text, tx, txOptions, onPress, ActionComponent, iconColor} = props;
+  const { backgroundColor, icon, text, tx, txOptions, onPress, ActionComponent, iconColor } = props;
 
   const content = tx ? translate(tx, txOptions) : text;
 
@@ -208,7 +208,7 @@ function HeaderAction(props: HeaderActionProps) {
 
   if (content) {
     return (
-      <TouchableOpacity style={[$actionTextContainer, {backgroundColor}]} onPress={onPress} disabled={!onPress} activeOpacity={0.8}>
+      <TouchableOpacity style={[$actionTextContainer, { backgroundColor }]} onPress={onPress} disabled={!onPress} activeOpacity={0.8}>
         <TextFactory>{content} </TextFactory>
       </TouchableOpacity>
     );
@@ -221,13 +221,13 @@ function HeaderAction(props: HeaderActionProps) {
         icon={icon}
         color={iconColor}
         onPress={onPress}
-        containerStyle={[$actionIconContainer, {backgroundColor}]}
-        style={isRTL ? {transform: [{rotate: '180deg'}]} : {}}
+        containerStyle={[$actionIconContainer, { backgroundColor }]}
+        style={isRTL ? { transform: [{ rotate: '180deg' }] } : {}}
       />
     );
   }
 
-  return <View style={[$actionFillerContainer, {backgroundColor}]} />;
+  return <View style={[$actionFillerContainer, { backgroundColor }]} />;
 }
 
 const $wrapper: ViewStyle = {

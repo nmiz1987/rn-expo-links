@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {FontStyle} from '@/styles/styles';
+import { StyleSheet } from 'react-native';
+import { FontStyle } from '@/styles/styles';
 
 export default StyleSheet.create({
-  h5: {...FontStyle.H5},
+  h5: { ...FontStyle.H5 },
 });

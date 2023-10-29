@@ -1,12 +1,12 @@
-import {DarkTheme, DefaultTheme, ThemeProvider} from '@react-navigation/native';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {Slot} from 'expo-router';
-import {StatusBar} from 'expo-status-bar';
-import {useColorScheme} from 'react-native';
-import {SafeAreaProvider, initialWindowMetrics} from 'react-native-safe-area-context';
+import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Slot } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+import { useColorScheme } from 'react-native';
+import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import LoadBuffer from '@/src/utils/LoadBuffer';
-import {TokenProvider} from '@/store/token/token';
-import {GlobalColors} from '@/styles/global-colors';
+import { TokenProvider } from '@/store/token/token';
+import { GlobalColors } from '@/styles/global-colors';
 import '@/src/i18n';
 import '@/src/utils/ignoreWarnings';
 

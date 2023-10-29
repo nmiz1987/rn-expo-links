@@ -1,12 +1,12 @@
-import {RedHatDisplay_500Medium, useFonts} from '@expo-google-fonts/red-hat-display';
+import { RedHatDisplay_500Medium, useFonts } from '@expo-google-fonts/red-hat-display';
 import * as SplashScreen from 'expo-splash-screen';
-import {useCallback} from 'react';
-import {StyleSheet, Text} from 'react-native';
-import {useToken} from '../../store/token/token';
+import { useCallback } from 'react';
+import { StyleSheet, Text } from 'react-native';
+import { useToken } from '../../store/token/token';
 import Box from '@/src/controllers/box/box';
 
-export default function LoadBuffer({children}: {children: React.ReactNode}) {
-  const {isTokenLoaded} = useToken();
+export default function LoadBuffer({ children }: { children: React.ReactNode }) {
+  const { isTokenLoaded } = useToken();
   const [fontsLoaded, fontError] = useFonts({
     RedHatDisplay_500Medium,
   });
@@ -22,7 +22,7 @@ export default function LoadBuffer({children}: {children: React.ReactNode}) {
   if (fontError) {
     return (
       <Box center>
-        <Text style={{fontSize: 16}}>A problem occur while loading fonts</Text>
+        <Text style={{ fontSize: 16 }}>A problem occur while loading fonts</Text>
       </Box>
     );
   }

@@ -1,15 +1,15 @@
-import React, {forwardRef, useEffect} from 'react';
-import {TextInput as RNTextInput} from 'react-native';
+import React, { forwardRef, useEffect } from 'react';
+import { TextInput as RNTextInput } from 'react-native';
 import useInputText from './hooks/useInputText';
 import TextInputProps from './interfaces';
 import Styles from './text-input.styles';
-import {Box} from '@/src/controllers/box/box';
+import Box from '@/src/controllers/box/box';
 import Spacer from '@/src/controllers/spacer/spacer';
 import Text from '@/src/controllers/text/text';
-import {GlobalColors} from '@/styles/global-colors';
+import { GlobalColors } from '@/styles/global-colors';
 
-const TextInput = forwardRef(({label, caption, isError = false, shownDisable = false, disabled, ...props}: TextInputProps, ref: any) => {
-  const {inputStatus, inputTextFocusHandler, setErrorStatus} = useInputText();
+const TextInput = forwardRef(({ label, caption, isError = false, shownDisable = false, disabled, ...props }: TextInputProps, ref: any) => {
+  const { inputStatus, inputTextFocusHandler, setErrorStatus } = useInputText();
 
   useEffect(() => {
     setErrorStatus(isError);
