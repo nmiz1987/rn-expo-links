@@ -19,15 +19,7 @@ export default StyleSheet.create({
     ...FontStyle.H5,
     textAlign: 'left',
   },
-  focusColor: {
-    borderColor: GlobalColors.Brand.primary,
-    stroke: GlobalColors.Brand.primary,
-  },
-  errorColor: {
-    borderColor: GlobalColors.SystemColors.Error,
-    backgroundColor: GlobalColors.SystemColors.Error2,
-    stroke: GlobalColors.SystemColors.Error,
-  },
+
   errorText: {
     paddingTop: 8,
     ...FontStyle.H5,
@@ -45,12 +37,12 @@ export default StyleSheet.create({
     textAlign: 'center',
     height: 96,
   },
-  centered: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   InputAccessory: {
     backgroundColor: 'white',
+  },
+  dummyWrapper: {
+    opacity: 1,
+    backgroundColor: 'transparent',
+    height: '100%',
   },
 });

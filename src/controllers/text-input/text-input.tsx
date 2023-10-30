@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useRef } from 'react';
 import { Button, InputAccessoryView, Platform, TextInput as RNTextInput, View } from 'react-native';
 import useInputText from './hooks/useInputText';
 import TextInputProps from './interfaces';
-import Styles from './text-input.styles';
+import Style from './text-input.styles';
 import KeyboardAvoidView from '@/src/components/keyboard-avoid-view/keyboard-avoid-view';
 import Box from '@/src/controllers/box/box';
 import Spacer from '@/src/controllers/spacer/spacer';
@@ -24,24 +24,24 @@ const TextInput = forwardRef(
         <Box>
           {Platform.OS === 'ios' && (
             <InputAccessoryView nativeID="inputID">
-              <Box style={Styles.InputAccessory}>
+              <Box style={Style.InputAccessory}>
                 <Button title={translate('common.done')} onPress={() => ref?.current.blur()} />
               </Box>
             </InputAccessoryView>
           )}
-          <Text style={[Styles.title, shownDisable && Styles.titleDisabled]}>{label}</Text>
+          <Text style={[Style.title, shownDisable && Style.titleDisabled]}>{label}</Text>
           <Spacer size={8} />
-          <View ref={boxRef} style={{ opacity: 1, backgroundColor: 'transparent', height: '100%' }}>
+          <View ref={boxRef} style={Style.dummyWrapper}>
             <RNTextInput
               ref={ref}
               allowFontScaling={false}
               style={[
                 props.style,
-                Styles.textInput,
+                Style.textInput,
                 inputStatus.activeStyle,
-                shownDisable && Styles.inputDisabled,
-                multiline && Styles.multiLine,
-                shownDisable && Styles.titleDisabled,
+                shownDisable && Style.inputDisabled,
+                multiline && Style.multiLine,
+                shownDisable && Style.titleDisabled,
               ]}
               // props.onFocus is important to show disable the focus color if the component wont active as input but as "displayed text"
               onFocus={props.onFocus || inputTextFocusHandler}
@@ -53,7 +53,7 @@ const TextInput = forwardRef(
               // disabled={disabled}
               {...props}
             />
-            {caption && <Text style={Styles.errorText}>{caption}</Text>}
+            {caption && <Text style={Style.errorText}>{caption}</Text>}
           </View>
         </Box>
       </KeyboardAvoidView>

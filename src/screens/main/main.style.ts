@@ -1,15 +1,24 @@
 import { StyleSheet } from 'react-native';
+import { GlobalColors } from '@/styles/global-colors';
 
 export default StyleSheet.create({
-  container: {
-    borderColor: 'white',
-    borderWidth: 1,
-    borderRadius: 12,
-    marginBottom: 12,
-    padding: 12,
+  categoriesContainer: {
+    marginVertical: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 8,
+    flexWrap: 'wrap',
   },
-  title: {
+  tag: {
     color: 'white',
+    borderRadius: 8,
+    borderColor: GlobalColors.lightGray,
+    borderWidth: 1,
+    padding: 4,
+  },
+  tagMarked: {
+    color: 'black',
+    backgroundColor: 'gray',
   },
   image: {
     width: 50,

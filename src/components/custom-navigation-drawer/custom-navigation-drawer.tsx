@@ -1,11 +1,11 @@
-import {useToken} from '@/store/token/token';
-import {GlobalColors} from '@/styles/global-colors';
-import {useRouter} from 'expo-router';
-import {DrawerContentScrollView, DrawerItemList, DrawerItem} from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
+import { useRouter } from 'expo-router';
+import { useToken } from '@/store/token/token';
+import { GlobalColors } from '@/styles/global-colors';
 
-function CustomNavigationDrawer({...props}) {
-  const {state, navigation} = props;
-  const {isLoggedIn, clearToken, setToken} = useToken();
+function CustomNavigationDrawer({ ...props }) {
+  const { state, navigation } = props;
+  const { isLoggedIn, clearToken, setToken } = useToken();
   const router = useRouter();
 
   const isActive = (index: number) => index === state.index;
