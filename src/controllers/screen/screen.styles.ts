@@ -5,7 +5,8 @@ export default StyleSheet.create({
     paddingHorizontal: 16,
     width: '100%',
     height: '100%',
-    paddingTop: Platform.select({ ios: 50, android: 20 }),
+    // paddingTop: Platform.select({ ios: 50, android: 20 }),
+    paddingTop: 16,
     backgroundColor: 'black',
   },
   scrollViewContainer: {
@@ -13,7 +14,8 @@ export default StyleSheet.create({
   },
   scrollViewContainerStyle: {
     paddingHorizontal: 16,
-    paddingTop: Platform.select({ ios: 50, android: 20 }),
+    // paddingTop: Platform.select({ ios: 50, android: 20 }),
+    paddingTop: 16,
     width: '100%',
     flex: 1,
     backgroundColor: 'black',

@@ -6,8 +6,9 @@ import Box from '@/src/controllers/box/box';
 import Screen from '@/src/controllers/screen/screen';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import linksStore from '@/store/links/links-store';
+import { observer } from 'mobx-react';
 
-export default function Page() {
+function Page() {
   if (linksStore.favoriteLinks.length === 0) {
     return (
       <Box centerFullScreen style={Style.notFoundContainer}>
@@ -28,3 +29,5 @@ export default function Page() {
     </Screen>
   );
 }
+
+export default observer(Page);

@@ -6,27 +6,21 @@ export default StyleSheet.create({
     marginVertical: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: 8,
+    rowGap: 5,
+    columnGap: 5,
     flexWrap: 'wrap',
+  },
+  tagContainer: {
+    backgroundColor: GlobalColors.gray,
+    borderRadius: 8,
   },
   tag: {
     color: 'white',
-    borderRadius: 8,
-    borderColor: GlobalColors.lightGray,
-    borderWidth: 1,
-    padding: 4,
+    paddingVertical: 5,
+    paddingHorizontal: 6
   },
   tagMarked: {
     color: 'black',
     backgroundColor: 'gray',
-  },
-  image: {
-    width: 50,
-    height: 50,
-    backgroundColor: '#0553',
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
 });

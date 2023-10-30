@@ -18,6 +18,7 @@ export default StyleSheet.create({
   title: {
     ...FontStyle.H5,
     textAlign: 'left',
+    color: GlobalColors.white
   },
 
   errorText: {

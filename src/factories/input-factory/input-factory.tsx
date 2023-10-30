@@ -8,7 +8,7 @@ const InputFactory = forwardRef(({ type, label, isError, shownDisable, disabled,
     case 'text':
       return <TextInput ref={ref} label={label} isError={isError} shownDisable={shownDisable} disabled={disabled} {...props} />;
     default:
-      break;
+      return <TextInput ref={ref} label={label} isError={isError} shownDisable={shownDisable} disabled={disabled} {...props} />;
   }
 });
 

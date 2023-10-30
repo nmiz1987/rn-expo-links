@@ -95,12 +95,12 @@ export default function RootLayout() {
                   options={{
                     href: '/user-favorites',
                     title: 'Your favorites',
-                    tabBarIcon: ({ color, size }) => <Ionicons name="heart" color={color} size={24} />,
+                    tabBarIcon: ({ color, size }) => <Ionicons name="star" color={color} size={24} />,
+                    tabBarActiveTintColor: GlobalColors.IconsColors.gold,
                     headerTitleAlign: 'center',
                     headerStyle: {
                       backgroundColor: GlobalColors.gray,
                     },
-                    tabBarActiveTintColor: GlobalColors.IconsColors.heart,
                     headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
                     // headerRight: () => <Ionicons name="log-in-outline" color={'white'} size={35} />,
                     headerTintColor: '#fff',

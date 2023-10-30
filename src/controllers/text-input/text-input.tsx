@@ -7,7 +7,7 @@ import KeyboardAvoidView from '@/src/components/keyboard-avoid-view/keyboard-avo
 import Box from '@/src/controllers/box/box';
 import Spacer from '@/src/controllers/spacer/spacer';
 import Text from '@/src/controllers/text/text';
-import { isRTL, translate } from '@/src/i18n';
+import { isRTL } from '@/src/i18n';
 import { GlobalColors } from '@/styles/global-colors';
 
 const TextInput = forwardRef(
@@ -25,7 +25,7 @@ const TextInput = forwardRef(
           {Platform.OS === 'ios' && (
             <InputAccessoryView nativeID="inputID">
               <Box style={Style.InputAccessory}>
-                <Button title={translate('common.done')} onPress={() => ref?.current.blur()} />
+                <Button title={"Done"} onPress={() => ref?.current.blur()} />
               </Box>
             </InputAccessoryView>
           )}
@@ -46,7 +46,7 @@ const TextInput = forwardRef(
               // props.onFocus is important to show disable the focus color if the component wont active as input but as "displayed text"
               onFocus={props.onFocus || inputTextFocusHandler}
               onBlur={props.onFocus || inputTextFocusHandler}
-              textAlign={isRTL ? 'right' : 'left'}
+              textAlign={'left'}
               placeholderTextColor={shownDisable ? GlobalColors.IconsColors.secondary : GlobalColors.IconsColors.primary}
               cursorColor={props.onFocus ? 'transparent' : '#000'}
               inputAccessoryViewID="inputID"

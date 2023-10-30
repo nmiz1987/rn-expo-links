@@ -15,9 +15,9 @@ function Heart({ id }: heartProps) {
       }}
     >
       {isFavoriteByUser ? (
-        <Ionicons name="heart" color={GlobalColors.IconsColors.gold} size={24} />
+        <Ionicons name="star" color={GlobalColors.IconsColors.gold} size={24} />
       ) : (
-        <Ionicons name="heart-outline" color={GlobalColors.IconsColors.gold} size={24} />
+        <Ionicons name="star-outline" color={GlobalColors.IconsColors.gold} size={24} />
       )}
     </Box>
   );

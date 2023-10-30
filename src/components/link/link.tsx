@@ -32,7 +32,7 @@ export default function Link({ link }: { link: linkProps }) {
       <TextFactory type="h4" style={Style.title}>
         {link.description}
       </TextFactory>
-      <Box style={Style.recommended} onPress={() => console.log('click')}>
+      <Box style={Style.recommended}>
         <Box style={Style.recommendedRow}>
           {link.recommended && (
             <>
@@ -43,6 +43,6 @@ export default function Link({ link }: { link: linkProps }) {
         </Box>
         <Heart id={link._id} />
       </Box>
-    </Box>
+    </Box >
   );
 }
