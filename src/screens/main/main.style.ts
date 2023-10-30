@@ -17,7 +17,7 @@ export default StyleSheet.create({
   tag: {
     color: 'white',
     paddingVertical: 5,
-    paddingHorizontal: 6
+    paddingHorizontal: 6,
   },
   tagMarked: {
     color: 'black',

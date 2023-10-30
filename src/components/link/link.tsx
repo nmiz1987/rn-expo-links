@@ -43,6 +43,6 @@ export default function Link({ link }: { link: linkProps }) {
         </Box>
         <Heart id={link._id} />
       </Box>
-    </Box >
+    </Box>
   );
 }

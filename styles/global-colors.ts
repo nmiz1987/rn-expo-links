@@ -49,5 +49,6 @@ export const GlobalColors = {
   gray: 'rgb(44, 44, 44)',
   blue: "rgb(28, 127, 255)",
   black: 'black',
+  red: "red"
 
 };

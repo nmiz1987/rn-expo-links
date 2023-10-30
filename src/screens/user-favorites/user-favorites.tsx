@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react';
 import { FlatList } from 'react-native';
 import Style from './user-favorites.style';
 import { linkProps } from '@/src/components/link/interfaces';
@@ -6,7 +7,6 @@ import Box from '@/src/controllers/box/box';
 import Screen from '@/src/controllers/screen/screen';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import linksStore from '@/store/links/links-store';
-import { observer } from 'mobx-react';
 
 function Page() {
   if (linksStore.favoriteLinks.length === 0) {

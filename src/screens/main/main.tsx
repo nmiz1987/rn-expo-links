@@ -22,23 +22,26 @@ export default function Page() {
       setLinks(filteredLinks);
     }
   }
-  const Tags = () => {
-    return (
-      <Box style={Style.categoriesContainer}>
-        {linksStore.categories.map(category => (
-          <Box onPress={() => filterLinks(category)} key={category} style={[Style.tagContainer, chosenCategory === category && Style.tagMarked]}>
-            <TextFactory style={Style.tag} type="h6">
-              {category}
-            </TextFactory>
-          </Box>
-        ))}
-      </Box>
-    )
-  }
+
 
   return (
     <Screen noScroll>
-      <FlatList ListHeaderComponent={<Tags />} data={links} renderItem={({ item }) => <Link link={item} />} keyExtractor={(item: linkProps) => item._id} />
+      <FlatList
+        ListHeaderComponent={
+          <Box style={Style.categoriesContainer}>
+            {linksStore.categories.map(category => (
+              <Box onPress={() => filterLinks(category)} key={category} style={[Style.tagContainer, chosenCategory === category && Style.tagMarked]}>
+                <TextFactory style={Style.tag} type="h6">
+                  {category}
+                </TextFactory>
+              </Box>
+            ))}
+          </Box>
+        }
+        data={links}
+        renderItem={({ item }) => <Link link={item} />}
+        keyExtractor={(item: linkProps) => item._id}
+      />
     </Screen>
   );
 }

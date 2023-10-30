@@ -5,6 +5,7 @@ export default StyleSheet.create({
   title: {
     color: GlobalColors.white,
     textAlign: 'center',
+    fontWeight: 'bold',
   },
   row: {
     flexDirection: 'row',
@@ -14,5 +15,4 @@ export default StyleSheet.create({
   email: {
     color: GlobalColors.white,
   },
-
 });

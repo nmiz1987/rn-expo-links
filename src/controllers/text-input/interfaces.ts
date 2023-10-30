@@ -1,10 +1,9 @@
-export default interface TextInputProps {
+import { TextInputProps as RNTextInputProps } from 'react-native';
+export interface TextInputProps extends RNTextInputProps {
   label?: string;
   caption?: string;
   isError?: boolean;
-  shownDisable?: boolean;
-  disabled?: boolean;
-  style?: any;
-  multiline?: boolean;
+  iconImage?: string;
+  iconHandler?: () => void;
   onFocus?: () => void;
 }

@@ -3,29 +3,52 @@ import { GlobalColors } from '@/styles/global-colors';
 import { FontStyle } from '@/styles/styles';
 
 export default StyleSheet.create({
-  textInput: {
+  inputContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
     borderWidth: 1,
-    width: '100%',
-    borderRadius: 10,
     backgroundColor: GlobalColors.BgColors.Bg1,
+    borderRadius: 10,
     borderColor: GlobalColors.Border,
-    ...FontStyle.H3,
-    paddingVertical: 2,
-    paddingBottom: 2,
-    ...FontStyle.H3,
+    height: 44,
   },
-
+  textInput: {
+    backgroundColor: 'transparent',
+    flex: 1,
+    paddingVertical: 4,
+    paddingBottom: 2,
+    paddingHorizontal: 8,
+    height: 44,
+    alignItems: 'center',
+    ...FontStyle.H4,
+  },
+  iconWrapper: {
+    paddingVertical: 20,
+    paddingHorizontal: 24,
+    width: 28,
+    height: 28,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    width: 28,
+    height: 28,
+  },
   title: {
     ...FontStyle.H5,
-    textAlign: 'left',
-    color: GlobalColors.white
+    color: GlobalColors.white,
   },
-
+  focusColor: {
+    borderColor: GlobalColors.blue,
+  },
+  errorColor: {
+    borderColor: GlobalColors.SystemColors.Error,
+    backgroundColor: GlobalColors.SystemColors.Error2,
+  },
   errorText: {
     paddingTop: 8,
     ...FontStyle.H5,
-    color: 'red',
-    textAlign: 'left',
+    color: GlobalColors.red,
   },
   titleDisabled: {
     color: GlobalColors.TextColors.secondary,
