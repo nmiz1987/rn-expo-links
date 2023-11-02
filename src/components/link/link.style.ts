@@ -10,6 +10,14 @@ export default StyleSheet.create({
   },
   title: {
     color: 'white',
+    flex: 1,
+    flexWrap: 'wrap',
+  },
+  category: {
+    color: 'white',
+  },
+  description: {
+    color: 'white',
   },
   image: {
     width: 50,

@@ -35,7 +35,7 @@ function Page() {
           secureTextEntry={!loginForm.isPasswordVisible}
           label="Password"
           placeholder="Password"
-          iconImage={!loginForm.isPasswordVisible ? openEye : closeEye}
+          iconImage={loginForm.isPasswordVisible ? openEye : closeEye}
           iconHandler={handlePasswordVisibility}
           value={loginForm.password}
           onChangeText={(value: string) => handleLoginForm(EnumLoginForm.Password, value)}

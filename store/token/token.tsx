@@ -1,5 +1,5 @@
-import React, {createContext, useContext, useEffect, useState} from 'react';
-import {deleteStringAsync, getStringAsync, setStringAsync} from './storage';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { deleteStringAsync, getStringAsync, setStringAsync } from './storage';
 
 const ACCESS_TOKEN_KEY = 'LINKS_ACCESS_TOKEN';
 
@@ -10,11 +10,11 @@ interface initialValuesInterface {
   setIsTokenLoaded: (state: boolean) => void;
 }
 
-const initialValues: initialValuesInterface = {token: '', setToken: () => {}, isTokenLoaded: false, setIsTokenLoaded: () => {}};
+const initialValues: initialValuesInterface = { token: '', setToken: () => {}, isTokenLoaded: false, setIsTokenLoaded: () => {} };
 
 export const TokenContext = createContext<initialValuesInterface>(initialValues);
 
-export function TokenProvider({children}: {children: React.ReactNode}) {
+export function TokenProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string>('');
   const [isTokenLoaded, setIsTokenLoaded] = useState(false);
 
@@ -29,13 +29,13 @@ export function TokenProvider({children}: {children: React.ReactNode}) {
 }
 
 export function useToken() {
-  const {token, setToken: setTokenInternal, isTokenLoaded, setIsTokenLoaded} = useContext(TokenContext);
+  const { token, setToken: setTokenInternal, isTokenLoaded, setIsTokenLoaded } = useContext(TokenContext);
 
   useEffect(() => {
     if (!isTokenLoaded) {
       getStringAsync(ACCESS_TOKEN_KEY).then(newToken => {
         if (newToken) {
-          Internal(newToken);
+          setTokenInternal(newToken);
         }
         setIsTokenLoaded(true);
       });
@@ -54,5 +54,5 @@ export function useToken() {
 
   const isLoggedIn = token !== null;
 
-  return {token, isLoggedIn, isTokenLoaded, setToken, clearToken};
+  return { token, isLoggedIn, isTokenLoaded, setToken, clearToken };
 }
