@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { EnumLoginForm, formProp } from '../interface';
+import { login, singUp } from '@/api/links/links.api';
+import { router } from 'expo-router';
+import { useToken } from '@/store/token/token';
 
 export default function useLogin() {
   const [loginForm, setLoginForm] = useState<formProp>({
@@ -12,6 +15,8 @@ export default function useLogin() {
     passwordErrorText: '',
     isError: false,
   });
+
+  const { setToken } = useToken();
 
   function handleLoginForm(field: EnumLoginForm, value: string) {
     if (field === EnumLoginForm.Email) {
@@ -48,7 +53,7 @@ export default function useLogin() {
     });
   }
 
-  function onPressHandler() {
+  async function onPressHandler() {
     if (loginForm.email.length === 0 && loginForm.password.length === 0) {
       setLoginForm({
         ...loginForm,
@@ -62,7 +67,11 @@ export default function useLogin() {
       setLoginForm({ ...loginForm, emailErrorText: 'Email is required', passwordErrorText: '', isError: true });
     } else if (loginForm.email !== '' || loginForm.password !== '') {
       setLoginForm({ ...loginForm, isError: false, emailErrorText: '', passwordErrorText: '' });
-      console.log('connect to the server');
+      const res = await login(loginForm.email, loginForm.password);
+      if (res.accessToken) {
+        setToken(res.accessToken);
+        router.replace('/');
+      }
     }
   }
 
