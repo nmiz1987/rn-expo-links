@@ -7,9 +7,10 @@ import Screen from '@/src/controllers/screen/screen';
 import Spacer from '@/src/controllers/spacer/spacer';
 import TextInput from '@/src/controllers/text-input/text-input';
 import TextFactory from '@/src/factories/text-factory/text-factory';
+import ButtonFactory from '@/src/factories/button-factory/button-factory';
 
 function Page() {
-  const { loginForm, handleLoginForm, handleFocus, handlePasswordVisibility } = useLogin();
+  const { loginForm, handleLoginForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useLogin();
   const openEye = require('@/assets/svg/openEye.svg');
   const closeEye = require('@/assets/svg/closeEye.svg');
 
@@ -25,8 +26,9 @@ function Page() {
           label="Email"
           placeholder="Email"
           value={loginForm.email}
-          onChangeText={(value: string) => handleLoginForm(EnumLoginForm.Email, value)}
+          isError={loginForm.isError}
           caption={loginForm.emailErrorText}
+          onChangeText={(value: string) => handleLoginForm(EnumLoginForm.Email, value)}
           onPressIn={() => handleFocus(EnumLoginForm.Email, true)}
           onEndEditing={() => handleFocus(EnumLoginForm.Email, false)}
         />
@@ -35,14 +37,21 @@ function Page() {
           secureTextEntry={!loginForm.isPasswordVisible}
           label="Password"
           placeholder="Password"
+          isError={loginForm.isError}
           iconImage={loginForm.isPasswordVisible ? openEye : closeEye}
           iconHandler={handlePasswordVisibility}
           value={loginForm.password}
-          onChangeText={(value: string) => handleLoginForm(EnumLoginForm.Password, value)}
           caption={loginForm.passwordErrorText}
+          onChangeText={(value: string) => handleLoginForm(EnumLoginForm.Password, value)}
           onPressIn={() => handleFocus(EnumLoginForm.Password, true)}
           onEndEditing={() => handleFocus(EnumLoginForm.Password, false)}
         />
+        <Spacer size={32} />
+
+        <Box style={Style.row}>
+          <ButtonFactory style={{ flex: 1 }} type="secondary" label="Reset form" onPress={resetFormHandler} />
+          <ButtonFactory style={{ flex: 1 }} label="Log in!" onPress={onPressHandler} />
+        </Box>
       </Box>
     </Screen>
   );

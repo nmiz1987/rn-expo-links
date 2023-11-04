@@ -32,11 +32,11 @@ export default function TextInput({ label, caption, isError = false, iconImage, 
         <Text style={Style.title}>{label}</Text>
         <Spacer size={8} />
         <View ref={boxRef} style={Style.dummyWrapper}>
-          <Box style={Style.inputContainer}>
+          <Box style={[Style.inputContainer, inputStatus.activeStyle, props.style]}>
             <RNTextInput
               ref={inputRef}
               allowFontScaling={false}
-              style={[Style.textInput, inputStatus.activeStyle, props.multiline && Style.multiLine, props.style]}
+              style={[Style.textInput, props.multiline && Style.multiLine]}
               multiline={props.multiline}
               // props.onFocus is important to show disable the focus color if the component wont active as input but as "displayed text"
               onFocus={props.onFocus || inputTextFocusHandler}
@@ -55,7 +55,7 @@ export default function TextInput({ label, caption, isError = false, iconImage, 
               {iconHandler && <Image style={Style.image} source={iconImage} contentFit="contain" />}
             </Box>
           </Box>
-          {isError && <Text style={Style.errorText}>{caption}</Text>}
+          {caption && <Text style={Style.errorText}>{caption}</Text>}
         </View>
       </Box>
     </KeyboardAvoidView>

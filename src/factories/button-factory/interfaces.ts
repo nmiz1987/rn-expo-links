@@ -3,15 +3,15 @@ import SecondaryButtonProps from './secondary-button/interfaces';
 
 type ButtonFactoryProps =
   | (PrimaryButtonProps & {
-      type: 'primary';
-      label: string;
+      type?: 'primary';
+      label?: string;
     })
   | (SecondaryButtonProps & {
-      type: 'secondary';
+      type?: 'secondary';
       label: string;
     })
   | (PrimaryButtonProps & {
-      type: 'default';
+      type?: 'default';
       label: string;
     });
 
