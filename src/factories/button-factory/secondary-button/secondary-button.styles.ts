@@ -5,6 +5,7 @@ import { FontStyle } from '@/styles/styles';
 export default StyleSheet.create({
   secondary: {
     backgroundColor: 'transparent',
+    flex: 1,
   },
   pressed: {
     opacity: 0.7,

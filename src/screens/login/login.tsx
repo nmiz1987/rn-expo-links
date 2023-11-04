@@ -49,8 +49,8 @@ function Page() {
         <Spacer size={32} />
 
         <Box style={Style.row}>
-          <ButtonFactory style={{ flex: 1 }} type="secondary" label="Reset form" onPress={resetFormHandler} />
-          <ButtonFactory style={{ flex: 1 }} label="Log in!" onPress={onPressHandler} />
+          <ButtonFactory type="secondary" label="Reset form" onPress={resetFormHandler} />
+          <ButtonFactory label="Log in!" onPress={onPressHandler} />
         </Box>
       </Box>
     </Screen>

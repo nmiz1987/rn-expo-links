@@ -4,7 +4,7 @@ import SecondaryButtonProps from './secondary-button/interfaces';
 type ButtonFactoryProps =
   | (PrimaryButtonProps & {
       type?: 'primary';
-      label?: string;
+      label: string;
     })
   | (SecondaryButtonProps & {
       type?: 'secondary';

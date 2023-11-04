@@ -5,6 +5,7 @@ import { FontStyle } from '@/styles/styles';
 export default StyleSheet.create({
   primary: {
     backgroundColor: 'transparent',
+    flex: 1,
   },
   label: {
     ...FontStyle.H2,

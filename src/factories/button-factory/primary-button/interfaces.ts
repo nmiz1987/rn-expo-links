@@ -1,6 +1,6 @@
-import { TextStyle, TouchableOpacityProps } from 'react-native';
-export default interface PrimaryButtonProps extends TouchableOpacityProps {
+import { TextStyle, PressableProps } from 'react-native';
+export default interface PrimaryButtonProps extends PressableProps {
   label: string;
-  lableStyle?: TextStyle[] | TextStyle;
+  labelStyle?: TextStyle[] | TextStyle;
   onPress: () => void;
 }
