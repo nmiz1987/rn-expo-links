@@ -1,11 +1,12 @@
-import { linkProps } from "@/src/components/link/interfaces";
+import { linkProps } from '@/src/components/link/interfaces';
 import { makeAutoObservable, runInAction } from 'mobx';
-
+import { deleteStringAsync, getStringAsync, setStringAsync } from '@/services/storage';
 
 class LinkStore {
   private _links: linkProps[] = [];
   private _categories: string[] = [];
   private _favoriteLinks: string[] = [];
+  private _usersFavoriteLinksToken: string = 'USERS_FAVORITE_LINKS';
 
   constructor() {
     makeAutoObservable(this);
@@ -23,6 +24,20 @@ class LinkStore {
     return this._favoriteLinks;
   }
 
+  async deleteFavoriteByUser() {
+    await deleteStringAsync(this._usersFavoriteLinksToken);
+  }
+
+  async loadFavoriteByUser() {
+    await getStringAsync(this._usersFavoriteLinksToken).then(links => {
+      if (links) {
+        runInAction(() => {
+          this._favoriteLinks = links.split(',');
+        });
+      }
+    });
+  }
+
   isFavoriteByUser(link: string) {
     return this._favoriteLinks.includes(link);
   }
@@ -35,17 +50,16 @@ class LinkStore {
       } else {
         this._favoriteLinks.splice(index, 1);
       }
-    }
-    );
+      setStringAsync(this._usersFavoriteLinksToken, this._favoriteLinks.join(','));
+    });
   }
 
   setLinks(links: linkProps[]) {
     if (links.length === 0) return;
     runInAction(() => {
       this._links = links;
-      this._categories = Array.from(new Set(links.map((link: linkProps) => link.category)))
+      this._categories = Array.from(new Set(links.map((link: linkProps) => link.category)));
     });
   }
-
 }
 export default new LinkStore();

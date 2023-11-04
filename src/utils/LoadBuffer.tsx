@@ -22,6 +22,7 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
     if (linksStore.links.length === 0) {
       getLinks();
     }
+    linksStore.loadFavoriteByUser();
   }, []);
 
   const onLayoutRootView = useCallback(() => {

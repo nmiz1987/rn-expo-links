@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 const _baseUrl = 'https://netanel-server.vercel.app';
 
