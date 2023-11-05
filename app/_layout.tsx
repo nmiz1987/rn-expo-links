@@ -1,12 +1,11 @@
-import { Ionicons } from '@expo/vector-icons';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Tabs } from 'expo-router/tabs';
+import { Drawer } from 'expo-router/drawer';
 import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import LoadBuffer from '@/src/utils/LoadBuffer';
-import { TokenProvider } from '@/store/token/token';
+import { TokenProvider, useToken } from '@/store/token/token';
 import { GlobalColors } from '@/styles/global-colors';
 import '@/src/i18n';
 import '@/src/utils/ignoreWarnings';
@@ -16,6 +15,7 @@ const queryClient = new QueryClient();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const baseTheme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
+  const { isLoggedIn } = useToken();
 
   const theme = {
     ...baseTheme,
@@ -33,84 +33,48 @@ export default function RootLayout() {
           <LoadBuffer>
             <QueryClientProvider client={queryClient}>
               <StatusBar style="light" />
-              <Tabs
+              <Drawer
                 screenOptions={{
+                  headerTitleAlign: 'center',
                   headerStyle: {
-                    backgroundColor: '#f4511e',
+                    backgroundColor: GlobalColors.gray,
                   },
                   headerTintColor: '#fff',
                   headerTitleStyle: {
                     fontWeight: 'bold',
                   },
-                  tabBarInactiveTintColor: 'gray',
-                  tabBarActiveBackgroundColor: 'black',
-                  tabBarInactiveBackgroundColor: 'black',
-                  tabBarLabelStyle: {
-                    fontSize: 12,
-                    marginVertical: 4,
+                  drawerActiveBackgroundColor: GlobalColors.blue,
+                  drawerLabelStyle: {
+                    fontSize: 16,
+                    color: 'white',
+                  },
+                  drawerStyle: {
+                    backgroundColor: GlobalColors.gray,
                   },
                 }}
               >
-                <Tabs.Screen
-                  name="index"
+                <Drawer.Screen
+                  name="(content)"
                   options={{
-                    href: '/',
+                    drawerLabel: 'All My Links',
                     title: 'All My Links',
-                    tabBarIcon: ({ color, size }) => <Ionicons name="home" color={color} size={24} />,
-                    headerTitleAlign: 'center',
-                    headerStyle: {
-                      backgroundColor: GlobalColors.gray,
-                    },
-                    tabBarActiveTintColor: GlobalColors.IconsColors.blue,
-                    headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
-                    headerTintColor: '#fff',
-                    headerTitleStyle: {
-                      fontWeight: 'bold',
-                      fontSize: 28,
-                    },
                   }}
                 />
-                <Tabs.Screen
-                  name="author-favorites"
+                <Drawer.Screen
+                  name="(auth)/login"
                   options={{
-                    href: '/author-favorites',
-                    title: 'Author favorites',
-                    tabBarIcon: ({ color, size }) => <Ionicons name="heart" color={color} size={24} />,
-                    headerTitleAlign: 'center',
-                    headerStyle: {
-                      backgroundColor: GlobalColors.gray,
-                    },
-                    tabBarActiveTintColor: GlobalColors.IconsColors.heart,
-                    headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
-                    // headerRight: () => <Ionicons name="log-in-outline" color={'white'} size={35} />,
-                    headerTintColor: '#fff',
-                    headerTitleStyle: {
-                      fontWeight: 'bold',
-                      fontSize: 28,
-                    },
+                    drawerLabel: 'Login',
+                    title: 'Login',
                   }}
                 />
-                <Tabs.Screen
-                  name="user-favorites"
+                <Drawer.Screen
+                  name="(auth)/sing-up"
                   options={{
-                    href: '/user-favorites',
-                    title: 'Your favorites',
-                    tabBarIcon: ({ color, size }) => <Ionicons name="star" color={color} size={24} />,
-                    tabBarActiveTintColor: GlobalColors.IconsColors.gold,
-                    headerTitleAlign: 'center',
-                    headerStyle: {
-                      backgroundColor: GlobalColors.gray,
-                    },
-                    headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
-                    // headerRight: () => <Ionicons name="log-in-outline" color={'white'} size={35} />,
-                    headerTintColor: '#fff',
-                    headerTitleStyle: {
-                      fontWeight: 'bold',
-                      fontSize: 28,
-                    },
+                    drawerLabel: 'Sing up',
+                    title: 'Sing up',
                   }}
                 />
-              </Tabs>
+              </Drawer>
             </QueryClientProvider>
           </LoadBuffer>
         </TokenProvider>

@@ -7,8 +7,15 @@ import Box from '@/src/controllers/box/box';
 import Screen from '@/src/controllers/screen/screen';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import linksStore from '@/store/links/links-store';
+import { useToken } from '@/store/token/token';
+import { router } from 'expo-router';
 
 function Page() {
+  const { isLoggedIn } = useToken();
+  if (!isLoggedIn) {
+    router.replace('/');
+  }
+
   if (linksStore.favoriteLinks.length === 0) {
     return (
       <Box centerFullScreen style={Style.notFoundContainer}>

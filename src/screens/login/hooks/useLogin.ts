@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { EnumLoginForm, formProp } from '../interface';
-import { login, singUp } from '@/api/links/links.api';
+import { login } from '@/api/links/links.api';
 import { router } from 'expo-router';
 import { useToken } from '@/store/token/token';
 
@@ -61,11 +61,11 @@ export default function useLogin() {
         passwordErrorText: 'Password is required',
         isError: true,
       });
-    } else if (loginForm.password.length === 0 && loginForm.email.length !== 0) {
+    } else if (loginForm.email.length !== 0 && loginForm.password.length === 0) {
       setLoginForm({ ...loginForm, emailErrorText: '', passwordErrorText: 'Password is required', isError: true });
     } else if (loginForm.email.length === 0 && loginForm.password.length !== 0) {
       setLoginForm({ ...loginForm, emailErrorText: 'Email is required', passwordErrorText: '', isError: true });
-    } else if (loginForm.email !== '' || loginForm.password !== '') {
+    } else if (loginForm.email.length > 0 || loginForm.password.length > 0) {
       setLoginForm({ ...loginForm, isError: false, emailErrorText: '', passwordErrorText: '' });
       const res = await login(loginForm.email, loginForm.password);
       if (res.accessToken) {

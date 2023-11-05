@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { deleteStringAsync, getStringAsync, setStringAsync } from '../../services/storage';
+import { Platform } from 'react-native';
 
 const ACCESS_TOKEN_KEY = 'LINKS_ACCESS_TOKEN';
 
@@ -52,7 +53,9 @@ export function useToken() {
     setTokenInternal('');
   }
 
-  const isLoggedIn = token !== null;
+  const isLoggedIn = token.length > 0;
+
+  console.log('isLoggedIn in useToken', Platform.OS, isLoggedIn, `|${token}|`, token.length);
 
   return { token, isLoggedIn, isTokenLoaded, setToken, clearToken };
 }
