@@ -1,11 +1,10 @@
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   noScroll: {
     paddingHorizontal: 16,
     width: '100%',
     height: '100%',
-    // paddingTop: Platform.select({ ios: 50, android: 20 }),
     paddingTop: 16,
     backgroundColor: 'black',
   },
@@ -14,7 +13,6 @@ export default StyleSheet.create({
   },
   scrollViewContainerStyle: {
     paddingHorizontal: 16,
-    // paddingTop: Platform.select({ ios: 50, android: 20 }),
     paddingTop: 16,
     width: '100%',
     flex: 1,

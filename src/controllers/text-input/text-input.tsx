@@ -8,7 +8,7 @@ import KeyboardAvoidView from '@/src/components/keyboard-avoid-view/keyboard-avo
 import Box from '@/src/controllers/box/box';
 import Spacer from '@/src/controllers/spacer/spacer';
 import Text from '@/src/controllers/text/text';
-import { isRTL, translate } from '@/src/i18n';
+import { isRTL } from '@/src/i18n';
 
 export default function TextInput({ label, caption, isError = false, iconImage, iconHandler, ...props }: TextInputProps) {
   const { inputStatus, inputTextFocusHandler, setErrorStatus } = useInputText();

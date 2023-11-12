@@ -1,13 +1,12 @@
 import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
 import { useRouter } from 'expo-router';
-import { useToken } from '@/store/token/token';
-import Box from '@/src/controllers/box/box';
 import Styles from './custom-navigation-drawer.styles';
+import Box from '@/src/controllers/box/box';
+import { useToken } from '@/store/token/token';
 import { GlobalColors } from '@/styles/global-colors';
 
 function CustomNavigationDrawer({ ...props }) {
-  const { state } = props;
-  const { isLoggedIn, clearToken, setToken } = useToken();
+  const { isLoggedIn, clearToken } = useToken();
   const router = useRouter();
 
   async function signOut() {

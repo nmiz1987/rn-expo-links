@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { observer } from 'mobx-react';
 import { FlatList } from 'react-native';
 import Style from './user-favorites.style';
@@ -8,7 +9,6 @@ import Screen from '@/src/controllers/screen/screen';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import linksStore from '@/store/links/links-store';
 import { useToken } from '@/store/token/token';
-import { router } from 'expo-router';
 
 function Page() {
   const { isLoggedIn } = useToken();

@@ -1,7 +1,7 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { EnumSingUpForm, formProp } from '../interface';
 import { singUp } from '@/api/links/links.api';
-import { router } from 'expo-router';
 import { useToken } from '@/store/token/token';
 
 export default function useLogin() {
