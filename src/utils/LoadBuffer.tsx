@@ -46,14 +46,14 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
     return null;
   } else {
     return (
-      <Box style={styles.fill} onLayout={onLayoutRootView}>
+      <Box style={Styles.fill} onLayout={onLayoutRootView}>
         {children}
       </Box>
     );
   }
 }
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   fill: {
     flex: 1,
   },

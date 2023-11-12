@@ -55,7 +55,5 @@ export function useToken() {
 
   const isLoggedIn = token.length > 0;
 
-  console.log('isLoggedIn in useToken', Platform.OS, isLoggedIn, `|${token}|`, token.length);
-
   return { token, isLoggedIn, isTokenLoaded, setToken, clearToken };
 }

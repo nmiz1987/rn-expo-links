@@ -9,6 +9,7 @@ import { TokenProvider, useToken } from '@/store/token/token';
 import { GlobalColors } from '@/styles/global-colors';
 import '@/src/i18n';
 import '@/src/utils/ignoreWarnings';
+import CustomNavigationDrawer from '@/src/components/custom-navigation-drawer/custom-navigation-drawer';
 
 const queryClient = new QueryClient();
 
@@ -52,26 +53,13 @@ export default function RootLayout() {
                     backgroundColor: GlobalColors.gray,
                   },
                 }}
+                drawerContent={props => <CustomNavigationDrawer {...props} />}
               >
                 <Drawer.Screen
                   name="(content)"
                   options={{
                     drawerLabel: 'All My Links',
                     title: 'All My Links',
-                  }}
-                />
-                <Drawer.Screen
-                  name="(auth)/login"
-                  options={{
-                    drawerLabel: 'Login',
-                    title: 'Login',
-                  }}
-                />
-                <Drawer.Screen
-                  name="(auth)/sing-up"
-                  options={{
-                    drawerLabel: 'Sing up',
-                    title: 'Sing up',
                   }}
                 />
               </Drawer>

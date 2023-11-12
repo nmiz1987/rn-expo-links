@@ -64,27 +64,38 @@ export default function RootLayout() {
           },
         }}
       />
-      {isLoggedIn && (
-        <Tabs.Screen
-          name="user-favorites"
-          options={{
-            href: '/user-favorites',
-            title: 'Your favorites',
-            tabBarIcon: ({ color, size }) => <Ionicons name="star" color={color} size={24} />,
-            tabBarActiveTintColor: GlobalColors.IconsColors.gold,
-            headerTitleAlign: 'center',
-            headerStyle: {
-              backgroundColor: GlobalColors.gray,
-            },
-            headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-              fontSize: 28,
-            },
-          }}
-        />
-      )}
+
+      <Tabs.Screen
+        name="user-favorites"
+        options={{
+          href: isLoggedIn ? '/user-favorites' : null,
+          title: 'Your favorites',
+          tabBarIcon: ({ color, size }) => <Ionicons name="star" color={color} size={24} />,
+          tabBarActiveTintColor: GlobalColors.IconsColors.gold,
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: GlobalColors.gray,
+          },
+          headerLeft: () => <Ionicons name="menu" color="white" size={35} />,
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+            fontSize: 28,
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="auth/login"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="auth/sing-up"
+        options={{
+          href: null,
+        }}
+      />
     </Tabs>
   );
 }
