@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import useSignIn from './hooks/useSignIn';
+import useSignIn from './hooks/useSingIn';
 import { EnumSignInForm } from './interface';
 import Style from './sign-in.style';
 import Box from '@/src/controllers/box/box';
