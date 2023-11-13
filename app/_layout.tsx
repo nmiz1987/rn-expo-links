@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useColorScheme } from 'react-native';
 import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-context';
 import CustomNavigationDrawer from '@/src/components/custom-navigation-drawer/custom-navigation-drawer';
+import links from '@/src/screens/links';
 import LoadBuffer from '@/src/utils/LoadBuffer';
 import { TokenProvider } from '@/store/token/token';
 import { GlobalColors } from '@/styles/global-colors';
@@ -44,23 +45,21 @@ export default function RootLayout() {
                     fontWeight: 'bold',
                   },
                   drawerActiveBackgroundColor: GlobalColors.blue,
-                  drawerLabelStyle: {
-                    fontSize: 16,
-                    color: 'white',
-                  },
                   drawerStyle: {
                     backgroundColor: GlobalColors.gray,
                   },
                 }}
                 drawerContent={props => <CustomNavigationDrawer {...props} />}
               >
-                <Drawer.Screen
-                  name="(content)"
-                  options={{
-                    drawerLabel: 'All My Links',
-                    title: 'All My Links',
-                  }}
-                />
+                {Object.keys(links).map(link => (
+                  <Drawer.Screen
+                    key={links[link].title}
+                    name={link}
+                    options={{
+                      title: links[link].title,
+                    }}
+                  />
+                ))}
               </Drawer>
             </QueryClientProvider>
           </LoadBuffer>

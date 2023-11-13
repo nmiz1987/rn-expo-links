@@ -1,12 +1,12 @@
-import { DrawerContentScrollView, DrawerItem, DrawerItemList } from '@react-navigation/drawer';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { useRouter } from 'expo-router';
-import Styles from './custom-navigation-drawer.styles';
-import Box from '@/src/controllers/box/box';
+import links from '@/src/screens/links';
 import { useToken } from '@/store/token/token';
 import { GlobalColors } from '@/styles/global-colors';
 
 function CustomNavigationDrawer({ ...props }) {
   const { isLoggedIn, clearToken } = useToken();
+  const { state, navigation } = props;
   const router = useRouter();
 
   async function signOut() {
@@ -15,27 +15,34 @@ function CustomNavigationDrawer({ ...props }) {
   }
 
   async function logIn() {
-    router.push('/auth/login');
+    router.push('/sing-in');
   }
 
+  function filterScreens(str) {
+    return ['_sitemap', '[...404]', 'sing-up'].some(item => str.includes(item));
+  }
+
+  const screensList = state.routes.filter(route => !filterScreens(route.name));
+
   return (
-    <DrawerContentScrollView {...props} style={Styles.container}>
-      <Box style={Styles.links}>
-        <DrawerItemList descriptors={props.descriptors} state={props.state} navigation={props.navigation} />
-      </Box>
-      <Box style={Styles.specialButtons}>
-        {isLoggedIn ? (
+    <DrawerContentScrollView {...props}>
+      {screensList.map((route, index) => {
+        const newLabel = links[route.name];
+
+        if (!isLoggedIn && newLabel.onlyToSignUser === true) return null;
+
+        return (
           <DrawerItem
             {...props}
-            inactiveBackgroundColor={GlobalColors.IconsColors.blue}
-            inactiveTintColor="white"
-            label="Sign out"
-            onPress={signOut}
+            labelStyle={{ fontSize: 16, color: GlobalColors.white }}
+            key={route.key}
+            label={newLabel.drawerLabel}
+            accessibilityLabel={newLabel.drawerLabel}
+            inactiveBackgroundColor={GlobalColors.lightGray}
+            onPress={() => navigation.navigate(route.name)}
           />
-        ) : (
-          <DrawerItem {...props} inactiveBackgroundColor={GlobalColors.IconsColors.blue} inactiveTintColor="white" label="Sign in" onPress={logIn} />
-        )}
-      </Box>
+        );
+      })}
     </DrawerContentScrollView>
   );
 }
