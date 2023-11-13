@@ -19,12 +19,11 @@ function CustomNavigationDrawer({ ...props }) {
   }
 
   async function signIn() {
-    await setToken('abc');
-    router.push('/');
+    router.push('/sign-in');
   }
 
   function filterScreens(str) {
-    return ['_sitemap', '[...404]', 'sign-up'].some(item => str.includes(item));
+    return ['_sitemap', '[...404]', 'sign-up', 'sign-in'].some(item => str.includes(item));
   }
 
   const screensList = state.routes.filter(route => !filterScreens(route.name));
@@ -35,6 +34,7 @@ function CustomNavigationDrawer({ ...props }) {
         {screensList.map((route, index) => {
           const newLabel = links[route.name];
           if (!isLoggedIn && newLabel.onlyToSignUser === true) return null;
+
           return (
             <DrawerItem
               {...props}
@@ -50,13 +50,12 @@ function CustomNavigationDrawer({ ...props }) {
           );
         })}
       </Box>
-      {isLoggedIn && (
+      {isLoggedIn ? (
         <Box style={Styles.specialButtons} onPress={signOut}>
           <Ionicons name="exit" color={GlobalColors.white} size={24} />
           <TextFactory style={Styles.singOutText}>Sing Out</TextFactory>
         </Box>
-      )}
-      {!isLoggedIn && (
+      ) : (
         <Box style={Styles.specialButtons} onPress={signIn}>
           <TextFactory style={Styles.singOutText}>Sing In</TextFactory>
         </Box>
