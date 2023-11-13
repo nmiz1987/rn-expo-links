@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import useSignIn from './hooks/useSingIn';
+import useSignUp from './hooks/useSingUp';
 import { EnumSignUpForm } from './interface';
 import Style from './sign-up.style';
 import Box from '@/src/controllers/box/box';
@@ -8,17 +8,15 @@ import Spacer from '@/src/controllers/spacer/spacer';
 import TextInput from '@/src/controllers/text-input/text-input';
 import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
+import { Link } from 'expo-router';
 
 function Page() {
-  const { signUpForm, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignIn();
+  const { signUpForm, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignUp();
   const openEye = require('@/assets/svg/openEye.svg');
   const closeEye = require('@/assets/svg/closeEye.svg');
 
   return (
     <Screen>
-      <TextFactory style={Style.title} type="h2">
-        Sign up
-      </TextFactory>
       <Spacer size={32} />
       <Box>
         <TextInput
@@ -51,6 +49,13 @@ function Page() {
         <Box style={Style.row}>
           <ButtonFactory type="secondary" label="Reset form" onPress={resetFormHandler} />
           <ButtonFactory label="Sign up!" onPress={onPressHandler} />
+        </Box>
+        <Spacer size={40} />
+        <Box style={Style.textContainer}>
+          <TextFactory style={Style.text}>Already have an account?</TextFactory>
+          <Link href="/sign-in" style={Style.link}>
+            Click here to sing in
+          </Link>
         </Box>
       </Box>
     </Screen>

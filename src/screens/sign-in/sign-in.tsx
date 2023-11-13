@@ -8,6 +8,7 @@ import Spacer from '@/src/controllers/spacer/spacer';
 import TextInput from '@/src/controllers/text-input/text-input';
 import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
+import { Link } from 'expo-router';
 
 function Page() {
   const { signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignIn();
@@ -16,9 +17,6 @@ function Page() {
 
   return (
     <Screen>
-      <TextFactory style={Style.title} type="h2">
-        Log in
-      </TextFactory>
       <Spacer size={32} />
       <Box>
         <TextInput
@@ -51,6 +49,13 @@ function Page() {
         <Box style={Style.row}>
           <ButtonFactory type="secondary" label="Reset form" onPress={resetFormHandler} />
           <ButtonFactory label="Log in!" onPress={onPressHandler} />
+        </Box>
+        <Spacer size={40} />
+        <Box style={Style.textContainer}>
+          <TextFactory style={Style.text}>Don't have an account?</TextFactory>
+          <Link href="/sign-up" style={Style.link}>
+            Click here to register
+          </Link>
         </Box>
       </Box>
     </Screen>

@@ -15,4 +15,19 @@ export default StyleSheet.create({
   email: {
     color: GlobalColors.white,
   },
+  textContainer: {
+    flexDirection: 'row',
+    gap: 12,
+    marginHorizontal: 'auto',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    color: GlobalColors.white,
+  },
+  link: {
+    color: GlobalColors.IconsColors.blue,
+    textDecorationLine: 'underline',
+    textDecorationColor: GlobalColors.IconsColors.blue,
+  },
 });

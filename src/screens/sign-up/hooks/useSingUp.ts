@@ -4,7 +4,7 @@ import { EnumSignUpForm, formProp } from '../interface';
 import { signUp } from '@/api/links/links.api';
 import { useToken } from '@/store/token/token';
 
-export default function useSignIn() {
+export default function useSignUp() {
   const [signUpForm, setSignUpForm] = useState<formProp>({
     email: '',
     password: '',

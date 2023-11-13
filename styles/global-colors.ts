@@ -3,14 +3,14 @@ export const GlobalColors = {
     primary: '#2C2D2E',
     secondary: '#919399',
     white: '#FFFFFF',
-    disable: '#BFC1C7'
+    disable: '#BFC1C7',
   },
   IconsColors: {
     primary: '#2C2D2E',
     secondary: '#BFC1C7',
-    blue: "#6f78ff",
-    heart: "#e43e3e",
-    gold: "#FFD700"
+    blue: '#6f78ff',
+    heart: '#e43e3e',
+    gold: '#FFD700',
   },
   Brand: {
     primary: '#9B0BF9',
@@ -45,10 +45,9 @@ export const GlobalColors = {
   },
   Bar: 'rgba(168, 167, 178, 0.20)',
   white: '#FFFFFF',
-  lightGray: '#757373',
+  lightGray: '#4e4e4e',
   gray: 'rgb(44, 44, 44)',
-  blue: "rgb(28, 127, 255)",
+  blue: 'rgb(28, 127, 255)',
   black: 'black',
-  red: "red"
-
+  red: 'red',
 };
