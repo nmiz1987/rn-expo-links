@@ -25,19 +25,15 @@ const Box = forwardRef((props: boxProps, ref: any): JSX.Element => {
     </View>
   );
 
-  return props.withoutFeedback ? (
+  return props.onPress ? (
     <Pressable
       {...props}
-      ref={props.ref}
-      style={[props.style && props.style, props.center && Style.center, props.centerFullScreen && Style.centerFullScreen]}
-      onPress={props.onPress}
-    >
-      {props.children}
-    </Pressable>
-  ) : props.onPress ? (
-    <Pressable
-      {...props}
-      style={[props.style && props.style, props.center && Style.center, props.centerFullScreen && Style.centerFullScreen]}
+      style={({ pressed }) => [
+        props.style && props.style,
+        props.center && Style.center,
+        props.centerFullScreen && Style.centerFullScreen,
+        pressed && { opacity: 0.5, backgroundColor: 'rgba(255, 255, 255, 0.1)' },
+      ]}
       onPress={props.onPress}
       ref={props.ref}
     >

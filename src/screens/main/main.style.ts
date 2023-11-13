@@ -3,7 +3,7 @@ import { GlobalColors } from '@/styles/global-colors';
 
 export default StyleSheet.create({
   categoriesContainer: {
-    marginVertical: 16,
+    marginVertical: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
     rowGap: 5,
@@ -22,5 +22,9 @@ export default StyleSheet.create({
   tagMarked: {
     color: 'black',
     backgroundColor: 'gray',
+  },
+  noLinksFound: {
+    color: GlobalColors.white,
+    textAlign: 'center',
   },
 });

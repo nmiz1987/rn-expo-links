@@ -50,16 +50,22 @@ function CustomNavigationDrawer({ ...props }) {
           );
         })}
       </Box>
-      {isLoggedIn ? (
-        <Box style={Styles.specialButtons} onPress={signOut}>
-          <Ionicons name="exit" color={GlobalColors.white} size={24} />
-          <TextFactory style={Styles.singOutText}>Sing Out</TextFactory>
-        </Box>
-      ) : (
-        <Box style={Styles.specialButtons} onPress={signIn}>
-          <TextFactory style={Styles.singOutText}>Sing In</TextFactory>
-        </Box>
-      )}
+      <Box center>
+        <Box style={Styles.bar} />
+      </Box>
+      <Box style={Styles.specialButtons}>
+        {isLoggedIn ? (
+          <Box style={Styles.button} onPress={signOut}>
+            <Ionicons name="exit" color={GlobalColors.white} size={24} />
+            <TextFactory style={Styles.singOutText}>Sing Out</TextFactory>
+          </Box>
+        ) : (
+          <Box style={Styles.button} onPress={signIn}>
+            <Ionicons name="enter" color={GlobalColors.white} size={24} />
+            <TextFactory style={Styles.singOutText}>Sing In</TextFactory>
+          </Box>
+        )}
+      </Box>
     </DrawerContentScrollView>
   );
 }

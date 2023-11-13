@@ -52,9 +52,13 @@ function Page() {
         </Box>
         <Spacer size={40} />
         <Box style={Style.textContainer}>
-          <TextFactory style={Style.text}>Already have an account?</TextFactory>
-          <Link href="/sign-in" style={Style.link}>
-            Click here to sing in
+          <TextFactory type="h5" style={Style.text}>
+            Already have an account?
+          </TextFactory>
+          <Link href="/sign-in">
+            <TextFactory type="h5" style={Style.link}>
+              Click here to sing in
+            </TextFactory>
           </Link>
         </Box>
       </Box>
