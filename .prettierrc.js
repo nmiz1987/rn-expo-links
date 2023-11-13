@@ -2,7 +2,7 @@
 const config = {
   arrowParens: 'avoid',
   bracketSpacing: true,
-  singleQuote: true,
+  signleQuote: true,
   trailingComma: 'all',
   printWidth: 150,
   tabWidth: 2,

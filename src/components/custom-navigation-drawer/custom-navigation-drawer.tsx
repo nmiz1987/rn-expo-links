@@ -14,12 +14,12 @@ function CustomNavigationDrawer({ ...props }) {
     router.push('/');
   }
 
-  async function singIn() {
-    router.push('/sing-in');
+  async function signIn() {
+    router.push('/sign-in');
   }
 
   function filterScreens(str) {
-    return ['_sitemap', '[...404]', 'sing-up'].some(item => str.includes(item));
+    return ['_sitemap', '[...404]', 'sign-up'].some(item => str.includes(item));
   }
 
   const screensList = state.routes.filter(route => !filterScreens(route.name));

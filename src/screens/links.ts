@@ -11,14 +11,14 @@ const links: linksProps = {
     title: 'Author Favorites',
     onlyToSignUser: false,
   },
-  'sing-in': {
-    drawerLabel: 'Sing In',
-    title: 'Sing In',
+  'sign-in': {
+    drawerLabel: 'Sign In',
+    title: 'Sign In',
     onlyToSignUser: false,
   },
-  'sing-up': {
-    drawerLabel: 'Sing Up',
-    title: 'Sing Up',
+  'sign-up': {
+    drawerLabel: 'Sign Up',
+    title: 'Sign Up',
     onlyToSignUser: false,
   },
   'user-favorites': {

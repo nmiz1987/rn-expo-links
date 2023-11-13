@@ -1,10 +1,10 @@
 import httpClient from '@/services/network-service/httpClient';
-import { singUpProps, singInProps } from './interfaces';
+import { signUpProps, signInProps } from './interfaces';
 
 const linksApi = {
   allLinks: 'useful-links',
-  singIn: 'login',
-  singUp: 'singup',
+  signIn: 'login',
+  signUp: 'signup',
 };
 
 async function getAllLinks() {
@@ -18,9 +18,9 @@ async function getAllLinks() {
   }
 }
 
-async function singUp(email: string, password: string): Promise<singUpProps> {
+async function signUp(email: string, password: string): Promise<signUpProps> {
   try {
-    const { status, data } = await httpClient().post(linksApi.singUp, { email, password });
+    const { status, data } = await httpClient().post(linksApi.signUp, { email, password });
     if (!status.toString().startsWith('2')) throw new Error('Loading failed');
     return data;
   } catch (error) {
@@ -29,9 +29,9 @@ async function singUp(email: string, password: string): Promise<singUpProps> {
   }
 }
 
-async function singIn(email: string, password: string): Promise<singInProps> {
+async function signIn(email: string, password: string): Promise<signInProps> {
   try {
-    const { status, data } = await httpClient().post(linksApi.singIn, { email, password });
+    const { status, data } = await httpClient().post(linksApi.signIn, { email, password });
     if (!status.toString().startsWith('2')) throw new Error('Loading failed');
     return data;
   } catch (error) {
@@ -40,4 +40,4 @@ async function singIn(email: string, password: string): Promise<singInProps> {
   }
 }
 
-export { getAllLinks, singUp, singIn };
+export { getAllLinks, signUp, signIn };

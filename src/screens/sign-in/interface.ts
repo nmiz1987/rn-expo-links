@@ -9,7 +9,7 @@ export interface formProp {
   isError: boolean;
 }
 
-export enum EnumSingInForm {
+export enum EnumSignInForm {
   Email = 'email',
   Password = 'password',
 }

@@ -1,8 +1,8 @@
-export interface singUpProps {
+export interface signUpProps {
   message: string;
   token: string;
 }
 
-export interface singInProps {
+export interface signInProps {
   accessToken: string;
 }

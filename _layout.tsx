@@ -91,7 +91,7 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="auth/sing-up"
+        name="auth/sign-up"
         options={{
           href: null,
         }}

@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
-import useSingIn from './hooks/useSingIn';
-import { EnumSingUpForm } from './interface';
-import Style from './sing-up.style';
+import useSignIn from './hooks/useSignIn';
+import { EnumSignInForm } from './interface';
+import Style from './sign-in.style';
 import Box from '@/src/controllers/box/box';
 import Screen from '@/src/controllers/screen/screen';
 import Spacer from '@/src/controllers/spacer/spacer';
@@ -10,14 +10,14 @@ import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 
 function Page() {
-  const { singUpForm, handleSingUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSingIn();
+  const { signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignIn();
   const openEye = require('@/assets/svg/openEye.svg');
   const closeEye = require('@/assets/svg/closeEye.svg');
 
   return (
     <Screen>
       <TextFactory style={Style.title} type="h2">
-        Sing up
+        Log in
       </TextFactory>
       <Spacer size={32} />
       <Box>
@@ -25,32 +25,32 @@ function Page() {
           keyboardType="email-address"
           label="Email"
           placeholder=""
-          value={singUpForm.email}
-          isError={singUpForm.isError}
-          caption={singUpForm.emailErrorText}
-          onChangeText={(value: string) => handleSingUpForm(EnumSingUpForm.Email, value)}
-          onPressIn={() => handleFocus(EnumSingUpForm.Email, true)}
-          onEndEditing={() => handleFocus(EnumSingUpForm.Email, false)}
+          value={signInForm.email}
+          isError={signInForm.isError}
+          caption={signInForm.emailErrorText}
+          onChangeText={(value: string) => handleSignInForm(EnumSignInForm.Email, value)}
+          onPressIn={() => handleFocus(EnumSignInForm.Email, true)}
+          onEndEditing={() => handleFocus(EnumSignInForm.Email, false)}
         />
         <Spacer size={16} />
         <TextInput
-          secureTextEntry={!singUpForm.isPasswordVisible}
+          secureTextEntry={!signInForm.isPasswordVisible}
           label="Password"
           placeholder="I won't tell anyone..."
-          isError={singUpForm.isError}
-          iconImage={singUpForm.isPasswordVisible ? openEye : closeEye}
+          isError={signInForm.isError}
+          iconImage={signInForm.isPasswordVisible ? openEye : closeEye}
           iconHandler={handlePasswordVisibility}
-          value={singUpForm.password}
-          caption={singUpForm.passwordErrorText}
-          onChangeText={(value: string) => handleSingUpForm(EnumSingUpForm.Password, value)}
-          onPressIn={() => handleFocus(EnumSingUpForm.Password, true)}
-          onEndEditing={() => handleFocus(EnumSingUpForm.Password, false)}
+          value={signInForm.password}
+          caption={signInForm.passwordErrorText}
+          onChangeText={(value: string) => handleSignInForm(EnumSignInForm.Password, value)}
+          onPressIn={() => handleFocus(EnumSignInForm.Password, true)}
+          onEndEditing={() => handleFocus(EnumSignInForm.Password, false)}
         />
         <Spacer size={32} />
 
         <Box style={Style.row}>
           <ButtonFactory type="secondary" label="Reset form" onPress={resetFormHandler} />
-          <ButtonFactory label="Sing up!" onPress={onPressHandler} />
+          <ButtonFactory label="Log in!" onPress={onPressHandler} />
         </Box>
       </Box>
     </Screen>
