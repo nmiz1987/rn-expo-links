@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react';
-import useLogin from './hooks/useLogin';
+import useSingIn from './hooks/useSingIn';
 import { EnumSingUpForm } from './interface';
 import Style from './sing-up.style';
 import Box from '@/src/controllers/box/box';
@@ -10,7 +10,7 @@ import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 
 function Page() {
-  const { singUpForm, handleSingUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useLogin();
+  const { singUpForm, handleSingUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSingIn();
   const openEye = require('@/assets/svg/openEye.svg');
   const closeEye = require('@/assets/svg/closeEye.svg');
 

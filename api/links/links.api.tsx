@@ -1,9 +1,9 @@
 import httpClient from '@/services/network-service/httpClient';
-import { singUpProps, logInProps } from './interfaces';
+import { singUpProps, singInProps } from './interfaces';
 
 const linksApi = {
   allLinks: 'useful-links',
-  login: 'login',
+  singIn: 'login',
   singUp: 'singup',
 };
 
@@ -29,9 +29,9 @@ async function singUp(email: string, password: string): Promise<singUpProps> {
   }
 }
 
-async function login(email: string, password: string): Promise<logInProps> {
+async function singIn(email: string, password: string): Promise<singInProps> {
   try {
-    const { status, data } = await httpClient().post(linksApi.login, { email, password });
+    const { status, data } = await httpClient().post(linksApi.singIn, { email, password });
     if (!status.toString().startsWith('2')) throw new Error('Loading failed');
     return data;
   } catch (error) {
@@ -40,4 +40,4 @@ async function login(email: string, password: string): Promise<logInProps> {
   }
 }
 
-export { getAllLinks, singUp, login };
+export { getAllLinks, singUp, singIn };

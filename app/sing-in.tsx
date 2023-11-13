@@ -1,5 +1,5 @@
-import Login from '@/src/screens/login/login';
+import SingIn from '@/src/screens/sing-in/sing-in';
 
 export default function Page() {
-  return <Login />;
+  return <SingIn />;
 }

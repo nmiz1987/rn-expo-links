@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react';
-import useLogin from './hooks/useLogin';
-import { EnumLoginForm } from './interface';
-import Style from './login.style';
+import useSingIn from './hooks/useSingIn';
+import { EnumSingInForm } from './interface';
+import Style from './sing-in.style';
 import Box from '@/src/controllers/box/box';
 import Screen from '@/src/controllers/screen/screen';
 import Spacer from '@/src/controllers/spacer/spacer';
@@ -10,7 +10,7 @@ import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 
 function Page() {
-  const { loginForm, handleLoginForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useLogin();
+  const { singInForm, handleSingInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSingIn();
   const openEye = require('@/assets/svg/openEye.svg');
   const closeEye = require('@/assets/svg/closeEye.svg');
 
@@ -25,26 +25,26 @@ function Page() {
           keyboardType="email-address"
           label="Email"
           placeholder=""
-          value={loginForm.email}
-          isError={loginForm.isError}
-          caption={loginForm.emailErrorText}
-          onChangeText={(value: string) => handleLoginForm(EnumLoginForm.Email, value)}
-          onPressIn={() => handleFocus(EnumLoginForm.Email, true)}
-          onEndEditing={() => handleFocus(EnumLoginForm.Email, false)}
+          value={singInForm.email}
+          isError={singInForm.isError}
+          caption={singInForm.emailErrorText}
+          onChangeText={(value: string) => handleSingInForm(EnumSingInForm.Email, value)}
+          onPressIn={() => handleFocus(EnumSingInForm.Email, true)}
+          onEndEditing={() => handleFocus(EnumSingInForm.Email, false)}
         />
         <Spacer size={16} />
         <TextInput
-          secureTextEntry={!loginForm.isPasswordVisible}
+          secureTextEntry={!singInForm.isPasswordVisible}
           label="Password"
           placeholder="I won't tell anyone..."
-          isError={loginForm.isError}
-          iconImage={loginForm.isPasswordVisible ? openEye : closeEye}
+          isError={singInForm.isError}
+          iconImage={singInForm.isPasswordVisible ? openEye : closeEye}
           iconHandler={handlePasswordVisibility}
-          value={loginForm.password}
-          caption={loginForm.passwordErrorText}
-          onChangeText={(value: string) => handleLoginForm(EnumLoginForm.Password, value)}
-          onPressIn={() => handleFocus(EnumLoginForm.Password, true)}
-          onEndEditing={() => handleFocus(EnumLoginForm.Password, false)}
+          value={singInForm.password}
+          caption={singInForm.passwordErrorText}
+          onChangeText={(value: string) => handleSingInForm(EnumSingInForm.Password, value)}
+          onPressIn={() => handleFocus(EnumSingInForm.Password, true)}
+          onEndEditing={() => handleFocus(EnumSingInForm.Password, false)}
         />
         <Spacer size={32} />
 

@@ -4,7 +4,7 @@ import { EnumSingUpForm, formProp } from '../interface';
 import { singUp } from '@/api/links/links.api';
 import { useToken } from '@/store/token/token';
 
-export default function useLogin() {
+export default function useSingIn() {
   const [singUpForm, setSingUpForm] = useState<formProp>({
     email: '',
     password: '',

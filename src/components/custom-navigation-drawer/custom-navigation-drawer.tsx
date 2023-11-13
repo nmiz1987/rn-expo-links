@@ -14,7 +14,7 @@ function CustomNavigationDrawer({ ...props }) {
     router.push('/');
   }
 
-  async function logIn() {
+  async function singIn() {
     router.push('/sing-in');
   }
 

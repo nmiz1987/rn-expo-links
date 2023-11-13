@@ -3,6 +3,6 @@ export interface singUpProps {
   token: string;
 }
 
-export interface logInProps {
+export interface singInProps {
   accessToken: string;
 }
