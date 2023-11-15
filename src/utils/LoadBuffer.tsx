@@ -1,12 +1,12 @@
-import { RedHatDisplay_500Medium, useFonts } from '@expo-google-fonts/red-hat-display';
-import * as SplashScreen from 'expo-splash-screen';
-import { observer } from 'mobx-react';
-import { useCallback, useEffect } from 'react';
-import { StyleSheet, Text } from 'react-native';
-import { useToken } from '../../store/token/token';
-import { getAllLinks } from '@/api/links/links.api';
-import Box from '@/src/controllers/box/box';
-import linksStore from '@/store/links/links-store';
+import { RedHatDisplay_500Medium, useFonts } from "@expo-google-fonts/red-hat-display";
+import * as SplashScreen from "expo-splash-screen";
+import { observer } from "mobx-react";
+import { useCallback, useEffect } from "react";
+import { StyleSheet, Text } from "react-native";
+import { useToken } from "../../store/token/token";
+import { getAllLinks } from "@/api/links/links.api";
+import Box from "@/src/controllers/box/box";
+import linksStore from "@/store/links/links-store";
 
 function LoadBuffer({ children }: { children: React.ReactNode }) {
   const { isTokenLoaded } = useToken();
