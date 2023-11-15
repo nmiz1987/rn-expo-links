@@ -16,4 +16,7 @@ export default StyleSheet.create({
     height: height * margin,
     padding: 16,
   },
+  title: {
+    textAlign: "center",
+  },
 });

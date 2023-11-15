@@ -1,3 +1,3 @@
-export interface StorePreviewPorps {
+export interface StorePreviewProps {
   listeners: any[];
 }

@@ -2,26 +2,21 @@ import Box from "@/src/controllers/box/box";
 import TextFactory from "@/src/factories/text-factory/text-factory";
 import Style from "./store-preview.styles";
 import { observer } from "mobx-react";
-import { StorePreviewPorps } from "./store-preview.interfaces";
+import { StorePreviewProps } from "./store-preview.interfaces";
+import Card from "./card/card";
 
-function StorePreview({ listeners }: StorePreviewPorps) {
-  // console.log(Object.keys(listeners[0]));
+function StorePreview({ listeners }: StorePreviewProps) {
   return (
     <Box scroll style={Style.container}>
-      <TextFactory>Store</TextFactory>
+      <TextFactory type="h4" style={Style.title}>
+        Store Preview
+      </TextFactory>
       {listeners.map(listener =>
-        Object.keys(listeners[0]).map(key => {
-          console.log(key);
-          return (
-            <>
-              <TextFactory>{key}</TextFactory>
-              <TextFactory>{JSON.stringify(listener["_links"], null, 2)}</TextFactory>
-              <TextFactory>{listener["_categories"]}</TextFactory>
-              <TextFactory>{listener["_favoriteLinks"]}</TextFactory>
-              <TextFactory>{listener["_usersFavoriteLinksToken"]}</TextFactory>
-            </>
-          );
-        }),
+        Object.keys(listeners[0]).map(key => (
+          <Box key={key}>
+            <Card title={key} info={listener[key]} />
+          </Box>
+        )),
       )}
     </Box>
   );
