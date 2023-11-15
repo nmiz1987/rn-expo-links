@@ -15,7 +15,7 @@ function Card({ title, info }: CardProps) {
           Key: {title}
         </TextFactory>
         <Box style={Style.arrowContainer}>
-          <Image style={[Style.arrow, isOpen && Style.rotate]} source={require("./asset/direction-up.svg")} contentFit="contain" />
+          <Image style={[Style.arrow, isOpen && Style.rotate]} source={require("../asset/direction-up.svg")} contentFit="contain" />
         </Box>
       </Box>
       <Box style={[Style.bar, !isOpen && { display: "none" }]} />
