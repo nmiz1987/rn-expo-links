@@ -12,7 +12,7 @@ function Card({ title, info }: CardProps) {
     <Box scroll style={Style.container}>
       <Box style={Style.titleRow} onPress={toggleOpen}>
         <TextFactory type="h5" style={Style.title}>
-          Key: {title}
+          Attribute: {title}
         </TextFactory>
         <Box style={Style.arrowContainer}>
           <Image style={[Style.arrow, isOpen && Style.rotate]} source={require("../asset/direction-up.svg")} contentFit="contain" />
