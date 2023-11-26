@@ -1,9 +1,9 @@
-import { router } from "expo-router";
-import { useState } from "react";
-import { EnumSignUpForm, formProp } from "../interface";
-import { signUp } from "@/api/links/links.api";
-import { useToken } from "@/store/token/token";
-import userStore from "@/store/user/user-store";
+import { router } from 'expo-router';
+import { useState } from 'react';
+import { EnumSignUpForm, formProp } from '../interface';
+import { signUp } from '@/api/links/links.api';
+import { useToken } from '@/store/token/token';
+import userStore from '@/store/user/user-store';
 
 export default function useSignUp() {
   const [signUpForm, setSignUpForm] = useState<formProp>({
@@ -12,8 +12,8 @@ export default function useSignUp() {
     isEmailFocus: false,
     isPasswordFocus: false,
     isPasswordVisible: false,
-    emailErrorText: "",
-    passwordErrorText: "",
+    emailErrorText: '',
+    passwordErrorText: '',
     isError: false,
   });
 
@@ -44,16 +44,16 @@ export default function useSignUp() {
   }
 
   function resetFormHandler() {
-    userStore.setEmail("");
-    userStore.setPassword("");
+    userStore.setEmail('');
+    userStore.setPassword('');
     setSignUpForm({
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       isEmailFocus: false,
       isPasswordFocus: false,
       isPasswordVisible: false,
-      emailErrorText: "",
-      passwordErrorText: "",
+      emailErrorText: '',
+      passwordErrorText: '',
       isError: false,
     });
   }
@@ -62,20 +62,20 @@ export default function useSignUp() {
     if (signUpForm.email.length === 0 && signUpForm.password.length === 0) {
       setSignUpForm({
         ...signUpForm,
-        emailErrorText: "Email is required",
-        passwordErrorText: "Password is required",
+        emailErrorText: 'Email is required',
+        passwordErrorText: 'Password is required',
         isError: true,
       });
     } else if (signUpForm.email.length !== 0 && signUpForm.password.length === 0) {
-      setSignUpForm({ ...signUpForm, emailErrorText: "", passwordErrorText: "Password is required", isError: true });
+      setSignUpForm({ ...signUpForm, emailErrorText: '', passwordErrorText: 'Password is required', isError: true });
     } else if (signUpForm.email.length === 0 && signUpForm.password.length !== 0) {
-      setSignUpForm({ ...signUpForm, emailErrorText: "Email is required", passwordErrorText: "", isError: true });
+      setSignUpForm({ ...signUpForm, emailErrorText: 'Email is required', passwordErrorText: '', isError: true });
     } else if (signUpForm.email.length > 0 || signUpForm.password.length > 0) {
-      setSignUpForm({ ...signUpForm, isError: false, emailErrorText: "", passwordErrorText: "" });
+      setSignUpForm({ ...signUpForm, isError: false, emailErrorText: '', passwordErrorText: '' });
       const res = await signUp(signUpForm.email, signUpForm.password);
       if (res.token) {
         setToken(res.token);
-        router.replace("/");
+        router.replace('/');
       }
     }
   }

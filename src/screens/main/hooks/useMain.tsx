@@ -1,28 +1,21 @@
-import { useEffect, useState } from "react";
-import linksStore from "@/store/links/links-store";
-import { linkProps } from "@/src/components/link/interfaces";
+import { useState } from 'react';
+import { linkProps } from '@/src/components/link/interfaces';
+import linksStore from '@/store/links/links-store';
 
 export default function useMain() {
   const [links, setLinks] = useState<linkProps[]>(linksStore.links);
-  const [chosenCategory, setChosenCategory] = useState<string>("");
-  const [searchTerms, setSearchTerms] = useState<string>("");
+  const [searchTerms, setSearchTerms] = useState<string>('');
+  const [chosenCategory, setChosenCategory] = useState<string>('');
+  const filteredLinks = links.filter((link: linkProps) => link.name.toLowerCase().includes(searchTerms.toLowerCase()));
 
-  // let filteredLinks = links.filter(link => link.category === category);
-  // filteredLinks = filteredLinks.filter((link: linkProps) => link.name.toLowerCase().includes(searchTerms.toLowerCase()));
-
-  useEffect(() => {
-    if (searchTerms.length === 0) {
-      setLinks(linksStore.links);
-    } else {
-      setLinks(links.filter((link: linkProps) => link.name.toLowerCase().includes(searchTerms.toLowerCase())));
-    }
-  }, [searchTerms, chosenCategory]);
-
-  function categoryHandler(category: string) {
+  function filterLinksByCategory(category: string) {
     if (category === chosenCategory) {
-      setChosenCategory("");
+      setLinks(linksStore.links); // all links
+      setChosenCategory('');
     } else {
       setChosenCategory(category);
+      const filteredLinks = linksStore.links.filter(link => link.category === category);
+      setLinks(filteredLinks);
     }
   }
 
@@ -31,8 +24,10 @@ export default function useMain() {
   }
 
   return {
-    links,
+    chosenCategory,
+    searchTerms,
+    filterLinksByCategory,
+    filteredLinks,
     searchTermsHandler,
-    categoryHandler,
   };
 }

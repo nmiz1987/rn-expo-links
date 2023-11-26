@@ -1,13 +1,13 @@
-import { MaterialIcons } from "@expo/vector-icons";
-import { Image } from "expo-image";
-import { Linking } from "react-native";
-import Heart from "./heart/heart";
-import { linkProps } from "./interfaces";
-import Styles from "./link.style";
-import Box from "@/src/controllers/box/box";
-import Spacer from "@/src/controllers/spacer/spacer";
-import TextFactory from "@/src/factories/text-factory/text-factory";
-import { GlobalColors } from "@/styles/global-colors";
+import { MaterialIcons } from '@expo/vector-icons';
+import { Image } from 'expo-image';
+import { Linking } from 'react-native';
+import Heart from './heart/heart';
+import { linkProps } from './interfaces';
+import Styles from './link.style';
+import Box from '@/src/controllers/box/box';
+import Spacer from '@/src/controllers/spacer/spacer';
+import TextFactory from '@/src/factories/text-factory/text-factory';
+import { GlobalColors } from '@/styles/global-colors';
 
 export default function Link({ link }: { link: linkProps }) {
   function openLink(link: string) {

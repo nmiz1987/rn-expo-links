@@ -1,11 +1,11 @@
-import Box from "@/src/controllers/box/box";
-import TextFactory from "@/src/factories/text-factory/text-factory";
-import Styles from "./store-preview.styles";
-import { observer } from "mobx-react";
-import { StorePreviewProps } from "./store-preview.interfaces";
-import Card from "./card/card";
-import { Image } from "expo-image";
-import usePreview from "./hooks/usePreview";
+import { Image } from 'expo-image';
+import { observer } from 'mobx-react';
+import Card from './card/card';
+import usePreview from './hooks/usePreview';
+import { StorePreviewProps } from './store-preview.interfaces';
+import Styles from './store-preview.styles';
+import Box from '@/src/controllers/box/box';
+import TextFactory from '@/src/factories/text-factory/text-factory';
 
 function StorePreview({ listeners }: StorePreviewProps) {
   const { isOpen, toggleOpen } = usePreview();
@@ -15,7 +15,7 @@ function StorePreview({ listeners }: StorePreviewProps) {
     return (
       <Box scroll style={Styles.container}>
         <Box style={Styles.closeContainer} onPress={toggleOpen}>
-          <Image style={Styles.close} source={require("./asset/close.svg")} contentFit="contain" />
+          <Image style={Styles.close} source={require('./asset/close.svg')} contentFit="contain" />
         </Box>
         <TextFactory type="h4" style={Styles.title}>
           Store Preview
@@ -38,7 +38,7 @@ function StorePreview({ listeners }: StorePreviewProps) {
   } else {
     return (
       <Box style={Styles.closeContainerPosition} onPress={toggleOpen}>
-        <Image style={Styles.close} source={require("./asset/debug.svg")} contentFit="contain" />
+        <Image style={Styles.close} source={require('./asset/debug.svg')} contentFit="contain" />
       </Box>
     );
   }

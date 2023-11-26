@@ -1,9 +1,9 @@
-import { router } from "expo-router";
-import { useState } from "react";
-import { EnumSignInForm, formProp } from "../interface";
-import { signIn } from "@/api/links/links.api";
-import { useToken } from "@/store/token/token";
-import userStore from "@/store/user/user-store";
+import { router } from 'expo-router';
+import { useState } from 'react';
+import { EnumSignInForm, formProp } from '../interface';
+import { signIn } from '@/api/links/links.api';
+import { useToken } from '@/store/token/token';
+import userStore from '@/store/user/user-store';
 
 export default function useSignIn() {
   const [signInForm, setSignInForm] = useState<formProp>({
@@ -12,8 +12,8 @@ export default function useSignIn() {
     isEmailFocus: false,
     isPasswordFocus: false,
     isPasswordVisible: false,
-    emailErrorText: "",
-    passwordErrorText: "",
+    emailErrorText: '',
+    passwordErrorText: '',
     isError: false,
   });
 
@@ -44,16 +44,16 @@ export default function useSignIn() {
   }
 
   function resetFormHandler() {
-    userStore.setEmail("");
-    userStore.setPassword("");
+    userStore.setEmail('');
+    userStore.setPassword('');
     setSignInForm({
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       isEmailFocus: false,
       isPasswordFocus: false,
       isPasswordVisible: false,
-      emailErrorText: "",
-      passwordErrorText: "",
+      emailErrorText: '',
+      passwordErrorText: '',
       isError: false,
     });
   }
@@ -62,20 +62,20 @@ export default function useSignIn() {
     if (signInForm.email.length === 0 && signInForm.password.length === 0) {
       setSignInForm({
         ...signInForm,
-        emailErrorText: "Email is required",
-        passwordErrorText: "Password is required",
+        emailErrorText: 'Email is required',
+        passwordErrorText: 'Password is required',
         isError: true,
       });
     } else if (signInForm.email.length !== 0 && signInForm.password.length === 0) {
-      setSignInForm({ ...signInForm, emailErrorText: "", passwordErrorText: "Password is required", isError: true });
+      setSignInForm({ ...signInForm, emailErrorText: '', passwordErrorText: 'Password is required', isError: true });
     } else if (signInForm.email.length === 0 && signInForm.password.length !== 0) {
-      setSignInForm({ ...signInForm, emailErrorText: "Email is required", passwordErrorText: "", isError: true });
+      setSignInForm({ ...signInForm, emailErrorText: 'Email is required', passwordErrorText: '', isError: true });
     } else if (signInForm.email.length > 0 || signInForm.password.length > 0) {
-      setSignInForm({ ...signInForm, isError: false, emailErrorText: "", passwordErrorText: "" });
+      setSignInForm({ ...signInForm, isError: false, emailErrorText: '', passwordErrorText: '' });
       const res = await signIn(signInForm.email, signInForm.password);
       if (res.accessToken) {
         setToken(res.accessToken);
-        router.replace("/");
+        router.replace('/');
       }
     }
   }

@@ -1,14 +1,14 @@
-import { Image } from "expo-image";
-import { useEffect, useRef } from "react";
-import { Button, InputAccessoryView, Platform, TextInput as RNTextInput, View } from "react-native";
-import useInputText from "./hooks/useInputText";
-import { TextInputProps } from "./interfaces";
-import Styles from "./text-input.styles";
-import KeyboardAvoidView from "@/src/components/keyboard-avoid-view/keyboard-avoid-view";
-import Box from "@/src/controllers/box/box";
-import Spacer from "@/src/controllers/spacer/spacer";
-import Text from "@/src/controllers/text/text";
-import { isRTL } from "@/src/i18n";
+import { Image } from 'expo-image';
+import { useEffect, useRef } from 'react';
+import { Button, InputAccessoryView, Platform, TextInput as RNTextInput, View } from 'react-native';
+import useInputText from './hooks/useInputText';
+import { TextInputProps } from './interfaces';
+import Styles from './text-input.styles';
+import KeyboardAvoidView from '@/src/components/keyboard-avoid-view/keyboard-avoid-view';
+import Box from '@/src/controllers/box/box';
+import Spacer from '@/src/controllers/spacer/spacer';
+import Text from '@/src/controllers/text/text';
+import { isRTL } from '@/src/i18n';
 
 export default function TextInput({ label, caption, isError = false, leftIconImage, rightIconImage, rightIconHandler, ...props }: TextInputProps) {
   const { inputStatus, inputTextFocusHandler, setErrorStatus } = useInputText();
@@ -22,7 +22,7 @@ export default function TextInput({ label, caption, isError = false, leftIconIma
   return (
     <KeyboardAvoidView wrapping={boxRef}>
       <Box>
-        {Platform.OS === "ios" && (
+        {Platform.OS === 'ios' && (
           <InputAccessoryView nativeID="inputID">
             <Box style={Styles.InputAccessory}>
               <Button title="Done" onPress={() => inputRef?.current?.blur()} />
@@ -46,8 +46,8 @@ export default function TextInput({ label, caption, isError = false, leftIconIma
               // props.onFocus is important to show disable the focus color if the component wont active as input but as "displayed text"
               onFocus={props.onFocus || inputTextFocusHandler}
               onBlur={props.onFocus || inputTextFocusHandler}
-              textAlign={isRTL ? "right" : "left"}
-              cursorColor={props.onFocus ? "transparent" : "#000"}
+              textAlign={isRTL ? 'right' : 'left'}
+              cursorColor={props.onFocus ? 'transparent' : '#000'}
               inputAccessoryViewID="inputID"
               {...props}
             />

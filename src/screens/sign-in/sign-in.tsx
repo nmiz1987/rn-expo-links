@@ -1,21 +1,21 @@
-import { observer } from "mobx-react";
-import useSignIn from "./hooks/useSingIn";
-import { EnumSignInForm } from "./interface";
-import Styles from "./sign-in.style";
-import Box from "@/src/controllers/box/box";
-import Screen from "@/src/controllers/screen/screen";
-import Spacer from "@/src/controllers/spacer/spacer";
-import TextInput from "@/src/controllers/text-input/text-input";
-import ButtonFactory from "@/src/factories/button-factory/button-factory";
-import TextFactory from "@/src/factories/text-factory/text-factory";
-import { Link } from "expo-router";
+import { Link } from 'expo-router';
+import { observer } from 'mobx-react';
+import useSignIn from './hooks/useSingIn';
+import { EnumSignInForm } from './interface';
+import Styles from './sign-in.style';
+import Box from '@/src/controllers/box/box';
+import Screen from '@/src/controllers/screen/screen';
+import Spacer from '@/src/controllers/spacer/spacer';
+import TextInput from '@/src/controllers/text-input/text-input';
+import ButtonFactory from '@/src/factories/button-factory/button-factory';
+import TextFactory from '@/src/factories/text-factory/text-factory';
 
 function Page() {
   const { signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignIn();
-  const openEyeSVG = require("@/assets/svg/openEye.svg");
-  const closeEyeSVG = require("@/assets/svg/closeEye.svg");
-  const emailSVG = require("@/assets/svg/email.svg");
-  const passwordSVG = require("@/assets/svg/password.svg");
+  const openEyeSVG = require('@/assets/svg/openEye.svg');
+  const closeEyeSVG = require('@/assets/svg/closeEye.svg');
+  const emailSVG = require('@/assets/svg/email.svg');
+  const passwordSVG = require('@/assets/svg/password.svg');
 
   return (
     <Screen>

@@ -1,12 +1,12 @@
-import { RedHatDisplay_500Medium, useFonts } from "@expo-google-fonts/red-hat-display";
-import { observer } from "mobx-react";
-import { useEffect } from "react";
-import { StyleSheet, Text } from "react-native";
-import { useToken } from "../../store/token/token";
-import { getAllLinks } from "@/api/links/links.api";
-import Box from "@/src/controllers/box/box";
-import linksStore from "@/store/links/links-store";
-import Loader from "@/src/components/loader/loader";
+import { RedHatDisplay_500Medium, useFonts } from '@expo-google-fonts/red-hat-display';
+import { observer } from 'mobx-react';
+import { useEffect } from 'react';
+import { StyleSheet } from 'react-native';
+import { useToken } from '../../store/token/token';
+import { getAllLinks } from '@/api/links/links.api';
+import Loader from '@/src/components/loader/loader';
+import Box from '@/src/controllers/box/box';
+import linksStore from '@/store/links/links-store';
 
 function LoadBuffer({ children }: { children: React.ReactNode }) {
   const { isTokenLoaded } = useToken();
@@ -14,12 +14,12 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
     RedHatDisplay_500Medium,
   });
 
-  if (fontError) throw new Error("Loading font failed");
+  if (fontError) throw new Error('Loading font failed');
 
   useEffect(() => {
     async function getLinks() {
       const res = await getAllLinks();
-      if (!res) throw new Error("Loading failed");
+      if (!res) throw new Error('Loading failed');
       linksStore.setLinks(res);
     }
     if (linksStore.links.length === 0) {

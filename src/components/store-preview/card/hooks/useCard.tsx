@@ -1,7 +1,7 @@
-import { useState } from "react";
-import Box from "@/src/controllers/box/box";
-import TextFactory from "@/src/factories/text-factory/text-factory";
-import Styles from "../card.styles";
+import { useState } from 'react';
+import Styles from '../card.styles';
+import Box from '@/src/controllers/box/box';
+import TextFactory from '@/src/factories/text-factory/text-factory';
 
 export default function useCard() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -26,7 +26,7 @@ export default function useCard() {
           </Box>
         ));
       }
-    } else if (typeof info === "object") {
+    } else if (typeof info === 'object') {
       result = JSON.stringify(info, null, 2);
     } else {
       result = <TextFactory>null</TextFactory>;

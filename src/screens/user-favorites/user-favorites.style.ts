@@ -1,5 +1,5 @@
-import { GlobalColors } from "@/styles/global-colors";
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
+import { GlobalColors } from '@/styles/global-colors';
 
 export default StyleSheet.create({
   conatiner: {
@@ -7,10 +7,10 @@ export default StyleSheet.create({
     paddingTop: 64,
   },
   lottie: {
-    width: "100%",
+    width: '100%',
   },
   notFoundTxt: {
     color: GlobalColors.white,
-    textAlign: "center",
+    textAlign: 'center',
   },
 });

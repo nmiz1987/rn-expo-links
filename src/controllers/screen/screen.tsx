@@ -1,13 +1,13 @@
-import { ForwardedRef, forwardRef } from "react";
-import { ScrollView, ViewProps } from "react-native";
-import Styles from "./screen.styles";
-import Box from "@/src/controllers/box/box";
+import { ForwardedRef, forwardRef } from 'react';
+import { ScrollView, ViewProps } from 'react-native';
+import Styles from './screen.styles';
+import Box from '@/src/controllers/box/box';
 
 type Props = ViewProps & {
   noScroll?: boolean;
   noPadding?: boolean;
   blur?: boolean;
-  contentContainerStyle?: ScrollView["props"]["contentContainerStyle"];
+  contentContainerStyle?: ScrollView['props']['contentContainerStyle'];
 };
 
 const Screen = forwardRef((props: Props, ref: ForwardedRef<any>) => {

@@ -1,31 +1,31 @@
-import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-import { Ionicons } from "@expo/vector-icons";
-import { Link, useRouter } from "expo-router";
-import links from "@/src/screens/links";
-import { useToken } from "@/store/token/token";
-import { GlobalColors } from "@/styles/global-colors";
-import Box from "@/src/controllers/box/box";
-import Styles from "./custom-navigation-drawer.styles";
-import TextFactory from "@/src/factories/text-factory/text-factory";
-import userStore from "@/store/user/user-store";
-import Spacer from "@/src/controllers/spacer/spacer";
+import { Ionicons } from '@expo/vector-icons';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { useRouter } from 'expo-router';
+import Styles from './custom-navigation-drawer.styles';
+import Box from '@/src/controllers/box/box';
+import Spacer from '@/src/controllers/spacer/spacer';
+import TextFactory from '@/src/factories/text-factory/text-factory';
+import links from '@/src/screens/links';
+import { useToken } from '@/store/token/token';
+import userStore from '@/store/user/user-store';
+import { GlobalColors } from '@/styles/global-colors';
 
 function CustomNavigationDrawer({ ...props }) {
-  const { isLoggedIn, clearToken, setToken } = useToken();
+  const { isLoggedIn, clearToken } = useToken();
   const { state, navigation } = props;
   const router = useRouter();
 
   async function signOut() {
     await clearToken();
-    router.push("/");
+    router.push('/');
   }
 
   async function signIn() {
-    router.push("/sign-in");
+    router.push('/sign-in');
   }
 
   function filterScreens(str) {
-    return ["_sitemap", "[...404]", "sign-up", "sign-in"].some(item => str.includes(item));
+    return ['_sitemap', '[...404]', 'sign-up', 'sign-in'].some(item => str.includes(item));
   }
 
   const screensList = state.routes.filter(route => !filterScreens(route.name));
@@ -34,7 +34,7 @@ function CustomNavigationDrawer({ ...props }) {
     <DrawerContentScrollView {...props}>
       <Box style={Styles.cardContainer}>
         <TextFactory type="h3" style={Styles.cardText}>
-          Hello {isLoggedIn ? userStore.email : "Guest"}
+          Hello {isLoggedIn ? userStore.email : 'Guest'}
         </TextFactory>
         {isLoggedIn && (
           <>
