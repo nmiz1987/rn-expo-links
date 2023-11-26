@@ -9,7 +9,8 @@ import Screen from "@/src/controllers/screen/screen";
 import TextFactory from "@/src/factories/text-factory/text-factory";
 import linksStore from "@/store/links/links-store";
 import { useToken } from "@/store/token/token";
-
+import LottieView from "lottie-react-native";
+import Spacer from "@/src/controllers/spacer/spacer";
 function Page() {
   const { isLoggedIn } = useToken();
   if (!isLoggedIn) {
@@ -18,11 +19,15 @@ function Page() {
 
   if (linksStore.favoriteLinks.length === 0) {
     return (
-      <Box centerFullScreen style={Styles.notFoundContainer}>
-        <TextFactory style={Styles.notFoundTxt} type="h1">
-          First you need to select some link...
-        </TextFactory>
-      </Box>
+      <Screen noScroll>
+        <Box style={Styles.conatiner}>
+          <LottieView style={Styles.lottie} autoPlay source={require("@/assets/lotties/space.json")} />
+          <Spacer size={32} />
+          <TextFactory style={Styles.notFoundTxt} type="h2">
+            First you need to select some link....
+          </TextFactory>
+        </Box>
+      </Screen>
     );
   }
 

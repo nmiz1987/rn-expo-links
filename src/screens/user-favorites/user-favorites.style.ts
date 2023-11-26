@@ -1,12 +1,16 @@
-import { StyleSheet } from 'react-native';
-import { GlobalColors } from '@/styles/global-colors';
+import { GlobalColors } from "@/styles/global-colors";
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  notFoundContainer: {
-    backgroundColor: GlobalColors.black,
+  conatiner: {
+    flex: 1,
+    paddingTop: 64,
+  },
+  lottie: {
+    width: "100%",
   },
   notFoundTxt: {
     color: GlobalColors.white,
-    width: '80%',
+    textAlign: "center",
   },
 });

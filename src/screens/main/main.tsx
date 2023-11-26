@@ -11,11 +11,14 @@ import linksStore from "@/store/links/links-store";
 import { GlobalColors } from "@/styles/global-colors";
 import TextInput from "@/src/controllers/text-input/text-input";
 import Spacer from "@/src/controllers/spacer/spacer";
+import LottieView from "lottie-react-native";
 
 export default function Page() {
   const [chosenCategory, setChosenCategory] = useState<string>("");
   const [links, setLinks] = useState<linkProps[]>(linksStore.links);
   const [searchTerms, setSearchTerms] = useState<string>("");
+  const searchIcon = require("@/assets/svg/search.svg");
+  const xIcon = require("@/assets/svg/close.svg");
 
   function filterLinks(category: string) {
     if (category === chosenCategory) {
@@ -27,8 +30,6 @@ export default function Page() {
       setLinks(filteredLinks);
     }
   }
-  const searchIcon = require("@/assets/svg/search.svg");
-  const xIcon = require("@/assets/svg/close.svg");
 
   let filteredLinks = links.filter((link: linkProps) => link.name.toLowerCase().includes(searchTerms.toLowerCase()));
 
@@ -36,9 +37,9 @@ export default function Page() {
     return (
       <Box>
         <TextInput
-          placeholder="Search..."
-          iconImage={searchTerms ? xIcon : searchIcon}
-          iconHandler={() => searchTerms.length > 0 && setSearchTerms("")}
+          placeholder={chosenCategory ? `Search in ${chosenCategory}` : "Search all links..."}
+          rightIconImage={searchTerms ? xIcon : searchIcon}
+          rightIconHandler={() => searchTerms.length > 0 && setSearchTerms("")}
           value={searchTerms}
           onChangeText={(value: string) => setSearchTerms(value)}
         />
@@ -61,9 +62,10 @@ export default function Page() {
     return (
       <Screen noScroll>
         <Filter />
-        <Box centerFullScreen>
-          <TextFactory type="h2" style={Styles.noLinksFound}>
-            No links found...
+        <Box style={Styles.conatiner}>
+          <LottieView style={Styles.lottie} autoPlay source={require("@/assets/lotties/space.json")} />
+          <TextFactory style={Styles.noLinksFound} type="h6">
+            houston we have a problem...
           </TextFactory>
         </Box>
       </Screen>

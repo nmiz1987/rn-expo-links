@@ -10,7 +10,7 @@ import Spacer from "@/src/controllers/spacer/spacer";
 import Text from "@/src/controllers/text/text";
 import { isRTL } from "@/src/i18n";
 
-export default function TextInput({ label, caption, isError = false, iconImage, iconHandler, ...props }: TextInputProps) {
+export default function TextInput({ label, caption, isError = false, leftIconImage, rightIconImage, rightIconHandler, ...props }: TextInputProps) {
   const { inputStatus, inputTextFocusHandler, setErrorStatus } = useInputText();
   const boxRef = useRef<View>(null);
   const inputRef = useRef<RNTextInput>(null);
@@ -33,6 +33,11 @@ export default function TextInput({ label, caption, isError = false, iconImage, 
         <Spacer size={8} />
         <View ref={boxRef} style={Styles.dummyWrapper}>
           <Box style={[Styles.inputContainer, inputStatus.activeStyle, props.style]}>
+            {leftIconImage && (
+              <Box style={Styles.leftIconWrapper}>
+                <Image style={Styles.image} source={leftIconImage} contentFit="contain" />
+              </Box>
+            )}
             <RNTextInput
               ref={inputRef}
               allowFontScaling={false}
@@ -47,12 +52,12 @@ export default function TextInput({ label, caption, isError = false, iconImage, 
               {...props}
             />
             <Box
-              style={Styles.iconWrapper}
+              style={Styles.rightIconWrapper}
               onPress={() => {
-                iconHandler && iconHandler();
+                rightIconHandler && rightIconHandler();
               }}
             >
-              {iconHandler && <Image style={Styles.image} source={iconImage} contentFit="contain" />}
+              {rightIconHandler && <Image style={Styles.image} source={rightIconImage} contentFit="contain" />}
             </Box>
           </Box>
           {caption && <Text style={Styles.errorText}>{caption}</Text>}

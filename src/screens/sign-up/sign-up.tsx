@@ -12,8 +12,10 @@ import { Link } from "expo-router";
 
 function Page() {
   const { signUpForm, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignUp();
-  const openEye = require("@/assets/svg/openEye.svg");
-  const closeEye = require("@/assets/svg/closeEye.svg");
+  const openEyeSVG = require("@/assets/svg/openEye.svg");
+  const closeEyeSVG = require("@/assets/svg/closeEye.svg");
+  const emailSVG = require("@/assets/svg/email.svg");
+  const passwordSVG = require("@/assets/svg/password.svg");
 
   return (
     <Screen>
@@ -23,6 +25,7 @@ function Page() {
           keyboardType="email-address"
           label="Email"
           placeholder=""
+          leftIconImage={emailSVG}
           value={signUpForm.email}
           isError={signUpForm.isError}
           caption={signUpForm.emailErrorText}
@@ -36,8 +39,9 @@ function Page() {
           label="Password"
           placeholder="I won't tell anyone..."
           isError={signUpForm.isError}
-          iconImage={signUpForm.isPasswordVisible ? openEye : closeEye}
-          iconHandler={handlePasswordVisibility}
+          leftIconImage={passwordSVG}
+          rightIconImage={signUpForm.isPasswordVisible ? openEyeSVG : closeEyeSVG}
+          rightIconHandler={handlePasswordVisibility}
           value={signUpForm.password}
           caption={signUpForm.passwordErrorText}
           onChangeText={(value: string) => handleSignUpForm(EnumSignUpForm.Password, value)}

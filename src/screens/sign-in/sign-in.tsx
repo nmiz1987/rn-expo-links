@@ -12,8 +12,10 @@ import { Link } from "expo-router";
 
 function Page() {
   const { signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignIn();
-  const openEye = require("@/assets/svg/openEye.svg");
-  const closeEye = require("@/assets/svg/closeEye.svg");
+  const openEyeSVG = require("@/assets/svg/openEye.svg");
+  const closeEyeSVG = require("@/assets/svg/closeEye.svg");
+  const emailSVG = require("@/assets/svg/email.svg");
+  const passwordSVG = require("@/assets/svg/password.svg");
 
   return (
     <Screen>
@@ -22,7 +24,8 @@ function Page() {
         <TextInput
           keyboardType="email-address"
           label="Email"
-          placeholder=""
+          placeholder="What's your email?"
+          leftIconImage={emailSVG}
           value={signInForm.email}
           isError={signInForm.isError}
           caption={signInForm.emailErrorText}
@@ -36,8 +39,9 @@ function Page() {
           label="Password"
           placeholder="I won't tell anyone..."
           isError={signInForm.isError}
-          iconImage={signInForm.isPasswordVisible ? openEye : closeEye}
-          iconHandler={handlePasswordVisibility}
+          leftIconImage={passwordSVG}
+          rightIconImage={signInForm.isPasswordVisible ? openEyeSVG : closeEyeSVG}
+          rightIconHandler={handlePasswordVisibility}
           value={signInForm.password}
           caption={signInForm.passwordErrorText}
           onChangeText={(value: string) => handleSignInForm(EnumSignInForm.Password, value)}

@@ -14,9 +14,12 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
     RedHatDisplay_500Medium,
   });
 
+  if (fontError) throw new Error("Loading font failed");
+
   useEffect(() => {
     async function getLinks() {
       const res = await getAllLinks();
+      if (!res) throw new Error("Loading failed");
       linksStore.setLinks(res);
     }
     if (linksStore.links.length === 0) {
@@ -24,14 +27,6 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
     }
     linksStore.loadFavoriteByUser();
   }, []);
-
-  if (fontError) {
-    return (
-      <Box center>
-        <Text style={{ fontSize: 16 }}>A problem occur while loading fonts</Text>
-      </Box>
-    );
-  }
 
   if (!isTokenLoaded || !fontsLoaded || linksStore.links.length === 0) {
     return <Loader />;

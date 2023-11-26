@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
-import { GlobalColors } from '@/styles/global-colors';
-import { FontStyle } from '@/styles/styles';
+import { StyleSheet } from "react-native";
+import { GlobalColors } from "@/styles/global-colors";
+import { FontStyle } from "@/styles/styles";
 
 export default StyleSheet.create({
   inputContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
+    alignItems: "center",
+    flexDirection: "row",
     borderWidth: 1,
     backgroundColor: GlobalColors.BgColors.Bg1,
     borderRadius: 10,
@@ -13,22 +13,30 @@ export default StyleSheet.create({
     height: 44,
   },
   textInput: {
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     flex: 1,
     paddingVertical: 4,
     paddingBottom: 2,
     paddingHorizontal: 8,
     height: 44,
-    alignItems: 'center',
+    alignItems: "center",
     ...FontStyle.H4,
   },
-  iconWrapper: {
+  leftIconWrapper: {
+    paddingVertical: 20,
+    paddingHorizontal: 18,
+    width: 28,
+    height: 28,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  rightIconWrapper: {
     paddingVertical: 20,
     paddingHorizontal: 24,
     width: 28,
     height: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   image: {
     width: 28,
@@ -57,16 +65,16 @@ export default StyleSheet.create({
     backgroundColor: GlobalColors.BgColors.Bg4,
   },
   multiLine: {
-    textAlignVertical: 'top',
-    textAlign: 'center',
+    textAlignVertical: "top",
+    textAlign: "center",
     height: 96,
   },
   InputAccessory: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
   },
   dummyWrapper: {
     opacity: 1,
-    backgroundColor: 'transparent',
-    height: '100%',
+    backgroundColor: "transparent",
+    height: "100%",
   },
 });
