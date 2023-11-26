@@ -1,8 +1,8 @@
-import { FlatList } from 'react-native';
-import { linkProps } from '@/src/components/link/interfaces';
-import Link from '@/src/components/link/link';
-import Screen from '@/src/controllers/screen/screen';
-import linksStore from '@/store/links/links-store';
+import { FlatList } from "react-native";
+import { linkProps } from "@/src/components/link/interfaces";
+import Link from "@/src/components/link/link";
+import Screen from "@/src/controllers/screen/screen";
+import linksStore from "@/store/links/links-store";
 
 export default function Page() {
   return (

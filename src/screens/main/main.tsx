@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FlatList } from "react-native";
-import Style from "./main.style";
+import Styles from "./main.style";
 import { linkProps } from "@/src/components/link/interfaces";
 import Link from "@/src/components/link/link";
 import Box from "@/src/controllers/box/box";
@@ -42,11 +42,11 @@ export default function Page() {
           value={searchTerms}
           onChangeText={(value: string) => setSearchTerms(value)}
         />
-        <Box style={Style.categoriesContainer}>
+        <Box style={Styles.categoriesContainer}>
           <Spacer size={16} />
           {linksStore.categories.map(category => (
-            <Box onPress={() => filterLinks(category)} key={category} style={[Style.tagContainer, chosenCategory === category && Style.tagMarked]}>
-              <TextFactory style={Style.tag} type="h6">
+            <Box onPress={() => filterLinks(category)} key={category} style={[Styles.tagContainer, chosenCategory === category && Styles.tagMarked]}>
+              <TextFactory style={Styles.tag} type="h6">
                 {category}
               </TextFactory>
             </Box>
@@ -62,7 +62,7 @@ export default function Page() {
       <Screen noScroll>
         <Filter />
         <Box centerFullScreen>
-          <TextFactory type="h2" style={Style.noLinksFound}>
+          <TextFactory type="h2" style={Styles.noLinksFound}>
             No links found...
           </TextFactory>
         </Box>

@@ -43,7 +43,7 @@ export default StyleSheet.create({
     alignItems: "center",
     backgroundColor: "lightgray",
     zIndex: 999,
-    top: height * 0.9,
+    bottom: height * 0.05,
     left: width * 0.05,
   },
 });

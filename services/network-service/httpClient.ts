@@ -1,14 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
+import baseUrl from "@/api/baseUrl";
 
-const _baseUrl = 'https://netanel-server.vercel.app';
-
-export default function httpClient(token = '') {
+export default function httpClient(token = "") {
   const headers = {};
   if (token) {
     headers.Authorization = `Bearer ${token}`;
   }
   return axios.create({
-    baseURL: _baseUrl,
+    baseURL: baseUrl,
     headers,
   });
 }

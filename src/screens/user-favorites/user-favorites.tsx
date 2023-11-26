@@ -1,25 +1,25 @@
-import { router } from 'expo-router';
-import { observer } from 'mobx-react';
-import { FlatList } from 'react-native';
-import Style from './user-favorites.style';
-import { linkProps } from '@/src/components/link/interfaces';
-import Link from '@/src/components/link/link';
-import Box from '@/src/controllers/box/box';
-import Screen from '@/src/controllers/screen/screen';
-import TextFactory from '@/src/factories/text-factory/text-factory';
-import linksStore from '@/store/links/links-store';
-import { useToken } from '@/store/token/token';
+import { router } from "expo-router";
+import { observer } from "mobx-react";
+import { FlatList } from "react-native";
+import Styles from "./user-favorites.style";
+import { linkProps } from "@/src/components/link/interfaces";
+import Link from "@/src/components/link/link";
+import Box from "@/src/controllers/box/box";
+import Screen from "@/src/controllers/screen/screen";
+import TextFactory from "@/src/factories/text-factory/text-factory";
+import linksStore from "@/store/links/links-store";
+import { useToken } from "@/store/token/token";
 
 function Page() {
   const { isLoggedIn } = useToken();
   if (!isLoggedIn) {
-    router.replace('/');
+    router.replace("/");
   }
 
   if (linksStore.favoriteLinks.length === 0) {
     return (
-      <Box centerFullScreen style={Style.notFoundContainer}>
-        <TextFactory style={Style.notFoundTxt} type="h1">
+      <Box centerFullScreen style={Styles.notFoundContainer}>
+        <TextFactory style={Styles.notFoundTxt} type="h1">
           First you need to select some link...
         </TextFactory>
       </Box>

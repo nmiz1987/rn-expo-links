@@ -1,14 +1,14 @@
-import { Image } from 'expo-image';
-import { useEffect, useRef } from 'react';
-import { Button, InputAccessoryView, Platform, TextInput as RNTextInput, View } from 'react-native';
-import useInputText from './hooks/useInputText';
-import { TextInputProps } from './interfaces';
-import Style from './text-input.styles';
-import KeyboardAvoidView from '@/src/components/keyboard-avoid-view/keyboard-avoid-view';
-import Box from '@/src/controllers/box/box';
-import Spacer from '@/src/controllers/spacer/spacer';
-import Text from '@/src/controllers/text/text';
-import { isRTL } from '@/src/i18n';
+import { Image } from "expo-image";
+import { useEffect, useRef } from "react";
+import { Button, InputAccessoryView, Platform, TextInput as RNTextInput, View } from "react-native";
+import useInputText from "./hooks/useInputText";
+import { TextInputProps } from "./interfaces";
+import Styles from "./text-input.styles";
+import KeyboardAvoidView from "@/src/components/keyboard-avoid-view/keyboard-avoid-view";
+import Box from "@/src/controllers/box/box";
+import Spacer from "@/src/controllers/spacer/spacer";
+import Text from "@/src/controllers/text/text";
+import { isRTL } from "@/src/i18n";
 
 export default function TextInput({ label, caption, isError = false, iconImage, iconHandler, ...props }: TextInputProps) {
   const { inputStatus, inputTextFocusHandler, setErrorStatus } = useInputText();
@@ -22,40 +22,40 @@ export default function TextInput({ label, caption, isError = false, iconImage, 
   return (
     <KeyboardAvoidView wrapping={boxRef}>
       <Box>
-        {Platform.OS === 'ios' && (
+        {Platform.OS === "ios" && (
           <InputAccessoryView nativeID="inputID">
-            <Box style={Style.InputAccessory}>
+            <Box style={Styles.InputAccessory}>
               <Button title="Done" onPress={() => inputRef?.current?.blur()} />
             </Box>
           </InputAccessoryView>
         )}
-        <Text style={Style.title}>{label}</Text>
+        <Text style={Styles.title}>{label}</Text>
         <Spacer size={8} />
-        <View ref={boxRef} style={Style.dummyWrapper}>
-          <Box style={[Style.inputContainer, inputStatus.activeStyle, props.style]}>
+        <View ref={boxRef} style={Styles.dummyWrapper}>
+          <Box style={[Styles.inputContainer, inputStatus.activeStyle, props.style]}>
             <RNTextInput
               ref={inputRef}
               allowFontScaling={false}
-              style={[Style.textInput, props.multiline && Style.multiLine]}
+              style={[Styles.textInput, props.multiline && Styles.multiLine]}
               multiline={props.multiline}
               // props.onFocus is important to show disable the focus color if the component wont active as input but as "displayed text"
               onFocus={props.onFocus || inputTextFocusHandler}
               onBlur={props.onFocus || inputTextFocusHandler}
-              textAlign={isRTL ? 'right' : 'left'}
-              cursorColor={props.onFocus ? 'transparent' : '#000'}
+              textAlign={isRTL ? "right" : "left"}
+              cursorColor={props.onFocus ? "transparent" : "#000"}
               inputAccessoryViewID="inputID"
               {...props}
             />
             <Box
-              style={Style.iconWrapper}
+              style={Styles.iconWrapper}
               onPress={() => {
                 iconHandler && iconHandler();
               }}
             >
-              {iconHandler && <Image style={Style.image} source={iconImage} contentFit="contain" />}
+              {iconHandler && <Image style={Styles.image} source={iconImage} contentFit="contain" />}
             </Box>
           </Box>
-          {caption && <Text style={Style.errorText}>{caption}</Text>}
+          {caption && <Text style={Styles.errorText}>{caption}</Text>}
         </View>
       </Box>
     </KeyboardAvoidView>

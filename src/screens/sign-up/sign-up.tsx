@@ -1,19 +1,19 @@
-import { observer } from 'mobx-react';
-import useSignUp from './hooks/useSingUp';
-import { EnumSignUpForm } from './interface';
-import Style from './sign-up.style';
-import Box from '@/src/controllers/box/box';
-import Screen from '@/src/controllers/screen/screen';
-import Spacer from '@/src/controllers/spacer/spacer';
-import TextInput from '@/src/controllers/text-input/text-input';
-import ButtonFactory from '@/src/factories/button-factory/button-factory';
-import TextFactory from '@/src/factories/text-factory/text-factory';
-import { Link } from 'expo-router';
+import { observer } from "mobx-react";
+import useSignUp from "./hooks/useSingUp";
+import { EnumSignUpForm } from "./interface";
+import Styles from "./sign-up.style";
+import Box from "@/src/controllers/box/box";
+import Screen from "@/src/controllers/screen/screen";
+import Spacer from "@/src/controllers/spacer/spacer";
+import TextInput from "@/src/controllers/text-input/text-input";
+import ButtonFactory from "@/src/factories/button-factory/button-factory";
+import TextFactory from "@/src/factories/text-factory/text-factory";
+import { Link } from "expo-router";
 
 function Page() {
   const { signUpForm, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignUp();
-  const openEye = require('@/assets/svg/openEye.svg');
-  const closeEye = require('@/assets/svg/closeEye.svg');
+  const openEye = require("@/assets/svg/openEye.svg");
+  const closeEye = require("@/assets/svg/closeEye.svg");
 
   return (
     <Screen>
@@ -46,17 +46,17 @@ function Page() {
         />
         <Spacer size={32} />
 
-        <Box style={Style.row}>
+        <Box style={Styles.row}>
           <ButtonFactory type="secondary" label="Reset form" onPress={resetFormHandler} />
           <ButtonFactory label="Sign up!" onPress={onPressHandler} />
         </Box>
         <Spacer size={40} />
-        <Box style={Style.textContainer}>
-          <TextFactory type="h5" style={Style.text}>
+        <Box style={Styles.textContainer}>
+          <TextFactory type="h5" style={Styles.text}>
             Already have an account?
           </TextFactory>
           <Link href="/sign-in">
-            <TextFactory type="h5" style={Style.link}>
+            <TextFactory type="h5" style={Styles.link}>
               Click here to sing in
             </TextFactory>
           </Link>

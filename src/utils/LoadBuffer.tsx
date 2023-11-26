@@ -1,12 +1,12 @@
 import { RedHatDisplay_500Medium, useFonts } from "@expo-google-fonts/red-hat-display";
-import * as SplashScreen from "expo-splash-screen";
 import { observer } from "mobx-react";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import { StyleSheet, Text } from "react-native";
 import { useToken } from "../../store/token/token";
 import { getAllLinks } from "@/api/links/links.api";
 import Box from "@/src/controllers/box/box";
 import linksStore from "@/store/links/links-store";
+import Loader from "@/src/components/loader/loader";
 
 function LoadBuffer({ children }: { children: React.ReactNode }) {
   const { isTokenLoaded } = useToken();
@@ -25,14 +25,6 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
     linksStore.loadFavoriteByUser();
   }, []);
 
-  const onLayoutRootView = useCallback(() => {
-    if (isTokenLoaded && fontsLoaded) {
-      return SplashScreen.hideAsync();
-    } else {
-      return null;
-    }
-  }, [isTokenLoaded, fontsLoaded]);
-
   if (fontError) {
     return (
       <Box center>
@@ -42,14 +34,9 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
   }
 
   if (!isTokenLoaded || !fontsLoaded || linksStore.links.length === 0) {
-    SplashScreen.preventAutoHideAsync();
-    return null;
+    return <Loader />;
   } else {
-    return (
-      <Box style={Styles.fill} onLayout={onLayoutRootView}>
-        {children}
-      </Box>
-    );
+    return <Box style={Styles.fill}>{children}</Box>;
   }
 }
 
