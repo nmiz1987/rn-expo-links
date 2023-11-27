@@ -2,7 +2,6 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { EnumSignInForm, formProp } from '../interface';
 import { signIn } from '@/api/links/links.api';
-import { useToken } from '@/store/token/token';
 import applicationStore from '@/store/application/application-store';
 
 export default function useSignIn() {
@@ -17,8 +16,6 @@ export default function useSignIn() {
     passwordErrorText: '',
     isError: false,
   });
-
-  const { setToken } = useToken();
 
   function handleRememberMe() {
     applicationStore.setRememberMe(!applicationStore.isRememberMe);
@@ -79,11 +76,12 @@ export default function useSignIn() {
     } else if (signInForm.email.length > 0 || signInForm.password.length > 0) {
       setSignInForm({ ...signInForm, isError: false, emailErrorText: '', passwordErrorText: '' });
       setIsLoading(true);
+      applicationStore.setEmail(signInForm.email);
       const res = await signIn(signInForm.email, signInForm.password);
       setIsLoading(false);
 
       if (res.accessToken) {
-        setToken(res.accessToken);
+        await applicationStore.setTokenHandler(res.accessToken);
         router.replace('/');
       }
     }

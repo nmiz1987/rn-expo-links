@@ -10,10 +10,10 @@ import Screen from '@/src/controllers/screen/screen';
 import Spacer from '@/src/controllers/spacer/spacer';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import linksStore from '@/store/links/links-store';
-import { useToken } from '@/store/token/token';
+import applicationStore from '@/store/application/application-store';
+
 function Page() {
-  const { isLoggedIn } = useToken();
-  if (!isLoggedIn) {
+  if (!applicationStore.isLoggedIn) {
     router.replace('/');
   }
 

@@ -28,6 +28,10 @@ export default function useCard() {
       }
     } else if (typeof info === 'object') {
       result = JSON.stringify(info, null, 2);
+    } else if (typeof info === 'boolean') {
+      result = <TextFactory>{info ? 'True' : 'False'}</TextFactory>;
+    } else if (typeof info === 'string' || typeof info === 'number') {
+      result = <TextFactory>{info}</TextFactory>;
     } else {
       result = <TextFactory>null</TextFactory>;
     }

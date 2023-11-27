@@ -1,4 +1,3 @@
-import { Link } from 'expo-router';
 import { observer } from 'mobx-react';
 import useSignIn from './hooks/useSingIn';
 import { EnumSignInForm } from './interface';

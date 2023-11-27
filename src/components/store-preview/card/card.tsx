@@ -4,12 +4,9 @@ import Styles from './card.styles';
 import useCard from './hooks/useCard';
 import Box from '@/src/controllers/box/box';
 import TextFactory from '@/src/factories/text-factory/text-factory';
-import { useToken } from '@/store/token/token';
 
 function Card({ title, info }: CardProps) {
   const { isOpen, toggleOpen, getInfo } = useCard();
-
-  // console.log(title, `|${info}|`);
 
   return (
     <Box scroll style={Styles.container}>

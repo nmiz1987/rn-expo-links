@@ -9,10 +9,10 @@ import StorePreview from '@/src/components/store-preview/store-preview';
 import links from '@/src/screens/links';
 import LoadBuffer from '@/src/utils/LoadBuffer';
 import linksStore from '@/store/links/links-store';
-import { TokenProvider, useToken } from '@/store/token/token';
 import { GlobalColors } from '@/styles/global-colors';
 import '@/src/i18n';
 import '@/src/utils/ignoreWarnings';
+import applicationStore from '@/store/application/application-store';
 
 const queryClient = new QueryClient();
 
@@ -30,44 +30,44 @@ export default function RootLayout() {
     },
   };
 
+  applicationStore.loadTokenHandler();
+
   return (
     <ThemeProvider value={theme}>
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <TokenProvider>
-          <LoadBuffer>
-            <QueryClientProvider client={queryClient}>
-              <StatusBar style="light" />
-              <StorePreview listeners={[linksStore, { token: useToken().token }]} />
-              <Drawer
-                screenOptions={{
-                  headerTitleAlign: 'center',
-                  headerStyle: {
-                    backgroundColor: GlobalColors.gray,
-                  },
-                  headerTintColor: '#fff',
-                  headerTitleStyle: {
-                    fontWeight: 'bold',
-                  },
-                  drawerActiveBackgroundColor: GlobalColors.blue,
-                  drawerStyle: {
-                    backgroundColor: GlobalColors.gray,
-                  },
-                }}
-                drawerContent={props => <CustomNavigationDrawer {...props} />}
-              >
-                {Object.keys(links).map(link => (
-                  <Drawer.Screen
-                    key={links[link].title}
-                    name={link}
-                    options={{
-                      title: links[link].title,
-                    }}
-                  />
-                ))}
-              </Drawer>
-            </QueryClientProvider>
-          </LoadBuffer>
-        </TokenProvider>
+        <LoadBuffer>
+          <QueryClientProvider client={queryClient}>
+            <StatusBar style="light" />
+            <StorePreview listeners={[linksStore, applicationStore]} />
+            <Drawer
+              screenOptions={{
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: GlobalColors.gray,
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+                drawerActiveBackgroundColor: GlobalColors.blue,
+                drawerStyle: {
+                  backgroundColor: GlobalColors.gray,
+                },
+              }}
+              drawerContent={props => <CustomNavigationDrawer {...props} />}
+            >
+              {Object.keys(links).map(link => (
+                <Drawer.Screen
+                  key={links[link].title}
+                  name={link}
+                  options={{
+                    title: links[link].title,
+                  }}
+                />
+              ))}
+            </Drawer>
+          </QueryClientProvider>
+        </LoadBuffer>
       </SafeAreaProvider>
     </ThemeProvider>
   );

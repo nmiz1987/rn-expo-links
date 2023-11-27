@@ -6,17 +6,15 @@ import Box from '@/src/controllers/box/box';
 import Spacer from '@/src/controllers/spacer/spacer';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import links from '@/src/screens/links';
-import { useToken } from '@/store/token/token';
 import applicationStore from '@/store/application/application-store';
 import { GlobalColors } from '@/styles/global-colors';
 
 function CustomNavigationDrawer({ ...props }) {
-  const { isLoggedIn, clearToken } = useToken();
   const { state, navigation } = props;
   const router = useRouter();
 
   async function signOut() {
-    await clearToken();
+    await applicationStore.deleteTokenHandler();
     router.push('/');
   }
 
@@ -34,9 +32,9 @@ function CustomNavigationDrawer({ ...props }) {
     <DrawerContentScrollView {...props}>
       <Box style={Styles.cardContainer}>
         <TextFactory type="h3" style={Styles.cardText}>
-          Hello {isLoggedIn ? applicationStore.email : 'Guest'}
+          Hello {applicationStore.isLoggedIn ? applicationStore.email : 'Guest'}
         </TextFactory>
-        {isLoggedIn && (
+        {applicationStore.isLoggedIn && (
           <>
             <Spacer size={8} />
             <TextFactory type="h5" style={Styles.cardText}>
@@ -48,7 +46,7 @@ function CustomNavigationDrawer({ ...props }) {
       <Box style={Styles.links}>
         {screensList.map((route, index) => {
           const newLabel = links[route.name];
-          if (!isLoggedIn && newLabel.onlyToSignUser === true) return null;
+          if (!applicationStore.isLoggedIn && newLabel.onlyToSignUser === true) return null;
 
           return (
             <DrawerItem
@@ -69,7 +67,7 @@ function CustomNavigationDrawer({ ...props }) {
         <Box style={Styles.bar} />
       </Box>
       <Box style={Styles.specialButtons}>
-        {isLoggedIn ? (
+        {applicationStore.isLoggedIn ? (
           <Box style={Styles.button} onPress={signOut}>
             <Ionicons name="exit" color={GlobalColors.white} size={24} />
             <TextFactory style={Styles.singOutText}>Sing Out</TextFactory>

@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { EnumSignUpForm, formProp } from '../interface';
 import { signUp } from '@/api/links/links.api';
-import { useToken } from '@/store/token/token';
+import applicationStore from '@/store/application/application-store';
 
 export default function useSignUp() {
   const [signUpForm, setSignUpForm] = useState<formProp>({
@@ -15,8 +15,6 @@ export default function useSignUp() {
     passwordErrorText: '',
     isError: false,
   });
-
-  const { setToken } = useToken();
 
   function handleSignUpForm(field: EnumSignUpForm, value: string) {
     if (field === EnumSignUpForm.Email) {
@@ -69,7 +67,7 @@ export default function useSignUp() {
       setSignUpForm({ ...signUpForm, isError: false, emailErrorText: '', passwordErrorText: '' });
       const res = await signUp(signUpForm.email, signUpForm.password);
       if (res.token) {
-        setToken(res.token);
+        await applicationStore.setTokenHandler(res.token);
         router.replace('/');
       }
     }
