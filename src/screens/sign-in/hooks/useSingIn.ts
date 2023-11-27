@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { EnumSignInForm, formProp } from '../interface';
 import { signIn } from '@/api/links/links.api';
 import { useToken } from '@/store/token/token';
-import userStore from '@/store/user/user-store';
 
 export default function useSignIn() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [signInForm, setSignInForm] = useState<formProp>({
-    email: userStore.email,
-    password: userStore.password,
+    email: '',
+    password: '',
     isEmailFocus: false,
     isPasswordFocus: false,
     isPasswordVisible: false,
@@ -21,11 +21,9 @@ export default function useSignIn() {
 
   function handleSignInForm(field: EnumSignInForm, value: string) {
     if (field === EnumSignInForm.Email) {
-      userStore.setEmail(value);
       setSignInForm({ ...signInForm, email: value });
     }
     if (field === EnumSignInForm.Password) {
-      userStore.setPassword(value);
       setSignInForm({ ...signInForm, password: value });
     }
   }
@@ -39,13 +37,16 @@ export default function useSignIn() {
     }
   }
 
+  function registerHandler() {
+    setSignInForm({ ...signInForm, email: '', password: '' });
+    router.push('/sign-up');
+  }
+
   function handlePasswordVisibility() {
     setSignInForm({ ...signInForm, isPasswordVisible: !signInForm.isPasswordVisible });
   }
 
   function resetFormHandler() {
-    userStore.setEmail('');
-    userStore.setPassword('');
     setSignInForm({
       email: '',
       password: '',
@@ -72,7 +73,10 @@ export default function useSignIn() {
       setSignInForm({ ...signInForm, emailErrorText: 'Email is required', passwordErrorText: '', isError: true });
     } else if (signInForm.email.length > 0 || signInForm.password.length > 0) {
       setSignInForm({ ...signInForm, isError: false, emailErrorText: '', passwordErrorText: '' });
+      setIsLoading(true);
       const res = await signIn(signInForm.email, signInForm.password);
+      setIsLoading(false);
+
       if (res.accessToken) {
         setToken(res.accessToken);
         router.replace('/');
@@ -80,5 +84,5 @@ export default function useSignIn() {
     }
   }
 
-  return { signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler };
+  return { isLoading, signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler, registerHandler };
 }

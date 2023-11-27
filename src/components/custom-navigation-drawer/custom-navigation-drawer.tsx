@@ -7,7 +7,7 @@ import Spacer from '@/src/controllers/spacer/spacer';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import links from '@/src/screens/links';
 import { useToken } from '@/store/token/token';
-import userStore from '@/store/user/user-store';
+import applicationStore from '@/store/application/application-store';
 import { GlobalColors } from '@/styles/global-colors';
 
 function CustomNavigationDrawer({ ...props }) {
@@ -34,7 +34,7 @@ function CustomNavigationDrawer({ ...props }) {
     <DrawerContentScrollView {...props}>
       <Box style={Styles.cardContainer}>
         <TextFactory type="h3" style={Styles.cardText}>
-          Hello {isLoggedIn ? userStore.email : 'Guest'}
+          Hello {isLoggedIn ? applicationStore.email : 'Guest'}
         </TextFactory>
         {isLoggedIn && (
           <>

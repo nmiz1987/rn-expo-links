@@ -6,6 +6,7 @@ export default StyleSheet.create({
   secondary: {
     backgroundColor: 'transparent',
     flex: 1,
+    height: 56,
   },
   pressed: {
     opacity: 0.7,

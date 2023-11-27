@@ -5,6 +5,7 @@ type ButtonFactoryProps =
   | (PrimaryButtonProps & {
       type?: 'primary';
       label: string;
+      isLoading?: boolean;
     })
   | (SecondaryButtonProps & {
       type?: 'secondary';
@@ -13,6 +14,7 @@ type ButtonFactoryProps =
   | (PrimaryButtonProps & {
       type?: 'default';
       label: string;
+      isLoading?: boolean;
     });
 
 export default ButtonFactoryProps;

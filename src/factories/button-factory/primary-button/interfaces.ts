@@ -3,4 +3,5 @@ export default interface PrimaryButtonProps extends PressableProps {
   label: string;
   labelStyle?: TextStyle[] | TextStyle;
   onPress: () => void;
+  isLoading?: boolean;
 }

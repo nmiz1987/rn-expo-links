@@ -6,6 +6,8 @@ export default StyleSheet.create({
   primary: {
     backgroundColor: 'transparent',
     flex: 1,
+    height: 56,
+    borderRadius: 8,
   },
   label: {
     ...FontStyle.H3,
@@ -15,11 +17,13 @@ export default StyleSheet.create({
     opacity: 0.7,
   },
   background: {
-    width: '100%',
-    paddingVertical: 12,
+    height: 56,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 8,
+  },
+  loading: {
+    opacity: 0.7,
   },
   shadow: {
     backgroundColor: 'white',

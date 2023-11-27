@@ -3,12 +3,11 @@ import { useState } from 'react';
 import { EnumSignUpForm, formProp } from '../interface';
 import { signUp } from '@/api/links/links.api';
 import { useToken } from '@/store/token/token';
-import userStore from '@/store/user/user-store';
 
 export default function useSignUp() {
   const [signUpForm, setSignUpForm] = useState<formProp>({
-    email: userStore.email,
-    password: userStore.password,
+    email: '',
+    password: '',
     isEmailFocus: false,
     isPasswordFocus: false,
     isPasswordVisible: false,
@@ -21,11 +20,9 @@ export default function useSignUp() {
 
   function handleSignUpForm(field: EnumSignUpForm, value: string) {
     if (field === EnumSignUpForm.Email) {
-      userStore.setEmail(value);
       setSignUpForm({ ...signUpForm, email: value });
     }
     if (field === EnumSignUpForm.Password) {
-      userStore.setPassword(value);
       setSignUpForm({ ...signUpForm, password: value });
     }
   }
@@ -44,8 +41,6 @@ export default function useSignUp() {
   }
 
   function resetFormHandler() {
-    userStore.setEmail('');
-    userStore.setPassword('');
     setSignUpForm({
       email: '',
       password: '',

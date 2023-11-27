@@ -3,8 +3,8 @@ import LottieView from 'lottie-react-native';
 import { observer } from 'mobx-react';
 import { FlatList } from 'react-native';
 import Styles from './user-favorites.style';
-import { linkProps } from '@/src/components/link/interfaces';
-import Link from '@/src/components/link/link';
+import { linkProps } from '@/src/components/link-preview/interfaces';
+import LinkPreview from '@/src/components/link-preview/link-preview';
 import Box from '@/src/controllers/box/box';
 import Screen from '@/src/controllers/screen/screen';
 import Spacer from '@/src/controllers/spacer/spacer';
@@ -35,7 +35,7 @@ function Page() {
     <Screen noScroll>
       <FlatList
         data={linksStore.links.filter(link => linksStore.isFavoriteByUser(link._id))}
-        renderItem={({ item }) => <Link link={item} />}
+        renderItem={({ item }) => <LinkPreview link={item} />}
         keyExtractor={(item: linkProps) => item._id}
       />
     </Screen>

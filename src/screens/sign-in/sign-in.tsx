@@ -11,7 +11,8 @@ import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 
 function Page() {
-  const { signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignIn();
+  const { isLoading, signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler, registerHandler } =
+    useSignIn();
   const openEyeSVG = require('@/assets/svg/openEye.svg');
   const closeEyeSVG = require('@/assets/svg/closeEye.svg');
   const emailSVG = require('@/assets/svg/email.svg');
@@ -52,18 +53,18 @@ function Page() {
 
         <Box style={Styles.row}>
           <ButtonFactory type="secondary" label="Reset form" onPress={resetFormHandler} />
-          <ButtonFactory label="Log in!" onPress={onPressHandler} />
+          <ButtonFactory label="Log in!" isLoading={isLoading} onPress={onPressHandler} />
         </Box>
         <Spacer size={40} />
         <Box style={Styles.textContainer}>
           <TextFactory type="h5" style={Styles.text}>
             Don't have an account?
           </TextFactory>
-          <Link href="/sign-up">
+          <Box onPress={registerHandler}>
             <TextFactory type="h5" style={Styles.link}>
               Click here to register
             </TextFactory>
-          </Link>
+          </Box>
         </Box>
       </Box>
     </Screen>

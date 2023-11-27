@@ -1,6 +1,6 @@
 import { FlatList } from 'react-native';
-import { linkProps } from '@/src/components/link/interfaces';
-import Link from '@/src/components/link/link';
+import { linkProps } from '@/src/components/link-preview/interfaces';
+import LinkPreview from '@/src/components/link-preview/link-preview';
 import Screen from '@/src/controllers/screen/screen';
 import linksStore from '@/store/links/links-store';
 
@@ -9,7 +9,7 @@ export default function Page() {
     <Screen noScroll>
       <FlatList
         data={linksStore.links.filter(link => link.recommended)}
-        renderItem={({ item }) => <Link link={item} />}
+        renderItem={({ item }) => <LinkPreview link={item} />}
         keyExtractor={(item: linkProps) => item._id}
       />
     </Screen>

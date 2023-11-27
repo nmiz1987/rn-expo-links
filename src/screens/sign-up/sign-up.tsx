@@ -24,7 +24,7 @@ function Page() {
         <TextInput
           keyboardType="email-address"
           label="Email"
-          placeholder=""
+          placeholder="What's your email?"
           leftIconImage={emailSVG}
           value={signUpForm.email}
           isError={signUpForm.isError}
