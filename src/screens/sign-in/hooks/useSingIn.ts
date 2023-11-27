@@ -5,6 +5,7 @@ import { signIn } from '@/api/links/links.api';
 import { useToken } from '@/store/token/token';
 
 export default function useSignIn() {
+  const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [signInForm, setSignInForm] = useState<formProp>({
     email: '',
@@ -18,6 +19,10 @@ export default function useSignIn() {
   });
 
   const { setToken } = useToken();
+
+  function handleRememberMe() {
+    setIsRememberMe(!isRememberMe);
+  }
 
   function handleSignInForm(field: EnumSignInForm, value: string) {
     if (field === EnumSignInForm.Email) {
@@ -84,5 +89,16 @@ export default function useSignIn() {
     }
   }
 
-  return { isLoading, signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler, registerHandler };
+  return {
+    isRememberMe,
+    isLoading,
+    signInForm,
+    handleSignInForm,
+    handleFocus,
+    handlePasswordVisibility,
+    onPressHandler,
+    resetFormHandler,
+    registerHandler,
+    handleRememberMe,
+  };
 }

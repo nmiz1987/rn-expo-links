@@ -9,10 +9,21 @@ import Spacer from '@/src/controllers/spacer/spacer';
 import TextInput from '@/src/controllers/text-input/text-input';
 import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
+import CheckBox from '@/src/components/check-box/check-box';
 
 function Page() {
-  const { isLoading, signInForm, handleSignInForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler, registerHandler } =
-    useSignIn();
+  const {
+    isRememberMe,
+    isLoading,
+    signInForm,
+    handleSignInForm,
+    handleFocus,
+    handlePasswordVisibility,
+    onPressHandler,
+    resetFormHandler,
+    registerHandler,
+    handleRememberMe,
+  } = useSignIn();
   const openEyeSVG = require('@/assets/svg/openEye.svg');
   const closeEyeSVG = require('@/assets/svg/closeEye.svg');
   const emailSVG = require('@/assets/svg/email.svg');
@@ -49,6 +60,10 @@ function Page() {
           onPressIn={() => handleFocus(EnumSignInForm.Password, true)}
           onEndEditing={() => handleFocus(EnumSignInForm.Password, false)}
         />
+        <Spacer size={32} />
+        <Box onPress={handleRememberMe}>
+          <CheckBox label="Remember me" status={isRememberMe} />
+        </Box>
         <Spacer size={32} />
 
         <Box style={Styles.row}>
