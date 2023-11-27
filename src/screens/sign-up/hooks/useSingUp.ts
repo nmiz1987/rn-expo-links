@@ -5,6 +5,7 @@ import { signUp } from '@/api/links/links.api';
 import applicationStore from '@/store/application/application-store';
 
 export default function useSignUp() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [signUpForm, setSignUpForm] = useState<formProp>({
     email: '',
     password: '',
@@ -65,13 +66,18 @@ export default function useSignUp() {
       setSignUpForm({ ...signUpForm, emailErrorText: 'Email is required', passwordErrorText: '', isError: true });
     } else if (signUpForm.email.length > 0 || signUpForm.password.length > 0) {
       setSignUpForm({ ...signUpForm, isError: false, emailErrorText: '', passwordErrorText: '' });
+      setIsLoading(true);
+
+      applicationStore.setEmail(signUpForm.email);
       const res = await signUp(signUpForm.email, signUpForm.password);
       if (res.token) {
         await applicationStore.setTokenHandler(res.token);
+        setIsLoading(false);
+
         router.replace('/');
       }
     }
   }
 
-  return { signUpForm, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler };
+  return { isLoading, signUpForm, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler };
 }

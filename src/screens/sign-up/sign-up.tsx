@@ -11,7 +11,7 @@ import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 
 function Page() {
-  const { signUpForm, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignUp();
+  const { isLoading, signUpForm, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignUp();
   const openEyeSVG = require('@/assets/svg/openEye.svg');
   const closeEyeSVG = require('@/assets/svg/closeEye.svg');
   const emailSVG = require('@/assets/svg/email.svg');
@@ -47,12 +47,13 @@ function Page() {
           onChangeText={(value: string) => handleSignUpForm(EnumSignUpForm.Password, value)}
           onPressIn={() => handleFocus(EnumSignUpForm.Password, true)}
           onEndEditing={() => handleFocus(EnumSignUpForm.Password, false)}
+          onSubmitEditing={onPressHandler}
         />
         <Spacer size={32} />
 
         <Box style={Styles.row}>
           <ButtonFactory type="secondary" label="Reset form" onPress={resetFormHandler} />
-          <ButtonFactory label="Sign up!" onPress={onPressHandler} />
+          <ButtonFactory isLoading={isLoading} label="Sign up!" onPress={onPressHandler} />
         </Box>
         <Spacer size={40} />
         <Box style={Styles.textContainer}>
