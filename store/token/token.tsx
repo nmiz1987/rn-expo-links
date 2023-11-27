@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { deleteStringAsync, getStringAsync, setStringAsync } from '../../services/storage';
-import { Platform } from 'react-native';
 
 const ACCESS_TOKEN_KEY = 'LINKS_ACCESS_TOKEN';
 

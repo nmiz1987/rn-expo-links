@@ -9,7 +9,7 @@ import StorePreview from '@/src/components/store-preview/store-preview';
 import links from '@/src/screens/links';
 import LoadBuffer from '@/src/utils/LoadBuffer';
 import linksStore from '@/store/links/links-store';
-import { TokenProvider } from '@/store/token/token';
+import { TokenProvider, useToken } from '@/store/token/token';
 import { GlobalColors } from '@/styles/global-colors';
 import '@/src/i18n';
 import '@/src/utils/ignoreWarnings';
@@ -18,6 +18,7 @@ const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
   const baseTheme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
 
   const theme = {
@@ -36,7 +37,7 @@ export default function RootLayout() {
           <LoadBuffer>
             <QueryClientProvider client={queryClient}>
               <StatusBar style="light" />
-              <StorePreview listeners={[linksStore]} />
+              <StorePreview listeners={[linksStore, { token: useToken().token }]} />
               <Drawer
                 screenOptions={{
                   headerTitleAlign: 'center',

@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { EnumSignInForm, formProp } from '../interface';
 import { signIn } from '@/api/links/links.api';
 import { useToken } from '@/store/token/token';
+import applicationStore from '@/store/application/application-store';
 
 export default function useSignIn() {
-  const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [signInForm, setSignInForm] = useState<formProp>({
     email: '',
@@ -21,7 +21,7 @@ export default function useSignIn() {
   const { setToken } = useToken();
 
   function handleRememberMe() {
-    setIsRememberMe(!isRememberMe);
+    applicationStore.setRememberMe(!applicationStore.isRememberMe);
   }
 
   function handleSignInForm(field: EnumSignInForm, value: string) {
@@ -90,7 +90,6 @@ export default function useSignIn() {
   }
 
   return {
-    isRememberMe,
     isLoading,
     signInForm,
     handleSignInForm,

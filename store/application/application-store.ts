@@ -2,9 +2,19 @@ import { makeAutoObservable } from 'mobx';
 
 class UserStore {
   private _email: string = '';
+  private _isRememberMe: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  get isRememberMe() {
+    return this._isRememberMe;
+  }
+
+  setRememberMe(isRememberMe: boolean) {
+    if (isRememberMe === undefined) return;
+    this._isRememberMe = isRememberMe;
   }
 
   get email() {

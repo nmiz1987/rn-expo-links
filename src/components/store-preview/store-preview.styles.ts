@@ -16,11 +16,13 @@ export default StyleSheet.create({
     width: width * marginWidth,
     height: height * marginHeight,
     padding: 16,
-    // paddingTop: 32,
   },
   title: {
     textAlign: 'center',
+    fontWeight: 'bold',
     paddingBottom: 8,
+    textDecorationColor: 'black',
+    textDecorationLine: 'underline',
   },
   closeContainer: {
     width: 40,

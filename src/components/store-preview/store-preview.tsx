@@ -6,6 +6,7 @@ import { StorePreviewProps } from './store-preview.interfaces';
 import Styles from './store-preview.styles';
 import Box from '@/src/controllers/box/box';
 import TextFactory from '@/src/factories/text-factory/text-factory';
+import { useToken } from '@/store/token/token';
 
 function StorePreview({ listeners }: StorePreviewProps) {
   const { isOpen, toggleOpen } = usePreview();
@@ -26,7 +27,7 @@ function StorePreview({ listeners }: StorePreviewProps) {
           </TextFactory>
         ) : (
           listeners.map(listener =>
-            Object.keys(listeners[0]).map(key => (
+            Object.keys(listener).map(key => (
               <Box key={key}>
                 <Card title={key} info={listener[key]} />
               </Box>

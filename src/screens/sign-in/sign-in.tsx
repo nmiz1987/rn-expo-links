@@ -10,10 +10,10 @@ import TextInput from '@/src/controllers/text-input/text-input';
 import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import CheckBox from '@/src/components/check-box/check-box';
+import applicationStore from '@/store/application/application-store';
 
 function Page() {
   const {
-    isRememberMe,
     isLoading,
     signInForm,
     handleSignInForm,
@@ -59,10 +59,11 @@ function Page() {
           onChangeText={(value: string) => handleSignInForm(EnumSignInForm.Password, value)}
           onPressIn={() => handleFocus(EnumSignInForm.Password, true)}
           onEndEditing={() => handleFocus(EnumSignInForm.Password, false)}
+          onSubmitEditing={onPressHandler}
         />
         <Spacer size={32} />
         <Box onPress={handleRememberMe}>
-          <CheckBox label="Remember me" status={isRememberMe} />
+          <CheckBox label="Remember me" status={applicationStore.isRememberMe} />
         </Box>
         <Spacer size={32} />
 
