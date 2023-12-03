@@ -6,6 +6,7 @@ import applicationStore from '@/store/application/application-store';
 
 export default function useSignIn() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [errorMsg, setErrorMsg] = useState<string>();
   const [signInForm, setSignInForm] = useState<formProp>({
     email: '',
     password: '',
@@ -80,9 +81,13 @@ export default function useSignIn() {
       const res = await signIn(signInForm.email, signInForm.password);
       setIsLoading(false);
 
-      if (res.accessToken) {
-        await applicationStore.setTokenHandler(res.accessToken);
+      if ('accessToken' in res) {
+        setErrorMsg('');
+        applicationStore.setTokenHandler(res.accessToken);
+        setSignInForm({ ...signInForm, password: '', isError: false, emailErrorText: '', passwordErrorText: '' });
         router.replace('/');
+      } else {
+        setErrorMsg(res.message);
       }
     }
   }
@@ -90,6 +95,7 @@ export default function useSignIn() {
   return {
     isLoading,
     signInForm,
+    errorMsg,
     handleSignInForm,
     handleFocus,
     handlePasswordVisibility,

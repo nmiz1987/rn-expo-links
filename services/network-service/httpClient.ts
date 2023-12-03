@@ -1,7 +1,7 @@
-import axios from "axios";
-import baseUrl from "@/api/baseUrl";
+import axios from 'axios';
+import baseUrl from '@/api/baseUrl';
 
-export default function httpClient(token = "") {
+export default function httpClient(token = '') {
   const headers = {};
   if (token) {
     headers.Authorization = `Bearer ${token}`;

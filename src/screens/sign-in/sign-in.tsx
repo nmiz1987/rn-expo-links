@@ -15,6 +15,7 @@ function Page() {
   const {
     isLoading,
     signInForm,
+    errorMsg,
     handleSignInForm,
     handleFocus,
     handlePasswordVisibility,
@@ -35,6 +36,7 @@ function Page() {
         <TextInput
           keyboardType="email-address"
           label="Email"
+          autoCapitalize="none"
           placeholder="What's your email?"
           leftIconImage={emailSVG}
           value={signInForm.email}
@@ -48,6 +50,7 @@ function Page() {
         <TextInput
           secureTextEntry={!signInForm.isPasswordVisible}
           label="Password"
+          autoCapitalize="none"
           placeholder="I won't tell anyone..."
           isError={signInForm.isError}
           leftIconImage={passwordSVG}
@@ -71,6 +74,14 @@ function Page() {
           <ButtonFactory label="Log in!" isLoading={isLoading} onPress={onPressHandler} />
         </Box>
         <Spacer size={40} />
+        {errorMsg && (
+          <>
+            <TextFactory type="h4" style={Styles.errorMsg}>
+              {errorMsg}
+            </TextFactory>
+            <Spacer size={16} />
+          </>
+        )}
         <Box style={Styles.textContainer}>
           <TextFactory type="h5" style={Styles.text}>
             Don't have an account?

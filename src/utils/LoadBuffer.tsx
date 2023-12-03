@@ -25,6 +25,7 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
       getLinks();
     }
     linksStore.loadFavoriteByUser();
+    applicationStore.loadTokenHandler();
   }, []);
 
   if (!applicationStore.isTokenLoaded || !fontsLoaded || linksStore.links.length === 0) {

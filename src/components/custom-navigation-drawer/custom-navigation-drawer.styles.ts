@@ -39,4 +39,9 @@ export default StyleSheet.create({
   cardText: {
     color: GlobalColors.white,
   },
+  error: {
+    color: GlobalColors.red,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });

@@ -30,8 +30,6 @@ export default function RootLayout() {
     },
   };
 
-  applicationStore.loadTokenHandler();
-
   return (
     <ThemeProvider value={theme}>
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>

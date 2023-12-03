@@ -23,4 +23,9 @@ export default StyleSheet.create({
     textDecorationLine: 'underline',
     textDecorationColor: GlobalColors.IconsColors.blue,
   },
+  errorMsg: {
+    color: GlobalColors.red,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
 });

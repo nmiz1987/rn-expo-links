@@ -11,7 +11,7 @@ import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 
 function Page() {
-  const { isLoading, signUpForm, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignUp();
+  const { isLoading, signUpForm, errorMsg, handleSignUpForm, handleFocus, handlePasswordVisibility, onPressHandler, resetFormHandler } = useSignUp();
   const openEyeSVG = require('@/assets/svg/openEye.svg');
   const closeEyeSVG = require('@/assets/svg/closeEye.svg');
   const emailSVG = require('@/assets/svg/email.svg');
@@ -24,6 +24,7 @@ function Page() {
         <TextInput
           keyboardType="email-address"
           label="Email"
+          autoCapitalize="none"
           placeholder="What's your email?"
           leftIconImage={emailSVG}
           value={signUpForm.email}
@@ -37,6 +38,7 @@ function Page() {
         <TextInput
           secureTextEntry={!signUpForm.isPasswordVisible}
           label="Password"
+          autoCapitalize="none"
           placeholder="I won't tell anyone..."
           isError={signUpForm.isError}
           leftIconImage={passwordSVG}
@@ -56,6 +58,14 @@ function Page() {
           <ButtonFactory isLoading={isLoading} label="Sign up!" onPress={onPressHandler} />
         </Box>
         <Spacer size={40} />
+        {errorMsg && (
+          <>
+            <TextFactory type="h4" style={Styles.errorMsg}>
+              {errorMsg}
+            </TextFactory>
+            <Spacer size={16} />
+          </>
+        )}
         <Box style={Styles.textContainer}>
           <TextFactory type="h5" style={Styles.text}>
             Already have an account?

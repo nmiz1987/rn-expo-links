@@ -8,14 +8,30 @@ import TextFactory from '@/src/factories/text-factory/text-factory';
 import links from '@/src/screens/links';
 import applicationStore from '@/store/application/application-store';
 import { GlobalColors } from '@/styles/global-colors';
+import { logOut } from '@/api/links/links.api';
+import { useState } from 'react';
+import Toast from '@/src/components/toast/toast';
+import { ActivityIndicator } from 'react-native';
 
 function CustomNavigationDrawer({ ...props }) {
   const { state, navigation } = props;
+  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
 
   async function signOut() {
-    await applicationStore.deleteTokenHandler();
-    router.push('/');
+    setIsLoading(true);
+    const res = await logOut(applicationStore.email, applicationStore.token);
+    if (res.status.toString().startsWith('2')) {
+      await applicationStore.deleteTokenHandler();
+      setIsLoading(false);
+      router.push('/');
+    } else {
+      setErrorMsg(`|${res.message}|`);
+      setTimeout(() => {
+        setErrorMsg('');
+      }, 5000);
+    }
   }
 
   async function signIn() {
@@ -71,12 +87,18 @@ function CustomNavigationDrawer({ ...props }) {
           <Box style={Styles.button} onPress={signOut}>
             <Ionicons name="exit" color={GlobalColors.white} size={24} />
             <TextFactory style={Styles.singOutText}>Sing Out</TextFactory>
+            {isLoading && <ActivityIndicator size={'small'} color={GlobalColors.white} />}
           </Box>
         ) : (
           <Box style={Styles.button} onPress={signIn}>
             <Ionicons name="enter" color={GlobalColors.white} size={24} />
             <TextFactory style={Styles.singOutText}>Sing In</TextFactory>
           </Box>
+        )}
+        {errorMsg && (
+          <TextFactory type="h4" style={Styles.error}>
+            {errorMsg}
+          </TextFactory>
         )}
       </Box>
     </DrawerContentScrollView>
