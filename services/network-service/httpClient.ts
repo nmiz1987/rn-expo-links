@@ -9,5 +9,6 @@ export default function httpClient(token = '') {
   return axios.create({
     baseURL: baseUrl,
     headers,
+    validateStatus: status => status < 500, // throw only server error
   });
 }

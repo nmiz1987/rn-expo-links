@@ -17,9 +17,9 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     async function getLinks() {
-      const res = await getAllLinks();
-      if (!res) throw new Error('Loading failed');
-      linksStore.setLinks(res);
+      const links = await getAllLinks();
+      if (!links) throw new Error('Loading failed');
+      linksStore.setLinks(links);
     }
     if (linksStore.links.length === 0) {
       getLinks();
@@ -30,9 +30,9 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
 
   if (!applicationStore.isTokenLoaded || !fontsLoaded || linksStore.links.length === 0) {
     return <Loader />;
-  } else {
-    return <Box style={Styles.fill}>{children}</Box>;
   }
+
+  return <Box style={Styles.fill}>{children}</Box>;
 }
 
 const Styles = StyleSheet.create({

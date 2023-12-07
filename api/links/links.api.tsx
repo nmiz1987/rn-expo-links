@@ -1,11 +1,21 @@
 import httpClient from '@/services/network-service/httpClient';
-import { LogOutResponseRequest, SignUpResponseRequest, SingUpErrorMessage, SingInResponseRequest, SingInErrorMessage } from './interfaces';
+import {
+  SignUpResponseProps,
+  SingUpErrorResponseProps,
+  SingInResponseProps,
+  SingInErrorResponseProps,
+  SingInWithTokenErrorResponseProps,
+  SingInWithTokenResponseProps,
+  LogOutResponseProps,
+} from './interfaces';
 
 const linksApi = {
   allLinks: 'useful-links',
   signIn: 'login',
   signUp: 'signup',
   logout: 'logout',
+  refreshToken: 'refresh-token',
+  singInWithToken: 'login-with-token',
 };
 
 export async function getAllLinks() {
@@ -22,14 +32,14 @@ export async function getAllLinks() {
   }
 }
 
-export async function logOut(email: string, token: string): Promise<LogOutResponseRequest> {
+export async function logOut(email: string, token: string): Promise<LogOutResponseProps> {
   try {
     const { status, data } = await httpClient(token).post(linksApi.logout, { email });
 
     if (!data) throw new Error('Log out failed');
 
     if (status.toString().startsWith('2')) {
-      let response: LogOutResponseRequest = { message: data.message, status };
+      let response: LogOutResponseProps = { message: data.message, status };
       return response;
     } else {
       throw new Error('Log-out failed', data);
@@ -39,7 +49,7 @@ export async function logOut(email: string, token: string): Promise<LogOutRespon
       // Axios error with response data
       const responseData = error.response.data;
       const responseStatus = error.response.status;
-      let errorResponse: LogOutResponseRequest = { message: responseData.message, status: responseStatus };
+      let errorResponse: LogOutResponseProps = { message: responseData.message, status: responseStatus };
       return errorResponse;
     } else {
       // Non-Axios error
@@ -50,14 +60,14 @@ export async function logOut(email: string, token: string): Promise<LogOutRespon
     }
   }
 }
-export async function signUp(email: string, password: string): Promise<SignUpResponseRequest | SingUpErrorMessage> {
+export async function signUp(email: string, password: string): Promise<SignUpResponseProps | SingUpErrorResponseProps> {
   try {
     const { status, data } = await httpClient().post(linksApi.signUp, { email, password });
 
     if (!data) throw new Error('Sign up failed');
 
     if (status.toString().startsWith('2')) {
-      let response: SignUpResponseRequest = { message: data.message, token: data.token };
+      let response: SignUpResponseProps = { message: data.message, accessToken: data.accessToken, refreshToken: data.refreshToken };
       return response;
     } else {
       throw new Error('Sign-in failed', data);
@@ -66,7 +76,7 @@ export async function signUp(email: string, password: string): Promise<SignUpRes
     if (error.isAxiosError && error.response) {
       // Axios error with response data
       const responseData = error.response.data;
-      let errorResponse: SingUpErrorMessage = { message: responseData.message };
+      let errorResponse: SingUpErrorResponseProps = { message: responseData.message };
       return errorResponse;
     } else {
       // Non-Axios error
@@ -78,23 +88,21 @@ export async function signUp(email: string, password: string): Promise<SignUpRes
   }
 }
 
-export async function signIn(email: string, password: string): Promise<SingInResponseRequest | SingInErrorMessage> {
+export async function signIn(email: string, password: string): Promise<SingInResponseProps | SingInErrorResponseProps> {
   try {
     const { status, data } = await httpClient().post(linksApi.signIn, { email, password });
 
     if (!data) throw new Error('Sign-in failed');
 
     if (status.toString().startsWith('2')) {
-      let response: SingInResponseRequest = { accessToken: data.accessToken };
+      let response: SingInResponseProps = { accessToken: data.accessToken, refreshToken: data.refreshToken };
       return response;
     } else {
       throw new Error('Sign-in failed', data);
     }
   } catch (error: any) {
     if (error.isAxiosError && error.response) {
-      // Axios error with response data
-      const responseData = error.response.data;
-      let errorResponse: SingInErrorMessage = { message: responseData.message };
+      let errorResponse: SingInErrorResponseProps = { message: error.response.data.message, status: error.response.status };
       return errorResponse;
     } else {
       // Non-Axios error
@@ -102,6 +110,32 @@ export async function signIn(email: string, password: string): Promise<SingInRes
 
       // Handle the error or throw it again if needed
       throw new Error('Sign-in failed');
+    }
+  }
+}
+
+export async function singInWithToken(token: string): Promise<SingInWithTokenResponseProps | SingInWithTokenErrorResponseProps> {
+  try {
+    const { status, data } = await httpClient().post(linksApi.token, { token });
+
+    if (!data) throw new Error('Sign-in with token failed');
+
+    if (status.toString().startsWith('2')) {
+      let response: SingInWithTokenResponseProps = { message: data.message, accessToken: data.accessToken };
+      return response;
+    } else {
+      throw new Error('Sign-in with token failed', data);
+    }
+  } catch (error: any) {
+    if (error.isAxiosError && error.response) {
+      let errorResponse: SingInWithTokenErrorResponseProps = { message: error.response.data.message, status: error.response.status };
+      return errorResponse;
+    } else {
+      // Non-Axios error
+      console.error('Error during sign-in with token:', error);
+
+      // Handle the error or throw it again if needed
+      throw new Error('Sign-in failed with token');
     }
   }
 }

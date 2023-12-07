@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { deleteStringAsync, getStringAsync, setStringAsync } from '../../services/storage';
+import { singInWithToken } from '@/api/links/links.api';
 
 class UserStore {
   private _email: string = '';
@@ -17,6 +18,7 @@ class UserStore {
   }
 
   get isLoggedIn() {
+    console.log(this._token, `|${this._token}|`, this._token.length);
     return this._token !== '';
   }
 
@@ -35,6 +37,8 @@ class UserStore {
   async loadTokenHandler() {
     const token = await getStringAsync(this._ACCESS_TOKEN_KEY);
     if (token) {
+      console.log('token existing in local storage');
+
       this.setTokenHandler(token);
     }
     runInAction(() => {
