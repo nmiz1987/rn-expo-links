@@ -17,7 +17,6 @@ function Page() {
     signInForm,
     errorMsg,
     handleSignInForm,
-    handleFocus,
     handlePasswordVisibility,
     onPressHandler,
     resetFormHandler,
@@ -43,8 +42,6 @@ function Page() {
           isError={signInForm.isError}
           caption={signInForm.emailErrorText}
           onChangeText={(value: string) => handleSignInForm(EnumSignInForm.Email, value)}
-          onPressIn={() => handleFocus(EnumSignInForm.Email, true)}
-          onEndEditing={() => handleFocus(EnumSignInForm.Email, false)}
         />
         <Spacer size={16} />
         <TextInput
@@ -59,8 +56,6 @@ function Page() {
           value={signInForm.password}
           caption={signInForm.passwordErrorText}
           onChangeText={(value: string) => handleSignInForm(EnumSignInForm.Password, value)}
-          onPressIn={() => handleFocus(EnumSignInForm.Password, true)}
-          onEndEditing={() => handleFocus(EnumSignInForm.Password, false)}
           onSubmitEditing={onPressHandler}
         />
         <Spacer size={32} />

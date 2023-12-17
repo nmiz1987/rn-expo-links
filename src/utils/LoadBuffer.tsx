@@ -28,7 +28,7 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
     applicationStore.loadTokenHandler();
   }, []);
 
-  if (!applicationStore.isTokenLoaded || !fontsLoaded || linksStore.links.length === 0) {
+  if (!applicationStore.isFinishLoadToken || !fontsLoaded || linksStore.links.length === 0) {
     return <Loader />;
   }
 

@@ -9,6 +9,7 @@ import Box from '@/src/controllers/box/box';
 import Spacer from '@/src/controllers/spacer/spacer';
 import Text from '@/src/controllers/text/text';
 import { isRTL } from '@/src/i18n';
+import { EnumITextInputStatus } from './hooks/interfaces';
 
 export default function TextInput({ label, caption, isError = false, leftIconImage, rightIconImage, rightIconHandler, ...props }: TextInputProps) {
   const { inputStatus, inputTextFocusHandler, setErrorStatus } = useInputText();
@@ -44,10 +45,10 @@ export default function TextInput({ label, caption, isError = false, leftIconIma
               style={[Styles.textInput, props.multiline && Styles.multiLine]}
               multiline={props.multiline}
               // props.onFocus is important to show disable the focus color if the component wont active as input but as "displayed text"
-              onFocus={props.onFocus || inputTextFocusHandler}
-              onBlur={props.onFocus || inputTextFocusHandler}
+              onFocus={inputTextFocusHandler}
+              onBlur={inputTextFocusHandler}
               textAlign={isRTL ? 'right' : 'left'}
-              cursorColor={props.onFocus ? 'transparent' : '#000'}
+              cursorColor={inputStatus.status === EnumITextInputStatus.Focus ? 'transparent' : '#000'}
               inputAccessoryViewID="inputID"
               {...props}
             />

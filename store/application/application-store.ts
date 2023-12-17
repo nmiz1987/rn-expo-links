@@ -6,7 +6,7 @@ class UserStore {
   private _email: string = '';
   private _token: string = '';
   private _isRememberMe: boolean = false;
-  private _isTokenLoaded: boolean = false;
+  private _isFinishLoadToken: boolean = false;
   private _ACCESS_TOKEN_KEY = 'LINKS_ACCESS_TOKEN';
 
   constructor() {
@@ -18,7 +18,7 @@ class UserStore {
   }
 
   get isLoggedIn() {
-    console.log(this._token, `|${this._token}|`, this._token.length);
+    // console.log('isLoggedIn() ', this._token, `|${this._token}|`, this._token.length);
     return this._token !== '';
   }
 
@@ -30,8 +30,8 @@ class UserStore {
     return this._email;
   }
 
-  get isTokenLoaded() {
-    return this._isTokenLoaded;
+  get isFinishLoadToken() {
+    return this._isFinishLoadToken;
   }
 
   async loadTokenHandler() {
@@ -42,7 +42,7 @@ class UserStore {
       this.setTokenHandler(token);
     }
     runInAction(() => {
-      this._isTokenLoaded = true;
+      this._isFinishLoadToken = true;
     });
   }
 

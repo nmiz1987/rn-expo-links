@@ -10,8 +10,6 @@ export default function useSignIn() {
   const [signInForm, setSignInForm] = useState<formProp>({
     email: '',
     password: '',
-    isEmailFocus: false,
-    isPasswordFocus: false,
     isPasswordVisible: false,
     emailErrorText: '',
     passwordErrorText: '',
@@ -31,15 +29,6 @@ export default function useSignIn() {
     }
   }
 
-  function handleFocus(field: EnumSignInForm, value: boolean) {
-    if (field === EnumSignInForm.Email) {
-      setSignInForm({ ...signInForm, isEmailFocus: value });
-    }
-    if (field === EnumSignInForm.Password) {
-      setSignInForm({ ...signInForm, isPasswordFocus: value });
-    }
-  }
-
   function registerHandler() {
     setSignInForm({ ...signInForm, email: '', password: '' });
     router.push('/sign-up');
@@ -53,8 +42,6 @@ export default function useSignIn() {
     setSignInForm({
       email: '',
       password: '',
-      isEmailFocus: false,
-      isPasswordFocus: false,
       isPasswordVisible: false,
       emailErrorText: '',
       passwordErrorText: '',
@@ -76,8 +63,11 @@ export default function useSignIn() {
       setSignInForm({ ...signInForm, emailErrorText: 'Email is required', passwordErrorText: '', isError: true });
     } else if (signInForm.email.length > 0 || signInForm.password.length > 0) {
       setSignInForm({ ...signInForm, isError: false, emailErrorText: '', passwordErrorText: '' });
+
       setIsLoading(true);
-      applicationStore.setEmail(signInForm.email);
+      if (applicationStore.isRememberMe) {
+        applicationStore.setEmail(signInForm.email);
+      }
       const res = await signIn(signInForm.email, signInForm.password);
       setIsLoading(false);
 
@@ -97,7 +87,6 @@ export default function useSignIn() {
     signInForm,
     errorMsg,
     handleSignInForm,
-    handleFocus,
     handlePasswordVisibility,
     onPressHandler,
     resetFormHandler,

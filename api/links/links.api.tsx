@@ -103,6 +103,7 @@ export async function signIn(email: string, password: string): Promise<SingInRes
   } catch (error: any) {
     if (error.isAxiosError && error.response) {
       let errorResponse: SingInErrorResponseProps = { message: error.response.data.message, status: error.response.status };
+      console.info('Netanel:\n', errorResponse);
       return errorResponse;
     } else {
       // Non-Axios error
