@@ -1,7 +1,7 @@
 import { router } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import { observer } from 'mobx-react';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import Styles from './user-favorites.style';
 import { linkProps } from '@/src/components/link-preview/interfaces';
 import LinkPreview from '@/src/components/link-preview/link-preview';
@@ -21,7 +21,7 @@ function Page() {
     return (
       <Screen noScroll>
         <Box style={Styles.conatiner}>
-          <LottieView style={Styles.lottie} autoPlay source={require('@/assets/lotties/space.json')} />
+          {Platform.OS !== 'web' && <LottieView style={Styles.lottie} autoPlay source={require('@/assets/lotties/space.json')} />}
           <Spacer size={32} />
           <TextFactory style={Styles.notFoundTxt} type="h2">
             First you need to select some link....

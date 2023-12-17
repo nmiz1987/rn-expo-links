@@ -117,7 +117,7 @@ export async function signIn(email: string, password: string): Promise<SingInRes
 
 export async function singInWithToken(token: string): Promise<SingInWithTokenResponseProps | SingInWithTokenErrorResponseProps> {
   try {
-    const { status, data } = await httpClient().post(linksApi.token, { token });
+    const { status, data } = await httpClient().post(linksApi.singInWithToken, { token });
 
     if (!data) throw new Error('Sign-in with token failed');
 

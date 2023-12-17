@@ -1,5 +1,5 @@
 import LottieView from 'lottie-react-native';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import useMain from './hooks/useMain';
 import Styles from './main.style';
 import FilterBar from '@/src/components/filter-bar/filter-bar';
@@ -40,7 +40,8 @@ export default function Page() {
             searchTermsHandler={searchTermsHandler}
             filterLinksByCategory={filterLinksByCategory}
           />
-          <LottieView style={Styles.lottie} autoPlay source={require('@/assets/lotties/space.json')} />
+          {Platform.OS !== 'web' && <LottieView style={Styles.lottie} autoPlay source={require('@/assets/lotties/space.json')} />}
+
           <TextFactory style={Styles.noLinksFound} type="h6">
             houston we have a problem...
           </TextFactory>
