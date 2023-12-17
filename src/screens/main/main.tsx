@@ -41,7 +41,6 @@ export default function Page() {
             filterLinksByCategory={filterLinksByCategory}
           />
           {Platform.OS !== 'web' && <LottieView style={Styles.lottie} autoPlay source={require('@/assets/lotties/space.json')} />}
-
           <TextFactory style={Styles.noLinksFound} type="h6">
             houston we have a problem...
           </TextFactory>

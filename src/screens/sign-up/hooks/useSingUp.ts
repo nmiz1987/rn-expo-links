@@ -73,10 +73,13 @@ export default function useSignUp() {
       const res = await signUp(signUpForm.email, signUpForm.password);
       setIsLoading(false);
 
-      if ('token' in res) {
+      if ('accessToken' in res) {
         setErrorMsg('');
-        applicationStore.setTokenHandler(res.token);
         setSignUpForm({ ...signUpForm, password: '', isError: false, emailErrorText: '', passwordErrorText: '' });
+        if (applicationStore.isRememberMe) {
+          applicationStore.setEmail(signUpForm.email);
+          applicationStore.storeTokensInStorageHandler(res.accessToken, res.refreshToken);
+        }
         router.replace('/');
       } else {
         setErrorMsg(res.message);

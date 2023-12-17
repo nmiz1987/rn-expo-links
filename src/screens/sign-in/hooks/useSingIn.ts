@@ -65,16 +65,17 @@ export default function useSignIn() {
       setSignInForm({ ...signInForm, isError: false, emailErrorText: '', passwordErrorText: '' });
 
       setIsLoading(true);
-      if (applicationStore.isRememberMe) {
-        applicationStore.setEmail(signInForm.email);
-      }
       const res = await signIn(signInForm.email, signInForm.password);
       setIsLoading(false);
 
       if ('accessToken' in res) {
         setErrorMsg('');
-        applicationStore.setTokenHandler(res.accessToken);
         setSignInForm({ ...signInForm, password: '', isError: false, emailErrorText: '', passwordErrorText: '' });
+        if (applicationStore.isRememberMe) {
+          applicationStore.setEmail(signInForm.email);
+          applicationStore.storeTokensInStorageHandler(res.accessToken, res.refreshToken);
+        }
+        applicationStore.setAccessTokensHandler(res.accessToken);
         router.replace('/');
       } else {
         setErrorMsg(res.message);

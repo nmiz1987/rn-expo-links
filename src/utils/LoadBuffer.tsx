@@ -25,10 +25,10 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
       getLinks();
     }
     linksStore.loadFavoriteByUser();
-    applicationStore.loadTokenHandler();
+    applicationStore.loadTokensFromStorageHandler();
   }, []);
 
-  if (!applicationStore.isFinishLoadToken || !fontsLoaded || linksStore.links.length === 0) {
+  if (!applicationStore.isFinishLoadTokens || !fontsLoaded || linksStore.links.length === 0) {
     return <Loader />;
   }
 

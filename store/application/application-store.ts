@@ -1,25 +1,31 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { deleteStringAsync, getStringAsync, setStringAsync } from '../../services/storage';
-import { singInWithToken } from '@/api/links/links.api';
+import { singInWithToken as singInWithTokenAPI, refreshToken as refreshTokenAPI } from '@/api/links/links.api';
 
 class UserStore {
   private _email: string = '';
-  private _token: string = '';
+  private _accessToken: string = '';
+  private _refreshToken: string = '';
   private _isRememberMe: boolean = false;
-  private _isFinishLoadToken: boolean = false;
+  private _isFinishLoadTokens: boolean = false;
   private _ACCESS_TOKEN_KEY = 'LINKS_ACCESS_TOKEN';
+  private _ACCESS_REFRESH_TOKEN_KEY = 'LINKS_REFRESH_ACCESS_TOKEN';
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  get token() {
-    return this._token;
+  get accessToken() {
+    return this._accessToken;
+  }
+
+  get refreshToken() {
+    return this._refreshToken;
   }
 
   get isLoggedIn() {
     // console.log('isLoggedIn() ', this._token, `|${this._token}|`, this._token.length);
-    return this._token !== '';
+    return this._accessToken !== '' && this._refreshToken !== '';
   }
 
   get isRememberMe() {
@@ -30,36 +36,68 @@ class UserStore {
     return this._email;
   }
 
-  get isFinishLoadToken() {
-    return this._isFinishLoadToken;
+  get isFinishLoadTokens() {
+    return this._isFinishLoadTokens;
   }
 
-  async loadTokenHandler() {
-    const token = await getStringAsync(this._ACCESS_TOKEN_KEY);
-    if (token) {
-      console.log('token existing in local storage');
+  async loadTokensFromStorageHandler() {
+    const accessToken = await getStringAsync(this._ACCESS_TOKEN_KEY);
+    const refreshToken = await getStringAsync(this._ACCESS_REFRESH_TOKEN_KEY);
 
-      this.setTokenHandler(token);
+    if (accessToken && refreshToken) {
+      this._accessToken = accessToken;
+      this._refreshToken = refreshToken;
+
+      const res = await singInWithTokenAPI(accessToken);
+      if ('accessToken' in res) {
+        this._accessToken = res.accessToken;
+        this._refreshToken = refreshToken;
+        this.storeTokensInStorageHandler(res.accessToken, refreshToken);
+      } else if (res.status === 401) {
+        //Token expired
+        const refreshRes = await refreshTokenAPI(refreshToken);
+        if ('accessToken' in refreshRes) {
+          this._accessToken = refreshRes.accessToken;
+          this._refreshToken = refreshToken;
+          this.storeTokensInStorageHandler(refreshRes.accessToken, refreshToken);
+        }
+      } else if (res.status === 403) {
+        //Access denied)
+        this._accessToken = '';
+        this._refreshToken = '';
+        this.deleteTokenHandler();
+      }
     }
     runInAction(() => {
-      this._isFinishLoadToken = true;
+      this._isFinishLoadTokens = true;
     });
   }
 
-  async setTokenHandler(newToken: string) {
-    if (!newToken) return;
-    await setStringAsync(this._ACCESS_TOKEN_KEY, newToken);
-    this._token = newToken;
+  async storeTokensInStorageHandler(accessToken: string, refreshToken: string) {
+    if (!accessToken || !refreshToken) return;
+    await setStringAsync(this._ACCESS_TOKEN_KEY, accessToken);
+    await setStringAsync(this._ACCESS_REFRESH_TOKEN_KEY, refreshToken);
+  }
+
+  async setAccessTokensHandler(accessToken: string) {
+    if (!accessToken) return;
+    this._accessToken = accessToken;
   }
 
   async deleteTokenHandler() {
     await deleteStringAsync(this._ACCESS_TOKEN_KEY);
-    this._token = '';
+    await deleteStringAsync(this._ACCESS_REFRESH_TOKEN_KEY);
+    runInAction(() => {
+      this._accessToken = '';
+      this._refreshToken = '';
+    });
   }
 
   setRememberMe(isRememberMe: boolean) {
     if (isRememberMe === undefined) return;
-    this._isRememberMe = isRememberMe;
+    runInAction(() => {
+      this._isRememberMe = isRememberMe;
+    });
   }
 
   setEmail(email: string) {

@@ -31,38 +31,42 @@ export default function RootLayout() {
   };
 
   return (
-    <LoadBuffer>
-      <QueryClientProvider client={queryClient}>
-        <StatusBar style="light" />
-        <StorePreview listeners={[linksStore, applicationStore]} />
-        <Drawer
-          screenOptions={{
-            headerTitleAlign: 'center',
-            headerStyle: {
-              backgroundColor: GlobalColors.gray,
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            drawerActiveBackgroundColor: GlobalColors.blue,
-            drawerStyle: {
-              backgroundColor: GlobalColors.gray,
-            },
-          }}
-          drawerContent={props => <CustomNavigationDrawer {...props} />}
-        >
-          {Object.keys(links).map(link => (
-            <Drawer.Screen
-              key={links[link].title}
-              name={link}
-              options={{
-                title: links[link].title,
+    <ThemeProvider value={theme}>
+      <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+        <LoadBuffer>
+          <QueryClientProvider client={queryClient}>
+            <StatusBar style="light" />
+            <StorePreview listeners={[linksStore, applicationStore]} />
+            <Drawer
+              screenOptions={{
+                headerTitleAlign: 'center',
+                headerStyle: {
+                  backgroundColor: GlobalColors.gray,
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+                drawerActiveBackgroundColor: GlobalColors.blue,
+                drawerStyle: {
+                  backgroundColor: GlobalColors.gray,
+                },
               }}
-            />
-          ))}
-        </Drawer>
-      </QueryClientProvider>
-    </LoadBuffer>
+              drawerContent={props => <CustomNavigationDrawer {...props} />}
+            >
+              {Object.keys(links).map(link => (
+                <Drawer.Screen
+                  key={links[link].title}
+                  name={link}
+                  options={{
+                    title: links[link].title,
+                  }}
+                />
+              ))}
+            </Drawer>
+          </QueryClientProvider>
+        </LoadBuffer>
+      </SafeAreaProvider>
+    </ThemeProvider>
   );
 }
