@@ -122,7 +122,13 @@ export async function singInWithToken(token: string): Promise<SingInWithTokenRes
     if (!data) throw new Error('Sign-in with token failed');
 
     if (status.toString().startsWith('2')) {
-      let response: SingInWithTokenResponseProps = { message: data.message, accessToken: data.accessToken, refreshToken: data.refreshToken, status };
+      let response: SingInWithTokenResponseProps = {
+        message: data.message,
+        email: data.email,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+        status,
+      };
       return response;
     } else if (status.toString().startsWith('4')) {
       let errorResponse: SingInWithTokenErrorResponseProps = { message: data.message, status };

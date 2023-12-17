@@ -52,6 +52,7 @@ class UserStore {
       if ('accessToken' in res) {
         this._accessToken = res.accessToken;
         this._refreshToken = refreshToken;
+        this._email = res.email;
         this.storeTokensInStorageHandler(res.accessToken, refreshToken);
       } else if (res.status === 401) {
         //Token expired

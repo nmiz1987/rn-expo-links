@@ -19,6 +19,7 @@ export interface SingInWithTokenResponseProps {
   accessToken: string;
   refreshToken: string;
   status: number;
+  email: string;
 }
 
 export interface SingInWithTokenErrorResponseProps {
