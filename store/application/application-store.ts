@@ -1,9 +1,11 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { deleteStringAsync, getStringAsync, setStringAsync } from '../../services/storage';
 import { singInWithToken as singInWithTokenAPI, refreshToken as refreshTokenAPI } from '@/api/links/links.api';
+import { EnumUserRoles } from './interfaces';
 
 class UserStore {
   private _email: string = '';
+  private _userRole: EnumUserRoles = EnumUserRoles.Guest;
   private _accessToken: string = '';
   private _refreshToken: string = '';
   private _isRememberMe: boolean = false;
@@ -19,13 +21,21 @@ class UserStore {
     return this._accessToken;
   }
 
+  get userRole() {
+    return this._userRole;
+  }
+
+  setUserRole(role: EnumUserRoles) {
+    if (!role) return;
+    this._userRole = role;
+  }
+
   get refreshToken() {
     return this._refreshToken;
   }
 
   get isLoggedIn() {
-    // console.log('isLoggedIn() ', this._token, `|${this._token}|`, this._token.length);
-    return this._accessToken !== '' && this._refreshToken !== '';
+    return this._accessToken.length > 0 && this._email.length > 0;
   }
 
   get isRememberMe() {
@@ -43,34 +53,49 @@ class UserStore {
   async loadTokensFromStorageHandler() {
     const accessToken = await getStringAsync(this._ACCESS_TOKEN_KEY);
     const refreshToken = await getStringAsync(this._ACCESS_REFRESH_TOKEN_KEY);
-
-    if (accessToken && refreshToken) {
-      this._accessToken = accessToken;
-      this._refreshToken = refreshToken;
-
-      const res = await singInWithTokenAPI(accessToken);
-      if ('accessToken' in res) {
-        this._accessToken = res.accessToken;
+    try {
+      if (accessToken && refreshToken) {
+        this._accessToken = accessToken;
         this._refreshToken = refreshToken;
-        this._email = res.email;
-        this.storeTokensInStorageHandler(res.accessToken, refreshToken);
-      } else if (res.status === 401) {
-        //Token expired
-        const refreshRes = await refreshTokenAPI(refreshToken);
-        if ('accessToken' in refreshRes) {
-          this._accessToken = refreshRes.accessToken;
+
+        const res = await singInWithTokenAPI(accessToken);
+        if ('accessToken' in res) {
+          this._accessToken = res.accessToken;
           this._refreshToken = refreshToken;
-          this.storeTokensInStorageHandler(refreshRes.accessToken, refreshToken);
+          this._email = res.email;
+          this._userRole = res.userRole;
+          this.storeTokensInStorageHandler(res.accessToken, refreshToken);
+        } else if (res.status === 401) {
+          //Token expired
+          const refreshRes = await refreshTokenAPI(refreshToken);
+          if ('accessToken' in refreshRes) {
+            this._accessToken = refreshRes.accessToken;
+            this._refreshToken = refreshToken;
+            this._userRole = refreshRes.userRole;
+            this.storeTokensInStorageHandler(refreshRes.accessToken, refreshToken);
+          }
+        } else if (res.status === 403) {
+          //Access denied)
+          this._accessToken = '';
+          this._refreshToken = '';
+          this.deleteTokenHandler();
         }
-      } else if (res.status === 403) {
-        //Access denied)
-        this._accessToken = '';
-        this._refreshToken = '';
-        this.deleteTokenHandler();
       }
+      runInAction(() => {
+        this._isFinishLoadTokens = true;
+      });
+    } catch (error) {
+      console.error('error in loadTokensFromStorageHandler', error);
+      this._accessToken = '';
+      this._refreshToken = '';
+      this.deleteTokenHandler();
     }
+  }
+
+  setIsFinishLoadTokensHandler(isFinishLoadTokens: boolean) {
+    if (isFinishLoadTokens === undefined) return;
     runInAction(() => {
-      this._isFinishLoadTokens = true;
+      this._isFinishLoadTokens = isFinishLoadTokens;
     });
   }
 

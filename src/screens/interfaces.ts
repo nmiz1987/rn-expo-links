@@ -1,3 +1,5 @@
+import { EnumUserRoles } from '@/store/application/interfaces';
+
 export interface linksProps {
   [key: string]: InfoProps;
 }
@@ -5,5 +7,5 @@ export interface linksProps {
 interface InfoProps {
   drawerLabel: string;
   title: string;
-  onlyToSignUser: boolean;
+  authMinLevel: EnumUserRoles;
 }

@@ -1,30 +1,36 @@
 import { linksProps } from './interfaces';
+import { EnumUserRoles } from '@/store/application/interfaces';
 
 const links: linksProps = {
   index: {
     drawerLabel: 'All My Links',
     title: 'All My Links',
-    onlyToSignUser: false,
+    authMinLevel: EnumUserRoles.Guest,
   },
   'author-favorites': {
     drawerLabel: 'Author Favorites',
     title: 'Author Favorites',
-    onlyToSignUser: false,
+    authMinLevel: EnumUserRoles.Guest,
   },
   'sign-in': {
     drawerLabel: 'Sign In',
     title: 'Sign In',
-    onlyToSignUser: false,
+    authMinLevel: EnumUserRoles.Guest,
   },
   'sign-up': {
     drawerLabel: 'Sign Up',
     title: 'Sign Up',
-    onlyToSignUser: false,
+    authMinLevel: EnumUserRoles.Guest,
   },
   'user-favorites': {
     drawerLabel: 'Your Favorites',
     title: 'Your Favorites',
-    onlyToSignUser: true,
+    authMinLevel: EnumUserRoles.User,
+  },
+  'link-form': {
+    drawerLabel: 'Add new link',
+    title: 'Add new link',
+    authMinLevel: EnumUserRoles.Admin,
   },
 };
 

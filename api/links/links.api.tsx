@@ -6,7 +6,7 @@ import {
   SingInErrorResponseProps,
   SingInWithTokenErrorResponseProps,
   SingInWithTokenResponseProps,
-  LogOutResponseProps,
+  SingOutResponseProps,
   RefreshTokenErrorResponseProps,
   RefreshTokenResponseProps,
 } from './interfaces';
@@ -34,15 +34,16 @@ export async function getAllLinks() {
   }
 }
 
-export async function logOut(email: string, token: string): Promise<LogOutResponseProps> {
+export async function logOut(email: string, token: string): Promise<SingOutResponseProps> {
   try {
     const { status, data } = await httpClient(token).post(linksApi.logout, { email });
 
-    if (!data) throw new Error('Log out failed');
-
     if (status.toString().startsWith('2')) {
-      let response: LogOutResponseProps = { message: data.message, status };
+      let response: SingOutResponseProps = { message: data.message, status };
       return response;
+    } else if (status.toString().startsWith('4')) {
+      let errorResponse: SingOutResponseProps = { message: data.message, status };
+      return errorResponse;
     } else {
       throw new Error('Log-out failed', data);
     }
@@ -51,7 +52,7 @@ export async function logOut(email: string, token: string): Promise<LogOutRespon
       // Axios error with response data
       const responseData = error.response.data;
       const responseStatus = error.response.status;
-      let errorResponse: LogOutResponseProps = { message: responseData.message, status: responseStatus };
+      let errorResponse: SingOutResponseProps = { message: responseData.message, status: responseStatus };
       return errorResponse;
     } else {
       // Non-Axios error
@@ -69,10 +70,19 @@ export async function signUp(email: string, password: string): Promise<SignUpRes
     if (!data) throw new Error('Sign up failed');
 
     if (status.toString().startsWith('2')) {
-      let response: SignUpResponseProps = { message: data.message, accessToken: data.accessToken, refreshToken: data.refreshToken, status };
+      let response: SignUpResponseProps = {
+        message: data.message,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+        status,
+        userRole: data.userRole,
+      };
       return response;
+    } else if (status.toString().startsWith('4')) {
+      let errorResponse: SingUpErrorResponseProps = { message: data.message, status };
+      return errorResponse;
     } else {
-      throw new Error('Sign-in failed', data);
+      throw new Error('Sign up failed', data);
     }
   } catch (error: any) {
     if (error.isAxiosError && error.response) {
@@ -96,8 +106,11 @@ export async function signIn(email: string, password: string): Promise<SingInRes
     if (!data) throw new Error('Sign-in failed');
 
     if (status.toString().startsWith('2')) {
-      let response: SingInResponseProps = { accessToken: data.accessToken, refreshToken: data.refreshToken, status };
+      let response: SingInResponseProps = { accessToken: data.accessToken, refreshToken: data.refreshToken, status, userRole: data.userRole };
       return response;
+    } else if (status.toString().startsWith('4')) {
+      let errorResponse: SingInErrorResponseProps = { message: data.message, status };
+      return errorResponse;
     } else {
       throw new Error('Sign-in failed', data);
     }
@@ -128,6 +141,7 @@ export async function singInWithToken(token: string): Promise<SingInWithTokenRes
         accessToken: data.accessToken,
         refreshToken: data.refreshToken,
         status,
+        userRole: data.userRole,
       };
       return response;
     } else if (status.toString().startsWith('4')) {
@@ -158,8 +172,11 @@ export async function refreshToken(refreshToken: string): Promise<RefreshTokenRe
     if (!data) throw new Error('refresh token failed');
 
     if (status.toString().startsWith('2')) {
-      let response: RefreshTokenResponseProps = { message: data.message, accessToken: data.accessToken, status };
+      let response: RefreshTokenResponseProps = { message: data.message, accessToken: data.accessToken, status, userRole: data.userRole };
       return response;
+    } else if (status.toString().startsWith('4')) {
+      let errorResponse: RefreshTokenErrorResponseProps = { message: data.message, status };
+      return errorResponse;
     } else {
       throw new Error('refresh token failed', data);
     }

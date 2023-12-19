@@ -1,8 +1,11 @@
+import { EnumUserRoles } from '@/store/application/interfaces';
+
 export interface SignUpResponseProps {
   message: string;
   accessToken: string;
   refreshToken: string;
   status: number;
+  userRole: EnumUserRoles;
 }
 export interface SingUpErrorResponseProps {
   message: string;
@@ -13,6 +16,7 @@ export interface SingInResponseProps {
   accessToken: string;
   refreshToken: string;
   status: number;
+  userRole: EnumUserRoles;
 }
 export interface SingInWithTokenResponseProps {
   message: string;
@@ -20,6 +24,7 @@ export interface SingInWithTokenResponseProps {
   refreshToken: string;
   status: number;
   email: string;
+  userRole: EnumUserRoles;
 }
 
 export interface SingInWithTokenErrorResponseProps {
@@ -31,7 +36,7 @@ export interface SingInErrorResponseProps {
   status: number;
 }
 
-export interface LogOutResponseProps {
+export interface SingOutResponseProps {
   message: string;
   status: number;
 }
@@ -40,6 +45,7 @@ export interface RefreshTokenResponseProps {
   message: string;
   accessToken: string;
   status: number;
+  userRole: EnumUserRoles;
 }
 
 export interface RefreshTokenErrorResponseProps {

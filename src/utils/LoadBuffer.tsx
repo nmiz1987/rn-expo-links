@@ -24,8 +24,14 @@ function LoadBuffer({ children }: { children: React.ReactNode }) {
     if (linksStore.links.length === 0) {
       getLinks();
     }
-    linksStore.loadFavoriteByUser();
-    applicationStore.loadTokensFromStorageHandler();
+    try {
+      linksStore.loadFavoriteByUser();
+      applicationStore.loadTokensFromStorageHandler();
+    } catch (error) {
+      console.error("error in LoadBuffer's useEffect", error);
+    } finally {
+      applicationStore.setIsFinishLoadTokensHandler(true);
+    }
   }, []);
 
   if (!applicationStore.isFinishLoadTokens || !fontsLoaded || linksStore.links.length === 0) {

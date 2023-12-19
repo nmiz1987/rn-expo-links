@@ -67,22 +67,31 @@ export default function useSignUp() {
       setSignUpForm({ ...signUpForm, emailErrorText: 'Email is required', passwordErrorText: '', isError: true });
     } else if (signUpForm.email.length > 0 || signUpForm.password.length > 0) {
       setSignUpForm({ ...signUpForm, isError: false, emailErrorText: '', passwordErrorText: '' });
+
       setIsLoading(true);
+      let timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 10000);
 
-      applicationStore.setEmail(signUpForm.email);
-      const res = await signUp(signUpForm.email, signUpForm.password);
-      setIsLoading(false);
+      try {
+        const res = await signUp(signUpForm.email, signUpForm.password);
+        setIsLoading(false);
+        clearTimeout(timer);
 
-      if ('accessToken' in res) {
-        setErrorMsg('');
-        setSignUpForm({ ...signUpForm, password: '', isError: false, emailErrorText: '', passwordErrorText: '' });
-        if (applicationStore.isRememberMe) {
+        if ('accessToken' in res) {
+          setErrorMsg('');
+          setSignUpForm({ ...signUpForm, password: '', isError: false, emailErrorText: '', passwordErrorText: '' });
+
           applicationStore.setEmail(signUpForm.email);
-          applicationStore.storeTokensInStorageHandler(res.accessToken, res.refreshToken);
+          applicationStore.setUserRole(res.userRole);
+          applicationStore.setAccessTokensHandler(res.accessToken);
+
+          router.replace('/');
+        } else {
+          setErrorMsg(res.message);
         }
-        router.replace('/');
-      } else {
-        setErrorMsg(res.message);
+      } catch (error) {
+        console.error('error in useSignUp', error);
       }
     }
   }

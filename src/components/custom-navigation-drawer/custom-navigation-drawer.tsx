@@ -21,7 +21,7 @@ function CustomNavigationDrawer({ ...props }) {
 
   async function signOut() {
     setIsLoading(true);
-    const res = await logOut(applicationStore.email, applicationStore.token);
+    const res = await logOut(applicationStore.email, applicationStore.accessToken);
     if (res.status.toString().startsWith('2')) {
       await applicationStore.deleteTokenHandler();
       setIsLoading(false);
@@ -30,6 +30,7 @@ function CustomNavigationDrawer({ ...props }) {
       setErrorMsg(`|${res.message}|`);
       setTimeout(() => {
         setErrorMsg('');
+        setIsLoading(false);
       }, 5000);
     }
   }
@@ -62,21 +63,26 @@ function CustomNavigationDrawer({ ...props }) {
       <Box style={Styles.links}>
         {screensList.map((route, index) => {
           const newLabel = links[route.name];
-          if (!applicationStore.isLoggedIn && newLabel.onlyToSignUser === true) return null;
+          // if (!applicationStore.isLoggedIn && newLabel.onlyToSignUser === true) return null;
 
-          return (
-            <DrawerItem
-              {...props}
-              labelStyle={{ fontSize: 16, color: GlobalColors.white }}
-              key={route.key}
-              label={newLabel.drawerLabel}
-              accessibilityLabel={newLabel.drawerLabel}
-              inactiveBackgroundColor={GlobalColors.lightGray}
-              focused={state.index === index}
-              activeBackgroundColor={GlobalColors.IconsColors.blue}
-              onPress={() => navigation.navigate(route.name)}
-            />
-          );
+          if (newLabel.authMinLevel > applicationStore.userRole) return null;
+          else {
+            return (
+              <DrawerItem
+                {...props}
+                labelStyle={{ fontSize: 16, color: GlobalColors.white }}
+                key={route.key}
+                label={newLabel.drawerLabel}
+                accessibilityLabel={newLabel.drawerLabel}
+                inactiveBackgroundColor={GlobalColors.lightGray}
+                focused={state.index === index}
+                activeBackgroundColor={GlobalColors.IconsColors.blue}
+                onPress={() => navigation.navigate(route.name)}
+              />
+            );
+          }
+
+          // if (!applicationStore.isLoggedIn && applicationStore.userRole >= newLabel.authMinLevel) return null;
         })}
       </Box>
       <Box center>

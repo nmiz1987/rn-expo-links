@@ -65,20 +65,30 @@ export default function useSignIn() {
       setSignInForm({ ...signInForm, isError: false, emailErrorText: '', passwordErrorText: '' });
 
       setIsLoading(true);
-      const res = await signIn(signInForm.email, signInForm.password);
-      setIsLoading(false);
+      let timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 10000);
 
-      if ('accessToken' in res) {
-        setErrorMsg('');
-        setSignInForm({ ...signInForm, password: '', isError: false, emailErrorText: '', passwordErrorText: '' });
-        if (applicationStore.isRememberMe) {
-          applicationStore.setEmail(signInForm.email);
-          applicationStore.storeTokensInStorageHandler(res.accessToken, res.refreshToken);
+      try {
+        const res = await signIn(signInForm.email, signInForm.password);
+        setIsLoading(false);
+        clearTimeout(timer);
+
+        if ('accessToken' in res) {
+          setErrorMsg('');
+          setSignInForm({ ...signInForm, password: '', isError: false, emailErrorText: '', passwordErrorText: '' });
+          if (applicationStore.isRememberMe) {
+            applicationStore.setEmail(signInForm.email);
+            applicationStore.setUserRole(res.userRole);
+            applicationStore.storeTokensInStorageHandler(res.accessToken, res.refreshToken);
+          }
+          applicationStore.setAccessTokensHandler(res.accessToken);
+          router.replace('/');
+        } else {
+          setErrorMsg(res.message);
         }
-        applicationStore.setAccessTokensHandler(res.accessToken);
-        router.replace('/');
-      } else {
-        setErrorMsg(res.message);
+      } catch (error) {
+        console.error('error in useSignIn', error);
       }
     }
   }
