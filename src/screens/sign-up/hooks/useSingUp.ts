@@ -89,6 +89,9 @@ export default function useSignUp() {
           router.replace('/');
         } else {
           setErrorMsg(res.message);
+          setTimeout(() => {
+            setErrorMsg(''); // reset error message
+          }, 5000);
         }
       } catch (error) {
         console.error('error in useSignUp', error);

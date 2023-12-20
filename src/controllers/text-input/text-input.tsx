@@ -33,7 +33,7 @@ export default function TextInput({ label, caption, isError = false, leftIconIma
         <Text style={Styles.title}>{label}</Text>
         <Spacer size={8} />
         <View ref={boxRef} style={Styles.dummyWrapper}>
-          <Box style={[Styles.inputContainer, inputStatus.activeStyle, props.style]}>
+          <Box style={[Styles.inputContainer, inputStatus.activeStyle, props.multiline && Styles.multiLine, props.style]}>
             {leftIconImage && (
               <Box style={Styles.leftIconWrapper}>
                 <Image style={Styles.image} source={leftIconImage} contentFit="contain" />
@@ -44,6 +44,8 @@ export default function TextInput({ label, caption, isError = false, leftIconIma
               allowFontScaling={false}
               style={[Styles.textInput, props.multiline && Styles.multiLine]}
               multiline={props.multiline}
+              numberOfLines={props.multiline ? 3 : 1}
+              autoCapitalize="none"
               // props.onFocus is important to show disable the focus color if the component wont active as input but as "displayed text"
               onFocus={inputTextFocusHandler}
               onBlur={inputTextFocusHandler}

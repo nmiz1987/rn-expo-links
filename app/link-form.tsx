@@ -1,5 +1,5 @@
-import SignIn from '@/src/screens/sign-in/sign-in';
+import LinkForm from '@/src/screens/link-form/link-form';
 
 export default function Page() {
-  return <SignIn />;
+  return <LinkForm />;
 }

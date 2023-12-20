@@ -1,13 +1,20 @@
 export interface formProp {
-  email: string;
-  password: string;
-  isPasswordVisible: boolean;
-  emailErrorText: string;
-  passwordErrorText: string;
+  tags: string;
+  category: string;
+  name: string;
+  description: string;
+  link: string;
+  isRecommended: boolean;
+  imgSrc: string;
   isError: boolean;
 }
 
-export enum EnumSignInForm {
-  Email = 'email',
-  Password = 'password',
+export enum EnumForm {
+  Tags = 'tags',
+  Category = 'category',
+  Name = 'name',
+  Description = 'description',
+  Link = 'link',
+  IsRecommended = 'recommended',
+  ImgSrc = 'imgSrc',
 }
