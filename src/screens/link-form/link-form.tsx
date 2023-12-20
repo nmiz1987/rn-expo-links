@@ -9,21 +9,39 @@ import TextInput from '@/src/controllers/text-input/text-input';
 import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import CheckBox from '@/src/components/check-box/check-box';
+import AutoComplete from '@/src/controllers/auto-complete/auto-complete';
+import linksStore from '@/store/links/links-store';
 
 function Page() {
-  const { isLoading, formInfo, errorMsg, handleForm, onPressHandler, resetFormHandler } = useForm();
+  const { isLoading, formInfo, errorMsg, getData, handleForm, onPressHandler, resetFormHandler } = useForm();
 
   return (
     <Screen>
-      <Spacer size={32} />
+      <Spacer size={16} />
+      <AutoComplete
+        data={linksStore.categories}
+        label="Category"
+        value={formInfo.category}
+        isError={formInfo.isError}
+        caption={formInfo.isError ? 'Please enter a category' : ''}
+        onChangeText={(value: string) => handleForm(EnumForm.Category, value)}
+      />
+      <Spacer size={8} />
       <Box scroll>
         <TextInput
           label="URL"
+          keyboardType="url"
           value={formInfo.link}
           isError={formInfo.isError}
           caption={formInfo.isError ? 'Please enter a URL' : ''}
           onChangeText={(value: string) => handleForm(EnumForm.Link, value)}
         />
+        <Spacer size={16} />
+        <Box style={Styles.auto} onPress={getData}>
+          <TextFactory type="h4" style={Styles.text}>
+            Click here to try to automate get some al the data
+          </TextFactory>
+        </Box>
         <Spacer size={16} />
         <TextInput
           label="Name"
@@ -49,14 +67,6 @@ function Page() {
           isError={formInfo.isError}
           caption={formInfo.isError ? 'Please enter some tags...' : ''}
           onChangeText={(value: string) => handleForm(EnumForm.Tags, value)}
-        />
-        <Spacer size={16} />
-        <TextInput
-          label="Category"
-          value={formInfo.category}
-          isError={formInfo.isError}
-          caption={formInfo.isError ? 'Please enter a category' : ''}
-          onChangeText={(value: string) => handleForm(EnumForm.Category, value)}
         />
 
         <Spacer size={16} />

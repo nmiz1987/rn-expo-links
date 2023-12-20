@@ -1,8 +1,6 @@
-import { router } from 'expo-router';
 import { useState } from 'react';
 import { EnumForm, formProp } from '../interface';
-import { signIn } from '@/api/links/links.api';
-import applicationStore from '@/store/application/application-store';
+import * as cheerio from 'cheerio';
 
 export default function useForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -50,6 +48,25 @@ export default function useForm() {
     });
   }
 
+  async function getData() {
+    try {
+      const site = fetch(formInfo.link);
+      if (!site) return;
+      const $ = cheerio.load(await site.then(res => res.text()));
+      let tmp = { ...formInfo };
+
+      // get the title of the page
+      tmp.description = $('title').text() || '';
+      // get all the favicons, the rel can containe text before the "icon" part
+      tmp.imgSrc = $('link[rel*="icon"]').attr('href') || '';
+      // get all the h1 tags
+      tmp.name = $('h1').text();
+      setFormInfo(tmp);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   async function onPressHandler() {
     // if (formInfo.email.length === 0 && formInfo.password.length === 0) {
     //   setFormInfo({
@@ -85,6 +102,7 @@ export default function useForm() {
     isLoading,
     formInfo,
     errorMsg,
+    getData,
     handleForm,
     onPressHandler,
     resetFormHandler,
