@@ -61,5 +61,13 @@ class LinkStore {
       this._categories = Array.from(new Set(links.map((link: linkProps) => link.category)));
     });
   }
+
+  addNewLink(link: linkProps) {
+    if (link.name.length === 0) return;
+    runInAction(() => {
+      this._links.push(link);
+      this._categories = Array.from(new Set(this._links.map((link: linkProps) => link.category)));
+    });
+  }
 }
 export default new LinkStore();

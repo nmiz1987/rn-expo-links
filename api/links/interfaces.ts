@@ -1,5 +1,32 @@
 import { EnumUserRoles } from '@/store/application/interfaces';
 
+export interface linkInfoProps {
+  tags: string[];
+  category: string;
+  name: string;
+  description: string;
+  link: string;
+  recommended: boolean;
+  imgSrc: string;
+}
+
+export interface NewLinkResponseProps {
+  category: string;
+  name: string;
+  description: string;
+  link: string;
+  recommended: boolean;
+  tags: string[];
+  imgSrc: string;
+  _id: string;
+  status?: number;
+}
+
+export interface NewLinkErrorResponseProps {
+  message: string;
+  status: number;
+}
+
 export interface SignUpResponseProps {
   message: string;
   accessToken: string;

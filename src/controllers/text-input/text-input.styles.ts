@@ -43,7 +43,6 @@ export default StyleSheet.create({
     height: 28,
   },
   title: {
-    ...FontStyle.H5,
     color: GlobalColors.white,
   },
   focusColor: {
@@ -55,7 +54,6 @@ export default StyleSheet.create({
   },
   errorText: {
     paddingTop: 8,
-    ...FontStyle.H5,
     color: GlobalColors.red,
   },
   titleDisabled: {
@@ -71,10 +69,5 @@ export default StyleSheet.create({
   },
   InputAccessory: {
     backgroundColor: 'white',
-  },
-  dummyWrapper: {
-    opacity: 1,
-    backgroundColor: 'transparent',
-    height: '100%',
   },
 });

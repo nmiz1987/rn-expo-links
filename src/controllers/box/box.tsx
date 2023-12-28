@@ -12,6 +12,7 @@ const Box = forwardRef((props: boxProps, ref: any): JSX.Element => {
       horizontal={props.horizontal}
       showsVerticalScrollIndicator={props.showsVerticalScrollIndicator ?? true}
       showsHorizontalScrollIndicator={props.showsHorizontalScrollIndicator ?? true}
+      nestedScrollEnabled={props.nestedScrollEnabled ?? true}
     >
       {props.children}
     </ScrollView>

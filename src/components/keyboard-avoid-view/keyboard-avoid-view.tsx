@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Dimensions, Keyboard } from 'react-native';
 import { KeyboardAvoidViewProps } from './keyboard-avoid-view.interface';
 import Box from '@/src/controllers/box/box';
+import { heightPixel } from '@/services/ui/pixel-ratio-service';
 
 export default function KeyboardAvoidView({ wrapping, children, wrapperMaxHeight, ...props }: KeyboardAvoidViewProps) {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
@@ -31,8 +32,10 @@ export default function KeyboardAvoidView({ wrapping, children, wrapperMaxHeight
     };
   }, [keyboardHeight]);
 
+  console.log({ marginBottom: keyboardHeight, maxHeight: containerMaxHeight });
+
   return (
-    <Box scroll {...props} style={{ marginBottom: keyboardHeight, maxHeight: containerMaxHeight }}>
+    <Box {...props} style={[{ marginBottom: keyboardHeight, maxHeight: containerMaxHeight }, props.style]}>
       {children}
     </Box>
   );

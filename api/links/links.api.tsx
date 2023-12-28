@@ -9,6 +9,9 @@ import {
   SingOutResponseProps,
   RefreshTokenErrorResponseProps,
   RefreshTokenResponseProps,
+  linkInfoProps,
+  NewLinkResponseProps,
+  NewLinkErrorResponseProps,
 } from './interfaces';
 
 const linksApi = {
@@ -18,6 +21,7 @@ const linksApi = {
   logout: 'logout',
   singInWithToken: 'login-with-token',
   refreshToken: 'refresh-token',
+  newLink: 'useful-links/new-link',
 };
 
 export async function getAllLinks() {
@@ -31,6 +35,36 @@ export async function getAllLinks() {
   } catch (error) {
     console.warn('getAllLinks failed');
     throw new Error('getAllLinks failed');
+  }
+}
+
+export async function newLink(linkInfo: linkInfoProps, token: string): Promise<NewLinkResponseProps | NewLinkErrorResponseProps> {
+  try {
+    const { status, data } = await httpClient(token).post(linksApi.newLink, linkInfo);
+
+    if (status.toString().startsWith('2')) {
+      let response: NewLinkResponseProps = { ...data, status };
+      return response;
+    } else if (status.toString().startsWith('4')) {
+      let errorResponse: NewLinkErrorResponseProps = { message: data.message, status };
+      return errorResponse;
+    } else {
+      throw new Error('create new link failed', data);
+    }
+  } catch (error: any) {
+    if (error.isAxiosError && error.response) {
+      // Axios error with response data
+      const responseData = error.response.data;
+      const responseStatus = error.response.status;
+      let errorResponse: NewLinkErrorResponseProps = { message: responseData.message, status: responseStatus };
+      return errorResponse;
+    } else {
+      // Non-Axios error
+      console.error('Error during create new link:', error);
+
+      // Handle the error or throw it again if needed
+      throw new Error('create new link failed');
+    }
   }
 }
 

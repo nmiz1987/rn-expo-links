@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { EnumForm, formProp } from '../interface';
 import * as cheerio from 'cheerio';
+import { router } from 'expo-router';
+import { newLink } from '@/api/links/links.api';
+import applicationStore from '@/store/application/application-store';
+import linksStore from '@/store/links/links-store';
 
 export default function useForm() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -8,43 +12,53 @@ export default function useForm() {
 
   const [formInfo, setFormInfo] = useState<formProp>({
     tags: '',
+    isErrorTags: false,
     category: '',
+    isErrorCategory: false,
     name: '',
+    isErrorName: false,
     description: '',
+    isErrorDescription: false,
     link: '',
+    isErrorLink: false,
     isRecommended: false,
     imgSrc: '',
-    isError: false,
+    isErrorImgSrc: false,
   });
 
   function handleForm(field: EnumForm, value?: string) {
     if (field === EnumForm.Tags) {
-      setFormInfo({ ...formInfo, tags: value as string });
+      setFormInfo({ ...formInfo, tags: value as string, isErrorTags: false });
     } else if (field === EnumForm.Category) {
-      setFormInfo({ ...formInfo, category: value as string });
+      setFormInfo({ ...formInfo, category: value as string, isErrorCategory: false });
     } else if (field === EnumForm.Name) {
-      setFormInfo({ ...formInfo, name: value as string });
+      setFormInfo({ ...formInfo, name: value as string, isErrorName: false });
     } else if (field === EnumForm.Description) {
-      setFormInfo({ ...formInfo, description: value as string });
+      setFormInfo({ ...formInfo, description: value as string, isErrorDescription: false });
     } else if (field === EnumForm.Link) {
-      setFormInfo({ ...formInfo, link: value as string });
+      setFormInfo({ ...formInfo, link: value as string, isErrorLink: false });
     } else if (field === EnumForm.IsRecommended) {
       setFormInfo({ ...formInfo, isRecommended: !formInfo.isRecommended });
     } else if (field === EnumForm.ImgSrc) {
-      setFormInfo({ ...formInfo, imgSrc: value as string });
+      setFormInfo({ ...formInfo, imgSrc: value as string, isErrorImgSrc: false });
     }
   }
 
   function resetFormHandler() {
     setFormInfo({
       tags: '',
+      isErrorTags: false,
       category: '',
+      isErrorCategory: false,
       name: '',
+      isErrorName: false,
       description: '',
+      isErrorDescription: false,
       link: '',
+      isErrorLink: false,
       isRecommended: false,
       imgSrc: '',
-      isError: false,
+      isErrorImgSrc: false,
     });
   }
 
@@ -68,34 +82,73 @@ export default function useForm() {
   }
 
   async function onPressHandler() {
-    // if (formInfo.email.length === 0 && formInfo.password.length === 0) {
-    //   setFormInfo({
-    //     ...formInfo,
-    //     emailErrorText: 'Email is required',
-    //     passwordErrorText: 'Password is required',
-    //     isError: true,
-    //   });
-    // } else if (formInfo.email.length !== 0 && formInfo.password.length === 0) {
-    //   setFormInfo({ ...formInfo, emailErrorText: '', passwordErrorText: 'Password is required', isError: true });
-    // } else if (formInfo.email.length === 0 && formInfo.password.length !== 0) {
-    //   setFormInfo({ ...formInfo, emailErrorText: 'Email is required', passwordErrorText: '', isError: true });
-    // } else if (formInfo.email.length > 0 || formInfo.password.length > 0) {
-    //   setFormInfo({ ...formInfo, isError: false, emailErrorText: '', passwordErrorText: '' });
-    //   setIsLoading(true);
-    //   const res = await signIn(formInfo.email, formInfo.password);
-    //   setIsLoading(false);
-    //   if ('accessToken' in res) {
-    //     setErrorMsg('');
-    //     setFormInfo({ ...formInfo, password: '', isError: false, emailErrorText: '', passwordErrorText: '' });
-    //     if (applicationStore.isRememberMe) {
-    //       applicationStore.setEmail(formInfo.email);
-    //       applicationStore.storeTokensInStorageHandler(res.accessToken, res.refreshToken);
-    //     }
-    //     router.replace('/');
-    //   } else {
-    //     setErrorMsg(res.message);
-    //   }
-    // }
+    if (
+      formInfo.category.length === 0 ||
+      formInfo.name.length === 0 ||
+      formInfo.description.length === 0 ||
+      formInfo.link.length === 0 ||
+      formInfo.imgSrc.length === 0 ||
+      formInfo.tags.length === 0
+    ) {
+      let tmpFormInfo = { ...formInfo };
+      if (formInfo.category.length === 0) {
+        tmpFormInfo = { ...tmpFormInfo, isErrorCategory: true };
+      }
+      if (formInfo.name.length === 0) {
+        tmpFormInfo = { ...tmpFormInfo, isErrorName: true };
+      }
+      if (formInfo.description.length === 0) {
+        tmpFormInfo = { ...tmpFormInfo, isErrorDescription: true };
+      }
+      if (formInfo.link.length === 0) {
+        tmpFormInfo = { ...tmpFormInfo, isErrorLink: true };
+      }
+      if (formInfo.imgSrc.length === 0) {
+        tmpFormInfo = { ...tmpFormInfo, isErrorImgSrc: true };
+      }
+      if (formInfo.tags.length === 0) {
+        tmpFormInfo = { ...tmpFormInfo, isErrorTags: true };
+      }
+
+      setFormInfo(tmpFormInfo);
+      return;
+    } else {
+      setIsLoading(true);
+      let timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 10000);
+
+      try {
+        const res = await newLink(
+          {
+            category: formInfo.category,
+            name: formInfo.name,
+            description: formInfo.description,
+            link: formInfo.link,
+            recommended: formInfo.isRecommended,
+            tags: formInfo.tags.split(','),
+            imgSrc: formInfo.imgSrc,
+          },
+          applicationStore.accessToken,
+        );
+        setIsLoading(false);
+        clearTimeout(timer);
+
+        if ('name' in res) {
+          setErrorMsg('');
+          resetFormHandler();
+          linksStore.addNewLink(res);
+          router.replace('/');
+        } else {
+          setErrorMsg(res.message);
+          setTimeout(() => {
+            setErrorMsg(''); // reset error message
+          }, 5000);
+        }
+      } catch (error) {
+        console.error('error in link-form', error);
+      }
+    }
   }
 
   return {

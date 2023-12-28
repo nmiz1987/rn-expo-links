@@ -17,23 +17,14 @@ function Page() {
 
   return (
     <Screen>
-      <Spacer size={16} />
-      <AutoComplete
-        data={linksStore.categories}
-        label="Category"
-        value={formInfo.category}
-        isError={formInfo.isError}
-        caption={formInfo.isError ? 'Please enter a category' : ''}
-        onChangeText={(value: string) => handleForm(EnumForm.Category, value)}
-      />
       <Spacer size={8} />
       <Box scroll>
         <TextInput
           label="URL"
           keyboardType="url"
           value={formInfo.link}
-          isError={formInfo.isError}
-          caption={formInfo.isError ? 'Please enter a URL' : ''}
+          isError={formInfo.isErrorLink}
+          caption={formInfo.isErrorLink ? 'Please enter a URL' : ''}
           onChangeText={(value: string) => handleForm(EnumForm.Link, value)}
         />
         <Spacer size={16} />
@@ -46,8 +37,8 @@ function Page() {
         <TextInput
           label="Name"
           value={formInfo.name}
-          isError={formInfo.isError}
-          caption={formInfo.isError ? 'Please enter a name' : ''}
+          isError={formInfo.isErrorName}
+          caption={formInfo.isErrorName ? 'Please enter a name' : ''}
           onChangeText={(value: string) => handleForm(EnumForm.Name, value)}
         />
         <Spacer size={16} />
@@ -55,17 +46,36 @@ function Page() {
           label="Description"
           multiline
           value={formInfo.description}
-          isError={formInfo.isError}
-          caption={formInfo.isError ? 'Please enter a description' : ''}
+          isError={formInfo.isErrorDescription}
+          caption={formInfo.isErrorDescription ? 'Please enter a description' : ''}
           onChangeText={(value: string) => handleForm(EnumForm.Description, value)}
+        />
+        <Spacer size={16} />
+        <TextInput
+          label="Favicon"
+          value={formInfo.imgSrc}
+          isError={formInfo.isErrorImgSrc}
+          caption={formInfo.isErrorImgSrc ? 'Please enter a description' : ''}
+          onChangeText={(value: string) => handleForm(EnumForm.ImgSrc, value)}
+        />
+        <Spacer size={16} />
+        <AutoComplete
+          categories={linksStore.categories}
+          label="Category"
+          value={formInfo.category}
+          isError={formInfo.isErrorCategory}
+          caption={formInfo.isErrorCategory ? 'Please enter a category' : ''}
+          onChangeText={(value: string) => handleForm(EnumForm.Category, value)}
+          onSelect={(value: string) => handleForm(EnumForm.Category, value)}
+          placeholder={'Choose from list or type a new one'}
         />
         <Spacer size={16} />
         <TextInput
           label="Tag"
           placeholder={`separate by comma ","`}
           value={formInfo.tags}
-          isError={formInfo.isError}
-          caption={formInfo.isError ? 'Please enter some tags...' : ''}
+          isError={formInfo.isErrorTags}
+          caption={formInfo.isErrorTags ? 'Please enter some tags...' : ''}
           onChangeText={(value: string) => handleForm(EnumForm.Tags, value)}
         />
 
@@ -74,12 +84,6 @@ function Page() {
           <CheckBox label="Is recommended?" status={formInfo.isRecommended} />
         </Box>
         <Spacer size={32} />
-
-        <Box style={Styles.row}>
-          <ButtonFactory type="secondary" label="Reset form" onPress={resetFormHandler} />
-          <ButtonFactory label="Add new link" isLoading={isLoading} onPress={onPressHandler} />
-        </Box>
-        <Spacer size={40} />
         {errorMsg && (
           <>
             <TextFactory type="h4" style={Styles.errorMsg}>
@@ -88,6 +92,12 @@ function Page() {
             <Spacer size={16} />
           </>
         )}
+
+        <Box style={Styles.row}>
+          <ButtonFactory type="secondary" label="Reset form" onPress={resetFormHandler} />
+          <ButtonFactory label="Add new link" isLoading={isLoading} onPress={onPressHandler} />
+        </Box>
+        <Spacer size={40} />
       </Box>
     </Screen>
   );

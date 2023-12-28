@@ -6,5 +6,6 @@ export interface AutoCompleteProps extends RNTextInputProps {
   isError?: boolean;
   leftIconImage?: any;
   onFocus?: () => void;
-  data?: string[];
+  categories?: string[];
+  onSelect: (item: string) => void;
 }
