@@ -1,5 +1,5 @@
 import Styles from './circular-checkbox.styles';
-import { CircularCheckboxProps } from './interfaces';
+import { CircularCheckboxProps } from './circular-checkbox.interfaces';
 import Box from '@/src/controllers/box/box';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 

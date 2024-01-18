@@ -1,5 +1,5 @@
 import { FlatList } from 'react-native';
-import { linkProps } from '@/src/components/link-preview/interfaces';
+import { linkProps } from '@/src/components/link-preview/link-preview.interfaces';
 import LinkPreview from '@/src/components/link-preview/link-preview';
 import Screen from '@/src/controllers/screen/screen';
 import linksStore from '@/store/links/links-store';

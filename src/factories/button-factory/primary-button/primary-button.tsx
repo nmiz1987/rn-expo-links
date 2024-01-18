@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { ActivityIndicator, Pressable } from 'react-native';
-import PrimaryButtonProps from './interfaces';
+import PrimaryButtonProps from './primary-button.interfaces';
 import Styles from './primary-button.styles';
 import Box from '@/src/controllers/box/box';
 import TextFactory from '@/src/factories/text-factory/text-factory';

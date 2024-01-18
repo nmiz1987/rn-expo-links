@@ -15,6 +15,8 @@ export default StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
+    fontStyle: 'normal',
+    fontSize: 16,
   },
   bar: {
     height: 1,

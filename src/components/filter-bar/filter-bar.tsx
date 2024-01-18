@@ -1,8 +1,8 @@
 import { FilterBarProps } from './filter-bar.interfaces';
 import Styles from './filter-bar.styles';
 import Box from '@/src/controllers/box/box';
-import Spacer from '@/src/controllers/spacer/spacer';
-import TextInput from '@/src/controllers/text-input/text-input';
+import Spacer from '@/src/components/spacer/spacer';
+import TextInput from '@/src/components/text-input/text-input';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import linksStore from '@/store/links/links-store';
 

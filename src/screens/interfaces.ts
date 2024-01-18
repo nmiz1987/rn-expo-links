@@ -1,4 +1,4 @@
-import { EnumUserRoles } from '@/store/application/interfaces';
+import { EnumUserRoles } from '@/store/application/application-store.interfaces';
 
 export interface linksProps {
   [key: string]: InfoProps;

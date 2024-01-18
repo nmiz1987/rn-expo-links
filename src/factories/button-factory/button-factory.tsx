@@ -1,4 +1,4 @@
-import ButtonFactoryProps from './interfaces';
+import ButtonFactoryProps from './button-factory.interfaces';
 import PrimaryButton from './primary-button/primary-button';
 import SecondaryButton from './secondary-button/secondary-button';
 

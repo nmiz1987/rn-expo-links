@@ -1,4 +1,4 @@
-import SpacerProps from './interfaces';
+import SpacerProps from './spacer.interfaces';
 import { createStyle } from './spacer.styles';
 import Box from '@/src/controllers/box/box';
 

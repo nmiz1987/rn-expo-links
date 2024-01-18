@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { View } from 'react-native';
 import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
-import { UseToastProps } from './interfaces';
+import { UseToastProps } from './useToast.interfaces';
 import { Dimensions } from 'react-native';
 
 let { height } = Dimensions.get('screen');

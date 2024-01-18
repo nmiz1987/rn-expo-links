@@ -1,4 +1,4 @@
-import httpClient from '@/services/network-service/httpClient';
+import httpClient from '@/services/network-service/http-client';
 import {
   SignUpResponseProps,
   SingUpErrorResponseProps,

@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import { deleteStringAsync, getStringAsync, setStringAsync } from '../../services/storage';
 import { singInWithToken as singInWithTokenAPI, refreshToken as refreshTokenAPI } from '@/api/links/links.api';
-import { EnumUserRoles } from './interfaces';
+import { EnumUserRoles } from './application-store.interfaces';
 
 class UserStore {
   private _email: string = '';

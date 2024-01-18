@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import Styles from './box.styles';
 
-import { boxProps } from './interfaces';
+import { boxProps } from './box.interfaces';
 
 const Box = forwardRef((props: boxProps, ref: any): JSX.Element => {
   const BoxView = props.scroll ? (

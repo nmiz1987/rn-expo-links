@@ -7,11 +7,11 @@ import { SafeAreaProvider, initialWindowMetrics } from 'react-native-safe-area-c
 import CustomNavigationDrawer from '@/src/components/custom-navigation-drawer/custom-navigation-drawer';
 import StorePreview from '@/src/components/store-preview/store-preview';
 import links from '@/src/screens/links';
-import LoadBuffer from '@/src/utils/LoadBuffer';
+import LoadBuffer from '@/src/utils/Load-buffer';
 import linksStore from '@/store/links/links-store';
 import { GlobalColors } from '@/styles/global-colors';
 import '@/src/i18n';
-import '@/src/utils/ignoreWarnings';
+import '@/src/utils/ignore-warnings';
 import applicationStore from '@/store/application/application-store';
 
 const queryClient = new QueryClient();

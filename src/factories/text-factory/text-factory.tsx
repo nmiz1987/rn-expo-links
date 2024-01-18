@@ -1,4 +1,4 @@
-import TextFactoryProps from './interfaces';
+import TextFactoryProps from './text-factory.interfaces';
 import TextH1 from './text-h1/text-h1';
 import TextH2 from './text-h2/text-h2';
 import TextH3 from './text-h3/text-h3';

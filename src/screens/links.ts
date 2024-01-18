@@ -1,5 +1,5 @@
 import { linksProps } from './interfaces';
-import { EnumUserRoles } from '@/store/application/interfaces';
+import { EnumUserRoles } from '@/store/application/application-store.interfaces';
 
 const links: linksProps = {
   index: {

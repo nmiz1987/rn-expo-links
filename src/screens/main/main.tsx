@@ -3,7 +3,7 @@ import { FlatList, Platform } from 'react-native';
 import useMain from './hooks/useMain';
 import Styles from './main.style';
 import FilterBar from '@/src/components/filter-bar/filter-bar';
-import { linkProps } from '@/src/components/link-preview/interfaces';
+import { linkProps } from '@/src/components/link-preview/link-preview.interfaces';
 import LinkPreview from '@/src/components/link-preview/link-preview';
 import Box from '@/src/controllers/box/box';
 import Screen from '@/src/controllers/screen/screen';

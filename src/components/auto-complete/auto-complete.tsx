@@ -1,10 +1,10 @@
 import Box from '@/src/controllers/box/box';
-import Spacer from '@/src/controllers/spacer/spacer';
+import Spacer from '@/src/components/spacer/spacer';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import Styles from './auto-complete.styles';
 import useInputText from './hooks/useInputText';
-import { AutoCompleteProps } from './interfaces';
+import { AutoCompleteProps } from './auto-complete.interfaces';
 import { Image } from 'expo-image';
 import { Button, InputAccessoryView, Platform, TextInput, View } from 'react-native';
 import { isRTL } from '@/src/i18n';

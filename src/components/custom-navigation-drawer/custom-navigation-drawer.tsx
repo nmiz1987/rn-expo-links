@@ -3,7 +3,7 @@ import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { useRouter } from 'expo-router';
 import Styles from './custom-navigation-drawer.styles';
 import Box from '@/src/controllers/box/box';
-import Spacer from '@/src/controllers/spacer/spacer';
+import Spacer from '@/src/components/spacer/spacer';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import links from '@/src/screens/links';
 import applicationStore from '@/store/application/application-store';

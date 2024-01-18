@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import Styles from '../text-input.styles';
-import { EnumITextInputStatus, ITextInputStatus } from './interfaces';
+import Styles from '../auto-complete.styles';
+import { EnumITextInputStatus, ITextInputStatus } from './useInputText.interfaces';
 
 function useInputText() {
   const [inputStatus, setInputStatus] = useState<ITextInputStatus>({

@@ -4,8 +4,7 @@ import Card from './card/card';
 import usePreview from './hooks/usePreview';
 import { StorePreviewProps } from './store-preview.interfaces';
 import Styles from './store-preview.styles';
-import Box from '@/src/controllers/box/box';
-import TextFactory from '@/src/factories/text-factory/text-factory';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 
 function StorePreview({ listeners }: StorePreviewProps) {
   const { isOpen, toggleOpen } = usePreview();
@@ -13,33 +12,29 @@ function StorePreview({ listeners }: StorePreviewProps) {
 
   if (isOpen) {
     return (
-      <Box scroll style={Styles.container}>
-        <Box style={Styles.closeContainer} onPress={toggleOpen}>
+      <ScrollView style={Styles.container}>
+        <Pressable style={Styles.closeContainer} onPress={toggleOpen}>
           <Image style={Styles.close} source={require('./asset/close.svg')} contentFit="contain" />
-        </Box>
-        <TextFactory type="h4" style={Styles.title}>
-          Store Preview
-        </TextFactory>
+        </Pressable>
+        <Text style={Styles.title}>Store Preview</Text>
         {listeners.length === 0 ? (
-          <TextFactory type="h4" style={Styles.title}>
-            No Stores
-          </TextFactory>
+          <Text style={Styles.title}>No Stores</Text>
         ) : (
           listeners.map(listener =>
             Object.keys(listener).map(key => (
-              <Box key={key}>
+              <View key={key}>
                 <Card title={key} info={listener[key]} />
-              </Box>
+              </View>
             )),
           )
         )}
-      </Box>
+      </ScrollView>
     );
   } else {
     return (
-      <Box style={Styles.closeContainerPosition} onPress={toggleOpen}>
+      <Pressable style={Styles.closeContainerPosition} onPress={toggleOpen}>
         <Image style={Styles.close} source={require('./asset/debug.svg')} contentFit="contain" />
-      </Box>
+      </Pressable>
     );
   }
 }

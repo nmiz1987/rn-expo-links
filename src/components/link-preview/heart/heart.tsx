@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { observer } from 'mobx-react';
-import { heartProps } from './interfaces';
+import { heartProps } from './heart.interfaces';
 import Box from '@/src/controllers/box/box';
 import linksStore from '@/store/links/links-store';
 import { GlobalColors } from '@/styles/global-colors';

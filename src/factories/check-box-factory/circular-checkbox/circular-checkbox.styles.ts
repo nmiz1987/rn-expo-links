@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { GlobalColors } from '@/styles/global-colors';
-import { HebrewStyle } from '@/styles/styles';
+import { HebrewStyle } from '@/styles/text-styles';
 
 export default StyleSheet.create({
   container: {

@@ -1,5 +1,5 @@
-import PrimaryButtonProps from './primary-button/interfaces';
-import SecondaryButtonProps from './secondary-button/interfaces';
+import PrimaryButtonProps from './primary-button/primary-button.interfaces';
+import SecondaryButtonProps from './secondary-button/secondary-button.interfaces';
 
 type ButtonFactoryProps =
   | (PrimaryButtonProps & {

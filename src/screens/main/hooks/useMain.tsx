@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { linkProps } from '@/src/components/link-preview/interfaces';
+import { linkProps } from '@/src/components/link-preview/link-preview.interfaces';
 import linksStore from '@/store/links/links-store';
 
 export default function useMain() {

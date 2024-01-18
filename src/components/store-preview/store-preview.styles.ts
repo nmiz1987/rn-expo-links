@@ -23,6 +23,8 @@ export default StyleSheet.create({
     paddingBottom: 8,
     textDecorationColor: 'black',
     textDecorationLine: 'underline',
+    fontStyle: 'normal',
+    fontSize: 20,
   },
   closeContainer: {
     width: 40,

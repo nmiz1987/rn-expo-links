@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Tstatus } from './interfaces';
+import { Tstatus } from './useCheckBoxState.interfaces';
 
 function useCheckBoxState(status: boolean) {
   const [isChecked, setIsChecked] = useState<Tstatus>(status ?? false);

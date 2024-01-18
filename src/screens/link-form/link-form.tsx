@@ -4,12 +4,12 @@ import { EnumForm } from './interface';
 import Styles from './link-form.style';
 import Box from '@/src/controllers/box/box';
 import Screen from '@/src/controllers/screen/screen';
-import Spacer from '@/src/controllers/spacer/spacer';
-import TextInput from '@/src/controllers/text-input/text-input';
+import Spacer from '@/src/components/spacer/spacer';
+import TextInput from '@/src/components/text-input/text-input';
 import ButtonFactory from '@/src/factories/button-factory/button-factory';
 import TextFactory from '@/src/factories/text-factory/text-factory';
-import CheckBox from '@/src/components/check-box/check-box';
-import AutoComplete from '@/src/controllers/auto-complete/auto-complete';
+import CheckBox from '@/src/factories/check-box-factory/square-check-box/square-check-box';
+import AutoComplete from '@/src/components/auto-complete/auto-complete';
 import linksStore from '@/store/links/links-store';
 
 function Page() {

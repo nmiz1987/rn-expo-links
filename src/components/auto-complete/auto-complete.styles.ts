@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { GlobalColors } from '@/styles/global-colors';
-import { FontStyle } from '@/styles/styles';
+import { FontStyle } from '@/styles/text-styles';
 import { heightPixel, widthPixel } from '@/services/ui/pixel-ratio-service';
 
 export default StyleSheet.create({

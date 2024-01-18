@@ -1,4 +1,4 @@
-import { linkProps } from '@/src/components/link-preview/interfaces';
+import { linkProps } from '@/src/components/link-preview/link-preview.interfaces';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { deleteStringAsync, getStringAsync, setStringAsync } from '@/services/storage';
 

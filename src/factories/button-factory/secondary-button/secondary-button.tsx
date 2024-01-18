@@ -1,5 +1,5 @@
 import { Pressable } from 'react-native';
-import SecondaryButtonProps from './interfaces';
+import SecondaryButtonProps from './secondary-button.interfaces';
 import Styles from './secondary-button.styles';
 import Box from '@/src/controllers/box/box';
 import TextFactory from '@/src/factories/text-factory/text-factory';

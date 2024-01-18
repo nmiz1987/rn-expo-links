@@ -2,10 +2,10 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
 import { Linking } from 'react-native';
 import Heart from './heart/heart';
-import { linkProps } from './interfaces';
+import { linkProps } from './link-preview.interfaces';
 import Styles from './link-preview.style';
 import Box from '@/src/controllers/box/box';
-import Spacer from '@/src/controllers/spacer/spacer';
+import Spacer from '@/src/components/spacer/spacer';
 import TextFactory from '@/src/factories/text-factory/text-factory';
 import { GlobalColors } from '@/styles/global-colors';
 
