@@ -1,72 +1,72 @@
-import { linkProps } from '@/src/components/link-preview/link-preview.interfaces';
 import { makeAutoObservable, runInAction } from 'mobx';
 import { deleteStringAsync, getStringAsync, setStringAsync } from '@/services/storage';
+import { linkProps } from '@/src/components/link-preview/link-preview.interfaces';
 
 class LinkStore {
-  private _links: linkProps[] = [];
-  private _categories: string[] = [];
-  private _favoriteLinks: string[] = [];
-  private _usersFavoriteLinksToken: string = 'USERS_FAVORITE_LINKS';
+  #links: linkProps[] = [];
+  #categories: string[] = [];
+  #favoriteLinks: string[] = [];
+  #usersFavoriteLinksToken: string = 'USERS_FAVORITE_LINKS';
 
   constructor() {
     makeAutoObservable(this);
   }
 
   get links() {
-    return this._links;
+    return this.#links;
   }
 
   get categories() {
-    return this._categories;
+    return this.#categories;
   }
 
   get favoriteLinks() {
-    return this._favoriteLinks;
+    return this.#favoriteLinks;
   }
 
   async deleteFavoriteByUser() {
-    await deleteStringAsync(this._usersFavoriteLinksToken);
+    await deleteStringAsync(this.#usersFavoriteLinksToken);
   }
 
   async loadFavoriteByUser() {
-    await getStringAsync(this._usersFavoriteLinksToken).then(links => {
+    await getStringAsync(this.#usersFavoriteLinksToken).then(links => {
       if (links) {
         runInAction(() => {
-          this._favoriteLinks = links.split(',');
+          this.#favoriteLinks = links.split(',');
         });
       }
     });
   }
 
   isFavoriteByUser(link: string) {
-    return this._favoriteLinks.includes(link);
+    return this.#favoriteLinks.includes(link);
   }
 
   setFavoriteByUser(link: string) {
     runInAction(() => {
-      const index = this._favoriteLinks.indexOf(link);
+      const index = this.#favoriteLinks.indexOf(link);
       if (index === -1) {
-        this._favoriteLinks.push(link);
+        this.#favoriteLinks.push(link);
       } else {
-        this._favoriteLinks.splice(index, 1);
+        this.#favoriteLinks.splice(index, 1);
       }
-      setStringAsync(this._usersFavoriteLinksToken, this._favoriteLinks.join(','));
+      setStringAsync(this.#usersFavoriteLinksToken, this.#favoriteLinks.join(','));
     });
   }
 
   setLinks(links: linkProps[]) {
     if (links.length === 0) return;
     runInAction(() => {
-      this._links = links;
-      this._categories = Array.from(new Set(links.map((link: linkProps) => link.category)));
+      this.#links = links;
+      this.#categories = Array.from(new Set(links.map((link: linkProps) => link.category)));
     });
   }
 
   addNewLink(link: linkProps) {
     if (link.name.length === 0) return;
     runInAction(() => {
-      this._links.push(link);
-      this._categories = Array.from(new Set(this._links.map((link: linkProps) => link.category)));
+      this.#links.push(link);
+      this.#categories = Array.from(new Set(this.#links.map((link: linkProps) => link.category)));
     });
   }
 }
